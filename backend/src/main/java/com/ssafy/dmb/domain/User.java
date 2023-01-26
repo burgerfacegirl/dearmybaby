@@ -29,7 +29,7 @@ public class User {
     private String userImg;
 
     @OneToMany(mappedBy = "user")
-    private List<GroupUser> groupUser = new ArrayList<>();
+    private List<FamilyUser> familyUser = new ArrayList<>();
 
 
 
