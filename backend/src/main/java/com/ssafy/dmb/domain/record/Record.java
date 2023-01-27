@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -16,7 +18,7 @@ public class Record {
     private Long id;
 
     // day_id
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "day_id")
     private Day day;
 
@@ -25,7 +27,11 @@ public class Record {
     private String record_file;
 
     private String record_text;
-    
+
+
+    @OneToMany
+    private List<Comment> comments = new ArrayList<>();
+
     // 위도
     @Embedded
     private Coordinate recordCoordinate;

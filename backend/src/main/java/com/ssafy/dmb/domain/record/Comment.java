@@ -1,13 +1,11 @@
 package com.ssafy.dmb.domain.record;
 
 
+import com.ssafy.dmb.domain.User;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -18,8 +16,15 @@ public class Comment {
     @Column(name = "comment_id")
     private Long id;
 
-    // record_id
-    // user_no
+    // FK
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="record_id")
+    private Record record;
+
+    // FK
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_no")
+    private User user;
 
     private String comment_text;
 
