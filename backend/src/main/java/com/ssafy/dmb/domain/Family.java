@@ -12,7 +12,7 @@ import java.util.List;
 public class Family {
 
     @Id @GeneratedValue
-    @Column(name = "family_no")
+    @Column(name = "family_id")
     private Long no;
 
     @OneToMany(mappedBy = "family")

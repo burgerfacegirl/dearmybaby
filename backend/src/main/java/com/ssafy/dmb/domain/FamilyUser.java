@@ -10,11 +10,11 @@ import javax.persistence.*;
 public class FamilyUser {
 
     @Id @GeneratedValue
-    @Column(name = "family_user_no")
+    @Column(name = "family_user_id")
     private Long no;
 
     @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name = "family_no")
+    @JoinColumn(name = "family_id")
     private Family family;
 
 
