@@ -3,13 +3,11 @@ package com.ssafy.dmb.domain.location;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
+@Entity
 public class Region {
 
     @Id @GeneratedValue

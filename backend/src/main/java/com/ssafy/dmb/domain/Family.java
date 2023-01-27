@@ -1,5 +1,6 @@
 package com.ssafy.dmb.domain;
 
+import com.ssafy.dmb.domain.plan.Plan;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,5 +19,6 @@ public class Family {
     @OneToMany(mappedBy = "family")
     private List<FamilyUser> FamilyUser = new ArrayList<>();
 
-
+    @OneToMany(mappedBy = "family")
+    private List<Plan> plans = new ArrayList<>();
 }
