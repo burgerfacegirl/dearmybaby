@@ -105,3 +105,9 @@ path alias를 이용한 <code>import</code>에서 <kbd>ctrl</kbd>+<kbd>click</kb
   }
 }
 ```
+
+## Redux Toolkit
+
+```
+npm install @reduxjs/toolkit
+```
