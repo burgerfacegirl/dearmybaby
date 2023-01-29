@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import Logo from '@/commons/components/logo';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 import './home.css';
 
 function Home() {
@@ -7,15 +8,23 @@ function Home() {
 
   return (
     <div>
-      <Logo></Logo>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="userplan">
+        <h3>계획 짜기</h3>
+
+        <button> 여행 계획 추가하기 </button>
       </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
+      <div className="reccommandCard">
+        <p> 아이 관심사 기반 여행 도시 추천</p>
+        <div className="reccomandCityCard">
+          <a href=""> 이 도시 관련 여행지 | </a>
+          <a href=""> 이 도시 관련 여행지 | </a>
+          <a href=""> 이 도시 관련 여행지 | </a>
+        </div>
+      </div>
+      <div>
+      <p className="read-the-docs">아이가 좋아하는 여행 추천지 리스트 들어가는곳</p>
+
+      </div>
     </div>
   );
 }
