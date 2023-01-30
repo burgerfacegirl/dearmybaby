@@ -1,5 +1,5 @@
 import reactLogo from '@/assets/react.svg';
-import './logo.css';
+import '@/commons/components/Logo';
 
 function Logo() {
   return (

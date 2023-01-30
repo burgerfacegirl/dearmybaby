@@ -7,6 +7,15 @@ export default function Home() {
     <div>
       <div className="userplan">
         <h3>계획 짜기</h3>
+
+        <ul className="" style={{ display: 'none' }}>
+          {/* <li onClick={}> 내 프로필</li> */}
+          <li> 내그룹</li>
+          <li> 장소 바구니</li>
+          <li> 내 여행</li>
+          <li> 공지사항</li>
+          <li> 고객 센터</li>
+        </ul>
         <button
           onClick={() => {
             navigate('/plan');

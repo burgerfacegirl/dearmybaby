@@ -6,6 +6,12 @@ import Plan from '@/pages/plan/Plan';
 import Record from '@/pages/record/Record';
 import Album from '@/pages/album/Album';
 import path from '@/config/path';
+import SideBar from './commons/components/SideBar';
+import Notice from './commons/components/Notice';
+import MyGroups from './commons/components/MyGroups';
+import MyTravels from './commons/components/MyTravels';
+import ServiceCenter from './commons/components/ServiceCenter';
+import TravelBasket from './commons/components/TravelBasket';
 
 export default function App() {
   // const menuNavigate = useNa;
@@ -14,22 +20,20 @@ export default function App() {
       <div className="App">
         <LinkManager />
 
-        <ul className="" style={{ display: 'none' }}>
-          {/* <li onClick={}> 내 프로필</li> */}
-          <li> 내그룹</li>
-          <li> 장소 바구니</li>
-          <li> 내 여행</li>
-          <li> 공지사항</li>
-          <li> 고객 센터</li>
-        </ul>
 
         <p className=""> 최상위 컴포넌트 헤더</p>
         <Routes>
-          {/* sidebar */}
+          {/* SideBar */}
           <Route path={path.home} element={<Home />} />
           <Route path={path.plan} element={<Plan />} />
           <Route path={path.record} element={<Record />} />
           <Route path={path.album} element={<Album />} />
+          <Route path={path.sidebar} element={<SideBar />}/>
+          <Route path={path.notice} element={<Notice />}/>
+          <Route path={path.mygroups} element={<MyGroups />}/>
+          <Route path={path.mytravels} element={<MyTravels />}/>
+          <Route path={path.servicecenter} element={<ServiceCenter />}/>
+          <Route path={path.travelbasket} element={<TravelBasket />}/>
         </Routes>
       </div>
     </BrowserRouter>

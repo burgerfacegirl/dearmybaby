@@ -4,3 +4,10 @@
   padding: 2rem;
   text-align: center;
 } */
+
+.App {
+  box-sizing: content-box;
+  width: 412px;
+  height: 915px;
+  border: 1px solid black;
+}
