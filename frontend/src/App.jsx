@@ -23,7 +23,7 @@ export default function App() {
           <li> 고객 센터</li>
         </ul>
 
-        <p className="text-3xl font-bold underline"> 최상위 컴포넌트 헤더</p>
+        <p className=""> 최상위 컴포넌트 헤더</p>
         <Routes>
           {/* sidebar */}
           <Route path={path.home} element={<Home />} />
