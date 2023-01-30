@@ -1,13 +1,13 @@
 package com.ssafy.dmb.domain.plan;
 
+import com.ssafy.dmb.domain.location.Place;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,5 +20,11 @@ public class Day {
 
     private LocalDate dayDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "plan_id")
+    private Plan plan;
+
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
+    private List<Place> places = new ArrayList<>();
 
 }
