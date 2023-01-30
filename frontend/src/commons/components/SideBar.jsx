@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import path from '@/config/path.jsx';
 
 export default function SideBar() {
   const navigate = useNavigate();
@@ -7,35 +8,35 @@ export default function SideBar() {
     <div className="sidebarParent" style={{ width: '40%' }}>
       <button
         onClick={() => {
-          navigate('/mygroups');
+          navigate(path.myGroups);
         }}
       >
         내 그룹
       </button>
       <button
         onClick={() => {
-          navigate('/travelbasket');
+          navigate(path.travelBasket);
         }}
       >
         장소 바구니
       </button>
       <button
         onClick={() => {
-          navigate('/mytravels');
+          navigate(path.myTravels);
         }}
       >
         내 여행
       </button>
       <button
         onClick={() => {
-          navigate('/servicecenter');
+          navigate(path.serviceCenter);
         }}
       >
         고객 센터
       </button>
       <button
         onClick={() => {
-          navigate('/notice');
+          navigate(path.notice);
         }}
       >
         공지사항
