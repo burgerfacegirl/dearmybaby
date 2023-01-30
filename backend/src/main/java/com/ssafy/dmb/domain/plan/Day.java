@@ -1,6 +1,7 @@
 package com.ssafy.dmb.domain.plan;
 
 import com.ssafy.dmb.domain.location.Place;
+import com.ssafy.dmb.domain.record.Record;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +25,10 @@ public class Day {
     @JoinColumn(name = "plan_id")
     private Plan plan;
 
-    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "day", cascade = CascadeType.ALL)
     private List<Place> places = new ArrayList<>();
+
+    @OneToMany(mappedBy = "day", cascade = CascadeType.ALL)
+    private List<Record> records = new ArrayList<>();
 
 }
