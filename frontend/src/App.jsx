@@ -1,15 +1,14 @@
 import '@/App.css';
-import Home from '@/pages/home/home.jsx';
-import Sidebar from './commons/components/sidebar';
+import Home from '@/pages/home/Home.jsx';
+import Sidebar from './commons/components/Sidebar';
 import { BrowserRouter,Route, Routes } from 'react-router-dom';
-import Header from './commons/components/Header';
-
+import RouteManager from './commons/components/RouteManager';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Header />
+        <RouteManager />
         <p className="text-3xl font-bold underline"> 최상위 컴포넌트 헤더</p>
         <Routes>
           <Route path='/' element = {<Home />}/>
