@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import './Home.css';
 
 function Home() {
@@ -9,11 +9,14 @@ function Home() {
         <h3>계획 짜기</h3>
         <button
           onClick={() => {
-            navigate('/plan/Plan');
+            navigate('/plan/make');
           }}
         >
           여행 계획 추가하기
         </button>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+        </Routes>
       </div>
       <div className="recommandCard">
         <p> 아이 관심사 기반 여행 도시 추천</p>

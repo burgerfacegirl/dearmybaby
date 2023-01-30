@@ -3,6 +3,7 @@ import Home from '@/pages/home/Home.jsx';
 import Sidebar from './commons/components/Sidebar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import RouteManager from './commons/components/RouteManager';
+import PlanForm from './pages/plan/PlanForm';
 
 function App() {
   return (
@@ -20,9 +21,10 @@ function App() {
           <li> 고객 센터</li>
         </ul>
 
+        <PlanForm/>
         <p className="text-3xl font-bold underline"> 최상위 컴포넌트 헤더</p>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/:" element={<Home />} />
           {/* sidebar */}
           <Route path="/sidebar" element={<Sidebar />} />
         </Routes>
