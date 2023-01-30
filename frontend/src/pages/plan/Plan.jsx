@@ -1,9 +1,9 @@
+import PlanForm from './PlanForm';
+
 const Plan = () => {
   return (
     <div>
-      <div>
-        <h1>Plan!!!!!!!!!!!!</h1>
-      </div>
+      <PlanForm />
     </div>
   );
 };
