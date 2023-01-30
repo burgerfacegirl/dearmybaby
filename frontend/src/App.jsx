@@ -5,8 +5,9 @@ import LinkManager from '@/commons/components/LinkManager';
 import Plan from '@/pages/plan/Plan';
 import Record from '@/pages/record/Record';
 import Album from '@/pages/album/Album';
+import path from '@/config/path';
 
-function App() {
+export default function App() {
   // const menuNavigate = useNa;
   return (
     <BrowserRouter>
@@ -24,15 +25,13 @@ function App() {
 
         <p className="text-3xl font-bold underline"> 최상위 컴포넌트 헤더</p>
         <Routes>
-          <Route path="/:" element={<Home />} />
+          <Route path={path.home} element={<Home />} />
           {/* sidebar */}
-          <Route path="/record" element={<Record />} />
-          <Route path="/album" element={<Album />} />
-          <Route path="/plan/Plan" element={<Plan />} />
+          <Route path={path.plan} element={<Plan />} />
+          <Route path={path.record} element={<Record />} />
+          <Route path={path.album} element={<Album />} />
         </Routes>
       </div>
     </BrowserRouter>
   );
 }
-
-export default App;

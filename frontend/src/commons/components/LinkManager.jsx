@@ -1,15 +1,13 @@
 import { Link } from 'react-router-dom';
+import path from '@/config/path';
 
-const LinkManager = () => {
+export default function LinkManager() {
   return (
     <>
-      <Link to={'/'}>Home | </Link>
-      <Link to={'/record'}> record |</Link>
-      <Link to={'/album'}> album |</Link>
-
-      <Link to={'/plan/Plan'}> plan |</Link>
+      <Link to={path.home}>Home | </Link>
+      <Link to={path.record}> record |</Link>
+      <Link to={path.album}> album |</Link>
+      <Link to={path.plan}> plan |</Link>
     </>
   );
-};
-
-export default LinkManager;
+}

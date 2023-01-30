@@ -1,11 +1,9 @@
 import PlanForm from './PlanForm';
 
-const Plan = () => {
+export default function Plan() {
   return (
     <div>
       <PlanForm />
     </div>
   );
-};
-
-export default Plan;
+}
