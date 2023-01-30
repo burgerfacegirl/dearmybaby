@@ -1,11 +1,19 @@
+import { useNavigate } from 'react-router-dom';
 import './Home.css';
 
 function Home() {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="userplan">
         <h3>계획 짜기</h3>
-        <button>여행 계획 추가하기</button>
+        <button
+          onClick={() => {
+            navigate('/plan/Plan');
+          }}
+        >
+          여행 계획 추가하기
+        </button>
       </div>
       <div className="recommandCard">
         <p> 아이 관심사 기반 여행 도시 추천</p>
