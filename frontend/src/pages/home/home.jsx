@@ -9,7 +9,7 @@ function Home() {
         <h3>계획 짜기</h3>
         <button
           onClick={() => {
-            navigate('/plan/make');
+            navigate('../plan/Plan');
           }}
         >
           여행 계획 추가하기
@@ -21,9 +21,9 @@ function Home() {
       <div className="recommandCard">
         <p> 아이 관심사 기반 여행 도시 추천</p>
         <div className="recomandCityCard">
+          {/* <a href="#"> 이 도시 관련 여행지 | </a>
           <a href="#"> 이 도시 관련 여행지 | </a>
-          <a href="#"> 이 도시 관련 여행지 | </a>
-          <a href="#"> 이 도시 관련 여행지 | </a>
+          <a href="#"> 이 도시 관련 여행지 | </a> */}
         </div>
       </div>
       <div>

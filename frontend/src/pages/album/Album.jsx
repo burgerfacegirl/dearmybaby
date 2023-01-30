@@ -1,7 +1,9 @@
 const Album = () => {
-    return (
-        <div></div>
-    )
+  return (
+    <div>
+      <h1>album</h1>
+    </div>
+  );
 };
 
 export default Album;
