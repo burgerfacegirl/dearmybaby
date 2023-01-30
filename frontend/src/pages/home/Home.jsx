@@ -1,5 +1,5 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import './home.css';
+import { useNavigate } from 'react-router-dom';
+import './Home.css';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -9,14 +9,11 @@ export default function Home() {
         <h3>계획 짜기</h3>
         <button
           onClick={() => {
-            navigate('../plan/Plan');
+            navigate('/plan');
           }}
         >
           여행 계획 추가하기
         </button>
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-        </Routes>
       </div>
       <div className="recommandCard">
         <p> 아이 관심사 기반 여행 도시 추천</p>

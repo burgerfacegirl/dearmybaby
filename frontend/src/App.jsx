@@ -25,8 +25,8 @@ export default function App() {
 
         <p className="text-3xl font-bold underline"> 최상위 컴포넌트 헤더</p>
         <Routes>
-          <Route path={path.home} element={<Home />} />
           {/* sidebar */}
+          <Route path={path.home} element={<Home />} />
           <Route path={path.plan} element={<Plan />} />
           <Route path={path.record} element={<Record />} />
           <Route path={path.album} element={<Album />} />
