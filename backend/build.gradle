@@ -3,6 +3,10 @@ plugins {
 	id 'org.springframework.boot' version '2.7.8'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
+//
+//springBoot {
+//	mainClass = "com.ssafy.dmb.DmbApplication"
+//}
 
 group = 'com.ssafy'
 version = '0.0.1-SNAPSHOT'
@@ -12,8 +16,8 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
-}
 
+}
 repositories {
 	mavenCentral()
 }
@@ -36,8 +40,12 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.7'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
+	// S3 dependence
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
