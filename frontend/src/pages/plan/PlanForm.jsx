@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // css import
 import moment from 'moment/moment';
+import { useNavigate } from 'react-router-dom';
 
 const PlanForm = () => {
   const [date, setDate] = useState(new Date());
+  const findCity = useNavigate();
+  function searchCity() {
+    findCity('/plan/findcity');
+  }
 
   return (
     <div>
@@ -20,7 +25,7 @@ const PlanForm = () => {
         <Calendar onChange={setDate} value={date} />
         <div>{moment(date).format('YYYY년 MM월 DD일')}</div>
       </div>
-        {/* <Calendar onChange={changeDate} value={date} /> */}
+      {/* <Calendar onChange={changeDate} value={date} /> */}
       <div>
         <h2>여행하실 지역을 선택해주세요</h2>
         <form action="#" className="regionButtons">
