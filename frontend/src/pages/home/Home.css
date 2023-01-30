@@ -1,8 +1,15 @@
-.card {
-  border: solid black;
-  padding: 2em;
+div {
+  border: solid 0.5px;
 }
 
-.read-the-docs {
-  color: #888;
+.recommandCard {
+
+  padding: 2.5%;
+  margin-inline: 5%;
+  margin-block: 15%;
+}
+
+.recomandCityCard {
+
+  margin-inline: 5%;
 }

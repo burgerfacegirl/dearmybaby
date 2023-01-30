@@ -8,9 +8,7 @@ export default function Plan() {
   return (
     <div>
       <PlanForm />
-      <Routes>
-        <Route> </Route>
-      </Routes>
+
     </div>
   );
 }

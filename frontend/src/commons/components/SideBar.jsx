@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import path from '@/config/path.jsx';
 
-export default function SideBar() {
+const SideBar = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="sidebarParent" style={{ width: '40%' }}>
+    <div className="sidebarParent" >
       <button
         onClick={() => {
           navigate(path.myGroups);
@@ -44,3 +44,4 @@ export default function SideBar() {
     </div>
   );
 }
+export default SideBar;
