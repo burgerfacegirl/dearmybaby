@@ -1,4 +1,14 @@
+import PlanMap from './PlanMap';
+
 export default function FindCity() {
+  const dummyPlace = [
+    {
+      dayCount: 1,
+      placeType: 0,
+      lat: 37.4977288,
+      lng: 127.0448612,
+    },
+  ];
   return (
     <div>
       <div className="search">
@@ -7,13 +17,9 @@ export default function FindCity() {
         </form>
       </div>
       <p>map component 자리</p>
-      <div>
-        <p> 여행 장소 이미지</p>
-        <p> 여행 장소</p>
-        <p>여행 장소 설명</p>
-        <button>detail</button>
-        <button>장소 바구니 담기</button>
-      </div>
+      <PlanMap dummyPlace={dummyPlace} />
+
+      <button>장소바구니 보러가기</button>
     </div>
   );
 }

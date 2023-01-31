@@ -10,7 +10,6 @@ const PlanForm = () => {
     <div>
       <SelectGroup />
       <SelectDate />
-
       <SelectPlace />
     </div>
   );
