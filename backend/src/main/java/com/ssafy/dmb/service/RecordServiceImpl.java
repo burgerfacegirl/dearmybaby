@@ -3,6 +3,8 @@ package com.ssafy.dmb.service;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.ssafy.dmb.dto.RecordDto;
+import com.ssafy.dmb.dto.RecordResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,13 +14,14 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class RecordServiceImpl {
+public class RecordServiceImpl implements RecordService{
 
     // local, development 등 현재 프로파일
     @Value("${spring.environment}")
@@ -114,4 +117,23 @@ public class RecordServiceImpl {
         return originalFilename.substring(pos + 1);
     }
 
+    @Override
+    public List<RecordResponseDto> getRecord(Long dayId) {
+        return null;
+    }
+
+    @Override
+    public RecordResponseDto getRecordDetail(RecordDto recordDto) {
+        return null;
+    }
+
+    @Override
+    public RecordResponseDto saveRecord(RecordDto recordDto) {
+        return null;
+    }
+
+    @Override
+    public void deleteRecord(Long recordId) {
+
+    }
 }
