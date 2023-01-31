@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { record } from './props';
 
 export default function AlbumRecordItem({ record }) {
   return (
@@ -16,12 +16,5 @@ export default function AlbumRecordItem({ record }) {
 }
 
 AlbumRecordItem.propTypes = {
-  record: PropTypes.shape({
-    recordId: PropTypes.number,
-    dayCount: PropTypes.number,
-    recordType: PropTypes.number,
-    recordFile: PropTypes.string,
-    lat: PropTypes.string,
-    lng: PropTypes.string,
-  }),
+  record,
 };

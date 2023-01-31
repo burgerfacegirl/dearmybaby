@@ -1,9 +1,13 @@
-div {
-  border: solid 0.5px;
-}
-
-
 .placeItem {
   display: inline;
   border: none;
+}
+.recommandCard {
+  padding: 2.5%;
+  margin-inline: 5%;
+  margin-block: 15%;
+}
+
+.recomandCityCard {
+  margin-inline: 5%;
 }
