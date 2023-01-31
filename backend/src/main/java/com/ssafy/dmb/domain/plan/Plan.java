@@ -32,6 +32,7 @@ public class Plan {
     @JoinColumn(name = "family_id")
     private Family family;
 
+
     @OneToMany(mappedBy = "plan")
     private List<Bookmark> bookmarks = new ArrayList<>();
 

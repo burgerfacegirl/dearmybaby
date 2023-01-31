@@ -1,5 +1,6 @@
 package com.ssafy.dmb.domain.plan;
 
+
 import com.ssafy.dmb.domain.location.LocationType;
 import lombok.*;
 

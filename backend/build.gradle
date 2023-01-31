@@ -43,11 +43,14 @@ dependencies {
 
 	// swagger dependencies
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.7'
+<<<<<<< HEAD
 
 	// S3 dependence
 	implementation platform('software.amazon.awssdk:bom:2.17.53')
 	implementation 'software.amazon.awssdk:s3'
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+=======
+>>>>>>> 2ff275e (feat : complete skeleton code for bookmark feature)
 
 }
 

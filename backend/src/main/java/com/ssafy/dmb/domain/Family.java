@@ -19,9 +19,10 @@ public class Family {
     @Column(nullable = false)
     private String familyName;
 
-    @OneToMany(mappedBy = "family")
+
+    @OneToMany(mappedBy = "family", cascade = CascadeType.ALL)
     private List<FamilyUser> FamilyUser = new ArrayList<>();
 
-    @OneToMany(mappedBy = "family")
+    @OneToMany(mappedBy = "family", cascade = CascadeType.ALL)
     private List<Plan> plans = new ArrayList<>();
 }
