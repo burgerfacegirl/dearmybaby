@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
+import Place from './Place';
 
 export default function Home() {
   const navigate = useNavigate();
   return (
     <div>
-      <div className="userplan" >
+      <div className="userplan">
         <h3>계획 짜기</h3>
 
         <ul className="" style={{ display: 'none' }}>
@@ -24,17 +25,12 @@ export default function Home() {
           여행 계획 추가하기
         </button>
       </div>
-      <div className="recommandCard">
-        <p> 아이 관심사 기반 여행 도시 추천</p>
-        <div >
-          {/* <a href="#"> 이 도시 관련 여행지 | </a>
-          <a href="#"> 이 도시 관련 여행지 | </a>
-          <a href="#"> 이 도시 관련 여행지 | </a> */}
-        </div>
-      </div>
-      <div className="recomandCityCard">
-        <p className="read-the-docs">아이가 좋아하는 여행 추천지 리스트 들어가는곳</p>
-      </div>
+
+      <h3>어린이와 겨울에 가기 좋은 여행지</h3>
+      <Place />
+
+      <h3>N세 어린이를 위한 추천 여행지</h3>
+      <Place />
     </div>
   );
 }
