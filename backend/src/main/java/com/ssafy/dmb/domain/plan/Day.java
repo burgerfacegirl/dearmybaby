@@ -21,7 +21,7 @@ public class Day {
 
     private LocalDate dayDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "plan_id")
     private Plan plan;
 

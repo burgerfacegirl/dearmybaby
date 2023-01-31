@@ -22,7 +22,7 @@ public class FamilyUser {
     @JoinColumn(name = "user_no")
     private User user;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Role role;
 
 }

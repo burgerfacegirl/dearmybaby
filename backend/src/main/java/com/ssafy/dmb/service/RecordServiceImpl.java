@@ -3,10 +3,17 @@ package com.ssafy.dmb.service;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.ssafy.dmb.domain.location.Coordinate;
+import com.ssafy.dmb.domain.plan.Day;
+import com.ssafy.dmb.domain.record.Record;
 import com.ssafy.dmb.dto.RecordDto;
 import com.ssafy.dmb.dto.RecordResponseDto;
+import com.ssafy.dmb.repository.DayRepository;
+import com.ssafy.dmb.repository.RecordRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,15 +21,18 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class RecordServiceImpl implements RecordService{
 
+    private final Logger LOGGER = LoggerFactory.getLogger(RecordServiceImpl.class);
+
+    private final RecordRepository recordRepository;
+    private final DayRepository dayRepository;
     // local, development 등 현재 프로파일
     @Value("${spring.environment}")
     private String environment;
@@ -49,6 +59,7 @@ public class RecordServiceImpl implements RecordService{
     public String upload(MultipartFile multipartFile, String bucket, String dirName) throws IOException {
         File uploadFile = convert(multipartFile)  // 파일 변환할 수 없으면 에러
                 .orElseThrow(() -> new IllegalArgumentException("error: MultipartFile -> File convert fail"));
+        String url = upload(uploadFile, bucket, dirName);
 
         return upload(uploadFile, bucket, dirName);
     }
@@ -118,22 +129,56 @@ public class RecordServiceImpl implements RecordService{
     }
 
     @Override
-    public List<RecordResponseDto> getRecord(Long dayId) {
+    public List<RecordResponseDto> getDayRecordList(Long dayId) {
+        List<Record> recordList = recordRepository.findAllByDayId(dayId);
+
+        List<RecordResponseDto> dayRecordDtoList = recordList.stream()
+                .map(r->new RecordResponseDto(r))
+                .collect(Collectors.toList());
+
+        return dayRecordDtoList;
+    }
+
+    @Override
+    public List<RecordResponseDto> getPlanRecordList(Long planId) {
+        List<Record> recordList = recordRepository.findAllByPlanId(planId);
+
+        List<RecordResponseDto> planRecordDtoList = recordList.stream()
+                .map(r->new RecordResponseDto(r))
+                .collect(Collectors.toList());
+        return planRecordDtoList;
+    }
+
+    @Override
+    public RecordResponseDto getRecord(RecordDto recordDto) {
         return null;
     }
 
     @Override
-    public RecordResponseDto getRecordDetail(RecordDto recordDto) {
-        return null;
-    }
+    public RecordResponseDto saveRecord(String url, RecordDto recordDto) {
+        LOGGER.info("[saveRecord] input dto: {}", recordDto);
+        Long dayId = recordDto.getDayId();
 
-    @Override
-    public RecordResponseDto saveRecord(RecordDto recordDto) {
+        Day day = dayRepository.findById(dayId).
+                orElseThrow(() -> new NoSuchElementException());
+
+        Coordinate recordCoordinate = new Coordinate(recordDto.getLatitude(), recordDto.getLongitude());
+
+        Record record = Record.builder().
+                day(day).
+                record_type(recordDto.getType()).
+                record_file(recordDto.getFileName()).
+                record_text(recordDto.getText()).
+                recordCoordinate(recordCoordinate).
+                build();
+
+        Record recordResponse = recordRepository.save(record);
+        // 뭐가 필요한지 말해라 front
         return null;
     }
 
     @Override
     public void deleteRecord(Long recordId) {
-
+        recordRepository.deleteById(recordId);
     }
 }

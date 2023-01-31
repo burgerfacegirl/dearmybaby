@@ -10,12 +10,16 @@ import lombok.Setter;
 @Getter @Setter
 public class RecordDto {
 
-    // S3 UploadId
-    private String uploadId;
+    // recordID
+    private Long dayId;
     // 서버에서 생성한 파일 이름
     private String fileName;
     // 이미지, 영상과 함께 오는 text
     private String text;
-    // 이미지, 영상 저장 url
-    private String url;
+
+    private String latitude;
+
+    private String longitude;
+
+    private int type;
 }

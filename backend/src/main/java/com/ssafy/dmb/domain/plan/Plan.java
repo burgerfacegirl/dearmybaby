@@ -1,9 +1,7 @@
 package com.ssafy.dmb.domain.plan;
 
 import com.ssafy.dmb.domain.Family;
-import com.ssafy.dmb.domain.plan.Bookmark;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,6 +10,9 @@ import java.util.List;
 
 @Getter @Setter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Plan {
     @Id @GeneratedValue
     @Column(name = "plan_id")
@@ -23,11 +24,11 @@ public class Plan {
 
     private int planPeriod;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "family_id")
     private Family family;
 
-    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.MERGE)
     private List<Bookmark> bookmarks = new ArrayList<>();
 
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)

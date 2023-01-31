@@ -21,14 +21,14 @@ public class User {
 
     private String userPassword;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private UserValid uservalid; // 1 - valid, 2 - withdrawn
 
     private String userId;
 
     private String userImg;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<FamilyUser> familyUser = new ArrayList<>();
 
 
