@@ -15,7 +15,6 @@ import TravelBasket from './commons/components/TravelBasket';
 import FindCity from './pages/plan/FindCity';
 
 export default function App() {
-
   return (
     <BrowserRouter>
       <div className="App" style={{}}>

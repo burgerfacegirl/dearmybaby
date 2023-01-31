@@ -1,4 +1,5 @@
 // 변수는 camelCase url은 kebab-case
+
 const path = {
   home: '/',
   plan: '/plan',

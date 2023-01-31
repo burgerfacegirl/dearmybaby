@@ -1,5 +1,6 @@
 import LinkManager from '@/commons/components/LinkManager';
-import { useNavigate } from 'react-router-dom';
+import path from '@/config/path';
+import { useNavigate, Link } from 'react-router-dom';
 
 const HeadBar = () => {
   const HeadBarStyle = {
@@ -17,7 +18,7 @@ const HeadBar = () => {
       </div>
       <div>
         {/* <FontAwesomeIcon icon="fa-solid fa-bars" /> */}
-        <button style={SideButton}>=</button>
+        <Link to={path.sidebar}><button style={SideButton}>=</button></Link>
       </div>
     </div>
   );

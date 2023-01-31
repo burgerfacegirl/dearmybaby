@@ -8,7 +8,6 @@ const LinkManager = () => {
       <Link to={path.plan}> plan |</Link>
       <Link to={path.record}> record |</Link>
       <Link to={path.album}> album |</Link>
-      <Link to={path.sidebar}> sidebar |</Link>
     </>
   );
 };

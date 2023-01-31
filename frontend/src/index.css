@@ -26,10 +26,11 @@ a:hover {
 }
 
 body {
-  margin: 1%;
+  margin: 0;
   display: flex;
   place-items: top;
   width: 100vw;
+  border: 5px solid black;
 }
 
 */ h1 {
