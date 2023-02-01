@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
+@Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Record {
     @Id @GeneratedValue
@@ -18,36 +18,37 @@ public class Record {
     private Long id;
 
     // day_id
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "day_id")
     private Day day;
 
-    private int record_type;
+    @Column(nullable = false)
+    private int recordType;
 
-    private String record_file;
+    @Column(nullable = false)
+    private String recordFile;
 
-    private String record_text;
+    private String recordText;
 
-    private String file_url;
+    private String fileUrl;
 
-    @OneToMany(mappedBy = "record", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "record")
     private List<Comment> comments = new ArrayList<>();
 
-    // 위도
     @Embedded
     private Coordinate recordCoordinate;
-    @Column(columnDefinition = "DATETIME default now()")
-    private LocalDateTime record_date;
+
+    @Column(columnDefinition = "LOCALDATETIME default now()")
+    private LocalDateTime recordDate;
 
     @Builder
-    public Record(String file_url, String record_file, String record_text, int record_type, Day day, Coordinate recordCoordinate) {
-        this.file_url = file_url;
-        this.record_file = record_file;
-        this.record_text = record_text;
-        this.record_type = record_type;
+    public Record(String fileUrl, String recordFile, String recordText, int recordType, Day day, Coordinate recordCoordinate) {
+        this.fileUrl = fileUrl;
+        this.recordFile = recordFile;
+        this.recordText = recordText;
+        this.recordType = recordType;
         this.day = day;
         this.recordCoordinate = recordCoordinate;
     }
-    // 경도
 
 }

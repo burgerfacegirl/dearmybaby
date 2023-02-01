@@ -4,9 +4,9 @@ package com.ssafy.dmb.domain.record;
 import com.ssafy.dmb.domain.User;
 import lombok.Getter;
 import lombok.Setter;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Getter @Setter
@@ -26,7 +26,9 @@ public class Comment {
     @JoinColumn(name = "user_no")
     private User user;
 
-    private String comment_text;
+    @Column(nullable = false)
+    private String commentText;
 
-    private LocalDate comment_date;
+    @Column(columnDefinition = "DATETIME default now()")
+    private DateTime commentDate;
 }

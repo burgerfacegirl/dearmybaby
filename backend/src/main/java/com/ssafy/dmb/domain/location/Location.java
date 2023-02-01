@@ -25,13 +25,7 @@ public class Location {
 
     private String locationLongitude;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Region region;
 
-
-//    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
-//    private List<Bookmark> bookmarks = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
-//    private List<Place> places = new ArrayList<>();
 }

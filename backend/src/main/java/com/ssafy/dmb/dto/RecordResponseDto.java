@@ -19,25 +19,25 @@ public class RecordResponseDto {
     // 몇일차껀지
     private Long dayId;
     // 서버에서 생성한 파일 이름
-    private String fileName;
+    private String recordFile;
     // 위도
     private String latitude;
     // 경도
     private String longitude;
     // 파일 타입
-    private int type;
+    private int recordType;
     // 저장 url
-    private String url;
+    private String fileUrl;
     // record 시간
-    private LocalDateTime recordTime;
+    private LocalDateTime recordDate;
 
     public RecordResponseDto(Record record){
         recordId = record.getId();
         dayId = record.getDay().getId();
-        fileName = record.getRecord_file();
-        type = record.getRecord_type();
-        url = record.getFile_url();
-        recordTime = record.getRecord_date();
+        recordFile = record.getRecordFile();
+        recordType = record.getRecordType();
+        fileUrl = record.getFileUrl();
+        recordDate = record.getRecordDate();
 
         Coordinate coordinate = record.getRecordCoordinate();
         latitude = coordinate.getLatitude();

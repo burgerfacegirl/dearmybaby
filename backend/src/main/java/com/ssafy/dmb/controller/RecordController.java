@@ -16,24 +16,19 @@ import java.util.List;
 public class RecordController {
     private final RecordServiceImpl recordService;
 
-    @PostMapping("/image")
-    public String imageUpload(@RequestParam("data") MultipartFile multipartFile
-            , @RequestParam("recorded") RecordDto recordDto) throws IOException {
+    @PostMapping()
+    public String saveRecord(@RequestPart MultipartFile multipartFile
+            , @RequestPart RecordDto recordDto) throws IOException {
 
-        String url = recordService.upload(multipartFile, "dearmybucket", "image");
-        // content와 URL 을 DB에 저장하는 service 코드와 repo method가 필요하다.
+        String url = recordService.upload(multipartFile, "dearmybucket", "dmb");
+
         recordService.saveRecord(url, recordDto);
-        return "ok";
-    }
-
-    @PostMapping("/video")
-    public String videoUpload(@RequestParam("data") MultipartFile multipartFile) throws IOException {
-        return recordService.upload(multipartFile, "dearmybucket", "video");
+        return url;
     }
 
     @GetMapping("/day")
-    public List<RecordResponseDto> getDayRecordList(@RequestParam("dayId") Long dayId) throws IOException {
-        return recordService.getDayRecordList(dayId);
+    public List<RecordResponseDto> getDayRecordList(@RequestParam("dayId") Long dayId, @RequestParam("planId") Long planId ) throws IOException {
+        return recordService.getDayRecordList(dayId, planId);
     }
 
     @GetMapping("/plan")
@@ -41,11 +36,14 @@ public class RecordController {
         return recordService.getPlanRecordList(planId);
     }
 
-
-
     @DeleteMapping()
     public void deleteRecord(@RequestParam("recordId") Long recordId) throws IOException {
         recordService.deleteRecord(recordId);
+    }
+
+    @PutMapping()
+    public void changeRecordText(@RequestParam("recordId") Long recordId, @RequestParam("recordText") String recordText) throws IOException {
+        recordService.changeRecordText(recordId, recordText);
     }
 
 }

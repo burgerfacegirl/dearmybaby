@@ -59,8 +59,6 @@ public class RecordServiceImpl implements RecordService{
     public String upload(MultipartFile multipartFile, String bucket, String dirName) throws IOException {
         File uploadFile = convert(multipartFile)  // 파일 변환할 수 없으면 에러
                 .orElseThrow(() -> new IllegalArgumentException("error: MultipartFile -> File convert fail"));
-        String url = upload(uploadFile, bucket, dirName);
-
         return upload(uploadFile, bucket, dirName);
     }
 
@@ -129,8 +127,9 @@ public class RecordServiceImpl implements RecordService{
     }
 
     @Override
-    public List<RecordResponseDto> getDayRecordList(Long dayId) {
-        List<Record> recordList = recordRepository.findAllByDayId(dayId);
+    public List<RecordResponseDto> getDayRecordList(Long dayId, Long planId) {
+        LOGGER.info("[getDayRecordList] input dayId: {}", dayId);
+        List<Record> recordList = recordRepository.findAllByDayId(dayId, planId);
 
         List<RecordResponseDto> dayRecordDtoList = recordList.stream()
                 .map(r->new RecordResponseDto(r))
@@ -141,11 +140,13 @@ public class RecordServiceImpl implements RecordService{
 
     @Override
     public List<RecordResponseDto> getPlanRecordList(Long planId) {
+        LOGGER.info("[getPlanRecordList] input planId: {}", planId);
         List<Record> recordList = recordRepository.findAllByPlanId(planId);
 
         List<RecordResponseDto> planRecordDtoList = recordList.stream()
                 .map(r->new RecordResponseDto(r))
                 .collect(Collectors.toList());
+
         return planRecordDtoList;
     }
 
@@ -155,7 +156,7 @@ public class RecordServiceImpl implements RecordService{
     }
 
     @Override
-    public RecordResponseDto saveRecord(String url, RecordDto recordDto) {
+    public void saveRecord(String url, RecordDto recordDto) {
         LOGGER.info("[saveRecord] input dto: {}", recordDto);
         Long dayId = recordDto.getDayId();
 
@@ -166,14 +167,24 @@ public class RecordServiceImpl implements RecordService{
 
         Record record = Record.builder().
                 day(day).
-                record_type(recordDto.getType()).
-                record_file(recordDto.getFileName()).
-                record_text(recordDto.getText()).
+                recordType(recordDto.getRecordType()).
+                recordFile(recordDto.getRecordFile()).
+                recordText(recordDto.getRecordText()).
                 recordCoordinate(recordCoordinate).
+                fileUrl(url).
                 build();
 
         Record recordResponse = recordRepository.save(record);
         // 뭐가 필요한지 말해라 front
+
+    }
+
+    @Override
+    public RecordResponseDto changeRecordText(Long recordId, String recordText) {
+        Record foundRecord = recordRepository.findById(recordId).get();
+        foundRecord.setRecordText(recordText);
+        recordRepository.save(foundRecord);
+
         return null;
     }
 

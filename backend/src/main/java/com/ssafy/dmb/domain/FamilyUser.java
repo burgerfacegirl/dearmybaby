@@ -11,7 +11,7 @@ public class FamilyUser {
 
     @Id @GeneratedValue
     @Column(name = "family_user_id")
-    private Long no;
+    private Long id;
 
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "family_id")
@@ -24,5 +24,4 @@ public class FamilyUser {
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
 }
