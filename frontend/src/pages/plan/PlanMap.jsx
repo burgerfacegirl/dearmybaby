@@ -19,15 +19,20 @@ export default function PlanMap() {
   let searchWord = '역삼';
   const onClick = () => {
     searchWord = keyWord;
+    // console.log({ info });
     // console.log(searchWord);
   };
 
+  // navigate 장소바구니
+  const toPlaceCart = () => {
+
+  }
   useEffect(() => {
     if (!map) return;
     const ps = new kakao.maps.services.Places();
     ps.keywordSearch(keyWord, (data, status, _pagination) => {
       if (status === kakao.maps.services.Status.OK) {
-        // console.log(data);
+        // console.log('data', data);
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
         const bounds = new kakao.maps.LatLngBounds();
@@ -40,10 +45,16 @@ export default function PlanMap() {
               lng: data[i].x,
             },
             content: data[i].place_name,
+            adressName: data[i].address_name,
+            placeURL: data[i].place_url,
+            categoryCode: data[i].category_group_code,
+            roadAddressName: data[i].road_address_name,
+
           });
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
         }
         setMarkers(markers);
+
 
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
         map.setBounds(bounds);
@@ -69,37 +80,79 @@ export default function PlanMap() {
         onCreate={setMap}
       >
         {markers.map((marker) => (
-          <MapMarker
-            key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
-            position={marker.position}
-            onClick={() => {
-              setInfo(marker);
-              setIsOpen(true);
-            }}
-          />
-        ))}
 
-        {markers.map((marker) => {
-          // console.log(marker.position.lat);
-          {
-            isOpen && (
+          <>
+            <MapMarker
+              key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
+              position={marker.position}
+              onClick={() => {
+                setInfo(marker);
+                // console.log(marker);
+                setIsOpen(true);
+              }}
+            />
+            {isOpen && (
+
               <CustomOverlayMap
+                key={`${marker.position.lng}`}
                 position={{
-                  lat: marker.position.lat,
-                  lng: marker.position.lng,
+                  lat: info.position.lat,
+                  lng: info.position.lng,
                 }}
               >
-                <div className="label" style={{ color: '#000' }}>
-                  <span className="left"></span>
-                  <span className="center">카카오!</span>
-                  <span className="right"></span>
+                <div className="wrap" style={{ backgroundColor: 'white' }}>
+                  <div className="info">
+                    <div className="title">
+                      {info.content}
+                      <div> <button
+                        className="close"
+                        onClick={() => setIsOpen(false)}
+                        title="닫기">X</button></div>
+                    </div>
+                    <div className="body">
+                      <div className="img">
+                        {/* <img
+                          src="//t1.daumcdn.net/thumb/C84x76/?fname=http://t1.daumcdn.net/cfile/2170353A51B82DE005"
+                          width="73"
+                          height="70"
+                          alt="카카오 스페이스닷원"
+                        /> */}
+                      </div>
+                      <div className="desc">
+                        <div className="ellipsis">
+                          {info.roadAddressName}
+                        </div>
+                        <div className="jibun ellipsis">
+                          {info.addressName}
+                        </div>
+                        <div>
+                          <a
+                            href={info.placeURL}
+                            target="_blank"
+                            className="link"
+                            rel="noreferrer"
+                          >
+                            디테일
+                          </a>
+                          <button >추가</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
               </CustomOverlayMap>
-            );
-          }
-        })}
+            )}
+          </>
+        ))}
+
+
+
+
+
+
       </Map>
-    </div>
+    </div >
   );
 }
 
