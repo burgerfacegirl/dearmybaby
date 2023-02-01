@@ -40,7 +40,7 @@ const SelectDate = () => {
   return (
     <div>
       <DateRange
-        editableDateInputs={false}
+        editableDateInputs={true}
         onChange={(item) => setState([item.selection])}
         moveRangeOnFirstSelection={false}
         ranges={state}

@@ -1,4 +1,4 @@
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import { useState, useEffect } from 'react';
 
 const kakao = window.kakao;
@@ -8,28 +8,26 @@ export default function PlanMap() {
   const [markers, setMarkers] = useState([]);
   const [map, setMap] = useState();
   const [keyWord, setKeyWord] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
 
+  // 검색어 상태 변화
   const onChange = (e) => {
     setKeyWord(e.target.value);
-    // console.log(keyWord);
   };
 
+  // 검색 키워드
   let searchWord = '역삼';
   const onClick = () => {
     searchWord = keyWord;
     // console.log(searchWord);
   };
-  // console.log(searchWord, '?????????????????');
 
   useEffect(() => {
     if (!map) return;
     const ps = new kakao.maps.services.Places();
     ps.keywordSearch(keyWord, (data, status, _pagination) => {
-      // console.log('inside useEffect', searchWord);
       if (status === kakao.maps.services.Status.OK) {
         // console.log(data);
-        // console.log(status);
-        // console.log(_pagination);
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
         const bounds = new kakao.maps.LatLngBounds();
@@ -57,6 +55,7 @@ export default function PlanMap() {
     <div>
       <input value={keyWord} onChange={onChange} type="text" placeholder="장소 검색 하세요" />
       <button onClick={onClick}>검색</button>
+
       <Map // 로드뷰를 표시할 Container
         center={{
           lat: 37.566826,
@@ -73,11 +72,32 @@ export default function PlanMap() {
           <MapMarker
             key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
             position={marker.position}
-            onClick={() => setInfo(marker)}
-          >
-            {info && info.content === marker.content && <div style={{ color: '#000' }}>{marker.content}</div>}
-          </MapMarker>
+            onClick={() => {
+              setInfo(marker);
+              setIsOpen(true);
+            }}
+          />
         ))}
+
+        {markers.map((marker) => {
+          // console.log(marker.position.lat);
+          {
+            isOpen && (
+              <CustomOverlayMap
+                position={{
+                  lat: marker.position.lat,
+                  lng: marker.position.lng,
+                }}
+              >
+                <div className="label" style={{ color: '#000' }}>
+                  <span className="left"></span>
+                  <span className="center">카카오!</span>
+                  <span className="right"></span>
+                </div>
+              </CustomOverlayMap>
+            );
+          }
+        })}
       </Map>
     </div>
   );
