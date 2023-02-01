@@ -6,6 +6,8 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.ssafy.dmb.domain.location.Coordinate;
 import com.ssafy.dmb.domain.plan.Day;
 import com.ssafy.dmb.domain.record.Record;
+import com.ssafy.dmb.dto.CommentResponseDto;
+import com.ssafy.dmb.dto.RecordDetailResponseDto;
 import com.ssafy.dmb.dto.RecordDto;
 import com.ssafy.dmb.dto.RecordResponseDto;
 import com.ssafy.dmb.repository.DayRepository;
@@ -16,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
@@ -26,6 +29,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class RecordServiceImpl implements RecordService{
 
@@ -151,8 +155,20 @@ public class RecordServiceImpl implements RecordService{
     }
 
     @Override
-    public RecordResponseDto getRecord(RecordDto recordDto) {
-        return null;
+    public RecordDetailResponseDto getRecord(Long recordId) {
+        Record recordDetail = recordRepository.findById(recordId).
+                orElseThrow(() -> new NoSuchElementException());
+
+        RecordDetailResponseDto recordDetailResponseDto = new RecordDetailResponseDto(recordDetail);
+        System.out.println(recordDetailResponseDto.toString());
+//        List<Comment> commentList = recordDetail.getComments();
+//        List<CommentResponseDto> comments = commentList.stream()
+//                .map(c->new CommentResponseDto(c))
+//                .collect(Collectors.toList());
+//
+//        recordDetailResponseDto.setComments(comments);
+
+        return recordDetailResponseDto;
     }
 
     @Override

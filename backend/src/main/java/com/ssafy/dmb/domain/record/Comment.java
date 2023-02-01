@@ -4,9 +4,9 @@ package com.ssafy.dmb.domain.record;
 import com.ssafy.dmb.domain.User;
 import lombok.Getter;
 import lombok.Setter;
-import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
@@ -17,7 +17,7 @@ public class Comment {
     private Long id;
 
     // FK
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="record_id")
     private Record record;
 
@@ -30,5 +30,5 @@ public class Comment {
     private String commentText;
 
     @Column(columnDefinition = "DATETIME default now()")
-    private DateTime commentDate;
+    private LocalDateTime commentDate;
 }

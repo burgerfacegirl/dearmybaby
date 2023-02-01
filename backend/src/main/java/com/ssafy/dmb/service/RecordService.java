@@ -1,5 +1,6 @@
 package com.ssafy.dmb.service;
 
+import com.ssafy.dmb.dto.RecordDetailResponseDto;
 import com.ssafy.dmb.dto.RecordDto;
 import com.ssafy.dmb.dto.RecordResponseDto;
 
@@ -10,7 +11,7 @@ public interface RecordService {
 
     List<RecordResponseDto> getPlanRecordList(Long planId);
 
-    RecordResponseDto getRecord(RecordDto recordDto);
+    RecordDetailResponseDto getRecord(Long recordId);
 
     void saveRecord(String url, RecordDto recordDto);
 

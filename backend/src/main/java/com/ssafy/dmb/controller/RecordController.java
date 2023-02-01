@@ -1,5 +1,6 @@
 package com.ssafy.dmb.controller;
 
+import com.ssafy.dmb.dto.RecordDetailResponseDto;
 import com.ssafy.dmb.dto.RecordDto;
 import com.ssafy.dmb.dto.RecordResponseDto;
 import com.ssafy.dmb.service.RecordServiceImpl;
@@ -34,6 +35,11 @@ public class RecordController {
     @GetMapping("/plan")
     public List<RecordResponseDto> getPlanRecordList(@RequestParam("planId") Long planId) throws IOException {
         return recordService.getPlanRecordList(planId);
+    }
+
+    @GetMapping("/detail")
+    public RecordDetailResponseDto getRecord(@RequestParam("recordId") Long recordId) throws IOException {
+        return recordService.getRecord(recordId);
     }
 
     @DeleteMapping()

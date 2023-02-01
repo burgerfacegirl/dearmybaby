@@ -22,10 +22,10 @@ public class Day {
     @JoinColumn(name = "plan_id")
     private Plan plan;
 
-    @OneToMany(mappedBy = "day", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "day")
     private List<Place> places = new ArrayList<>();
 
-    @OneToMany(mappedBy = "day", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "day")
     private List<Record> records = new ArrayList<>();
 
 }

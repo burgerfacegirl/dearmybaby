@@ -18,7 +18,7 @@ public class Record {
     private Long id;
 
     // day_id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "day_id")
     private Day day;
 
@@ -38,7 +38,7 @@ public class Record {
     @Embedded
     private Coordinate recordCoordinate;
 
-    @Column(columnDefinition = "LOCALDATETIME default now()")
+    @Column(columnDefinition = "DATETIME default now()")
     private LocalDateTime recordDate;
 
     @Builder

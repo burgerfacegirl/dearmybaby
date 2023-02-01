@@ -13,12 +13,12 @@ public class FamilyUser {
     @Column(name = "family_user_id")
     private Long id;
 
-    @ManyToOne(fetch= FetchType.LAZY)
+    @ManyToOne(fetch= FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "family_id")
     private Family family;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "user_no")
     private User user;
 
