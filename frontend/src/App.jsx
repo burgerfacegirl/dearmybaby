@@ -1,16 +1,20 @@
 import '@/App.css';
-import Home from '@/pages/home/Home';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React, { lazy, Suspense } from 'react';
+
+import Home from '@/pages/home/Home';
 import Plan from '@/pages/plan/Plan';
 import Record from '@/pages/record/Record';
 import Album from '@/pages/album/Album';
 import path from '@/config/path';
-import Notice from './commons/components/Notice';
-import SideBar from '@/commons/components/SideBar';
 import HeadBar from '@/commons/components/HeadBar';
-import MyGroups from './commons/components/MyGroups';
-import MyTravels from './commons/components/MyTravels';
-import ServiceCenter from './commons/components/ServiceCenter';
+import SideBar from '@/commons/components/SideBar';
+// 동적 라우팅
+const Notice = lazy(() => import('./commons/components/Notice'));
+const MyGroups = lazy(() => import('./commons/components/MyGroups'));
+const MyTravels = lazy(() => import('./commons/components/MyGroups'));
+const ServiceCenter = lazy(() => import('./commons/components/ServiceCenter'));
+
 import TravelBasket from './commons/components/TravelBasket';
 import FindCity from './pages/plan/FindCity';
 
@@ -27,6 +31,7 @@ export default function App() {
           <Route path={path.record} element={<Record />} />
           <Route path={path.album} element={<Album />} />
           <Route path={path.sidebar} element={<SideBar />} />
+          {/* 동적 라우팅  */}
           <Route path={path.notice} element={<Notice />} />
           <Route path={path.myGroups} element={<MyGroups />} />
           <Route path={path.myTravels} element={<MyTravels />} />

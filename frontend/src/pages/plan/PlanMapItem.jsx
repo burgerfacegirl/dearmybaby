@@ -1,8 +1,8 @@
 // import { record } from './props';
 import { MapMarker } from 'react-kakao-maps-sdk';
 
-export default function AlbumMapItem() {
+export default function PlanMapItem() {
   return <MapMarker></MapMarker>;
 }
 
-AlbumMapItem.propTypes = {};
+PlanMapItem.propTypes = {};

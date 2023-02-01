@@ -12,13 +12,13 @@ const SelectDate = () => {
       key: 'selection',
     },
   ]);
-  console.log('Start Date:', state[0].startDate);
-  console.log('End Date : ', state[0].endDate);
+  // console.log('Start Date:', state[0].startDate);
+  // console.log('End Date : ', state[0].endDate);
 
   return (
     <div>
       <DateRange
-        editableDateInputs={true}
+        editableDateInputs={false}
         onChange={(item) => setState([item.selection])}
         moveRangeOnFirstSelection={false}
         ranges={state}
