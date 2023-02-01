@@ -10,7 +10,7 @@ export default function AlbumMapItem({ record, handleRecordId }) {
         lng: record.lng,
       }}
       image={{
-        src: 'http://simpleicon.com/wp-content/uploads/foot.png',
+        src: 'https://cdn-icons-png.flaticon.com/512/1943/1943015.png',
         size: {
           width: 50,
           height: 50,

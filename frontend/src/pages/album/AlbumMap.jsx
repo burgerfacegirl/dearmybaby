@@ -1,10 +1,35 @@
-import { records } from './props';
 import { Map } from 'react-kakao-maps-sdk';
 import { useState } from 'react';
 import { Modal, Box } from '@mui/material';
 import AlbumMapCluster from './AlbumMapCluster';
 
-export default function AlbumMap({ records }) {
+export default function AlbumMap() {
+  const records = [
+    {
+      recordId: 1,
+      dayCount: 1,
+      recordType: 0,
+      recordFile: 'https://picsum.photos/200',
+      lat: 37.4977288,
+      lng: 127.0448612,
+    },
+    {
+      recordId: 2,
+      dayCount: 1,
+      recordType: 0,
+      recordFile: 'https://picsum.photos/200',
+      lat: 37.4967288,
+      lng: 127.0448612,
+    },
+    {
+      recordId: 3,
+      dayCount: 1,
+      recordType: 0,
+      recordFile: 'https://picsum.photos/200',
+      lat: 37.4987288,
+      lng: 127.0448612,
+    },
+  ];
   const [targetIndex, setTargetIndex] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -20,7 +45,7 @@ export default function AlbumMap({ records }) {
 
   return (
     <>
-      <Map center={{ lat: 37.4977288, lng: 127.0448612 }} style={{ width: '100%', height: '360px' }} draggable={true}>
+      <Map center={{ lat: 37.4977288, lng: 127.0448612 }} style={{ width: '100%', height: '90vh' }} draggable={true}>
         <AlbumMapCluster records={records} handleRecordId={handleRecordId}></AlbumMapCluster>
       </Map>
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
@@ -56,7 +81,3 @@ export default function AlbumMap({ records }) {
     </>
   );
 }
-
-AlbumMap.propTypes = {
-  records,
-};

@@ -3,7 +3,7 @@ import App from '@/App';
 import Home from '@/pages/home';
 import Plan, { PlanForm, FindCity } from '@/pages/plan';
 import Record from '@/pages/record';
-import Album from '@/pages/album';
+import Album, { AlbumList, AlbumMap, AlbumRecordList } from '@/pages/album';
 import User from '@/pages/user';
 
 const router = createBrowserRouter([
@@ -36,6 +36,20 @@ const router = createBrowserRouter([
       {
         path: 'album',
         element: <Album></Album>,
+        children: [
+          {
+            index: true,
+            element: <AlbumList></AlbumList>,
+          },
+          {
+            path: 'map',
+            element: <AlbumMap></AlbumMap>,
+          },
+          {
+            path: 'view',
+            element: <AlbumRecordList></AlbumRecordList>,
+          },
+        ],
       },
       {
         path: 'user',

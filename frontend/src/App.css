@@ -6,6 +6,11 @@ body {
   font-family: 'Do Hyeon', sans-serif;
 }
 
+/* Material UI에 도현체 적용 */
+[class^='MuiTypography'] {
+  font-family: 'Do Hyeon', sans-serif !important;
+}
+
 /* 화면 크기별 css 설계하기
 반응형 웹 구현하는데 씀 */
 @media (min-width: 650px) {
