@@ -49,14 +49,13 @@ public class BookmarkDto {
     @Builder
     @AllArgsConstructor
     public static class Request {
-        private Long id;
+//        private Long id;
         private Long planId;
         private String bookmarkName;
         private String bookmarkAddress;
         private String bookmarkLatitude;
         private String bookmarkLongitude;
         private LocationType bookmarkType;
-
 
     }
 }

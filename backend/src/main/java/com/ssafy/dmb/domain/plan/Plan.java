@@ -39,4 +39,13 @@ public class Plan {
     @OneToMany(mappedBy = "plan", cascade = CascadeType.PERSIST)
     private List<Day> days = new ArrayList<>();
 
+    @Builder
+    public Plan(String planDestination, LocalDate startDate, LocalDate endDate, int planPeriod, Family family){
+        this.planDestination = planDestination;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.planPeriod = planPeriod;
+        this.family = family;
+    }
+
 }
