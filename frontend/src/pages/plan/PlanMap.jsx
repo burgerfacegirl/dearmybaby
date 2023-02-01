@@ -25,7 +25,7 @@ export default function PlanMap() {
     if (!map) return;
     const ps = new kakao.maps.services.Places();
     ps.keywordSearch(keyWord, (data, status, _pagination) => {
-      console.log('inside useEffect', searchWord);
+      // console.log('inside useEffect', searchWord);
       if (status === kakao.maps.services.Status.OK) {
         // console.log(data);
         // console.log(status);
