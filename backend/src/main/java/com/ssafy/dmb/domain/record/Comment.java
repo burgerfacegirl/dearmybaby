@@ -2,8 +2,7 @@ package com.ssafy.dmb.domain.record;
 
 
 import com.ssafy.dmb.domain.User;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
