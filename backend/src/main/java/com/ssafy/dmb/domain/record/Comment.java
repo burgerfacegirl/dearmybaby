@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment {
 
     @Id @GeneratedValue
@@ -31,4 +32,11 @@ public class Comment {
 
     @Column(columnDefinition = "DATETIME default now()")
     private LocalDateTime commentDate;
+
+    @Builder
+    public Comment(Record record, User user, String commentText) {
+        this.record = record;
+        this.user = user;
+        this.commentText = commentText;
+    }
 }
