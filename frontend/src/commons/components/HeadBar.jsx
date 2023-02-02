@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -25,6 +25,7 @@ const links = [
 
 export default function HeadBar() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   function toggleDrawer(event, open) {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -37,14 +38,12 @@ export default function HeadBar() {
     <AppBar color="inherit" position="sticky">
       <Toolbar>
         <IconButton
-          component={Link}
-          to=".."
-          relative="path"
           size="large"
           edge="start"
           color="inherit"
           aria-label="menu"
           sx={{ mr: 2 }}
+          onClick={() => navigate(-1)}
         >
           <ArrowBackIcon />
         </IconButton>

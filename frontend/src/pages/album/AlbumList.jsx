@@ -10,42 +10,37 @@ import Typography from '@mui/material/Typography';
 import MapIcon from '@mui/icons-material/Map';
 import { Link } from 'react-router-dom';
 
+const plans = [
+  {
+    planId: 1,
+    planImg: 'https://picsum.photos/id/234/200/300',
+    planDate: '2022-01-01',
+    planCount: 3,
+  },
+  {
+    planId: 2,
+    planImg: 'https://picsum.photos/id/233/200/300',
+    planDate: '2022-02-01',
+    planCount: 3,
+  },
+  {
+    planId: 3,
+    planImg: 'https://picsum.photos/id/232/200/300',
+    planDate: '2022-03-01',
+    planCount: 3,
+  },
+];
+
 export default function AlbumList() {
-  const records = [
-    {
-      recordId: 1,
-      dayCount: 1,
-      recordType: 0,
-      recordFile: 'https://picsum.photos/200',
-      lat: 37.4977288,
-      lng: 127.0448612,
-    },
-    {
-      recordId: 2,
-      dayCount: 1,
-      recordType: 0,
-      recordFile: 'https://picsum.photos/200',
-      lat: 37.4967288,
-      lng: 127.0448612,
-    },
-    {
-      recordId: 3,
-      dayCount: 1,
-      recordType: 0,
-      recordFile: 'https://picsum.photos/200',
-      lat: 37.4987288,
-      lng: 127.0448612,
-    },
-  ];
   return (
     <>
       <Box p={2}>
         <Typography variant="h3">내 여행 기록들</Typography>
       </Box>
       <List>
-        {records.map((record) => (
+        {plans.map((plan) => (
           <ListItem
-            key={record.recordId}
+            key={plan.planId}
             secondaryAction={
               <IconButton component={Link} to="map" edge="end" aria-label="to-map">
                 <MapIcon />
@@ -55,7 +50,7 @@ export default function AlbumList() {
           >
             <ListItemButton component={Link} to="view">
               <ListItemAvatar>
-                <Avatar src="https://picsum.photos/200"></Avatar>
+                <Avatar src={plan.planImg}></Avatar>
               </ListItemAvatar>
               <ListItemText primary="제주도 여행" secondary="Jan 9, 2014" />
             </ListItemButton>

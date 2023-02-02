@@ -2,41 +2,59 @@ import { Map } from 'react-kakao-maps-sdk';
 import { useState } from 'react';
 import { Modal, Box } from '@mui/material';
 import AlbumMapCluster from './AlbumMapCluster';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+
+const dummyRecords = [
+  {
+    recordId: 1,
+    dayCount: 1,
+    recordType: 0,
+    recordFile: 'https://picsum.photos/id/237/200/300',
+    lat: 37.4967288,
+    lng: 127.0448612,
+  },
+  {
+    recordId: 2,
+    dayCount: 1,
+    recordType: 0,
+    recordFile: 'https://picsum.photos/id/236/300/300',
+    lat: 37.4977288,
+    lng: 127.0458612,
+  },
+  {
+    recordId: 3,
+    dayCount: 2,
+    recordType: 0,
+    recordFile: 'https://picsum.photos/id/235/300/200',
+    lat: 37.4987288,
+    lng: 127.0458612,
+  },
+  {
+    recordId: 4,
+    dayCount: 2,
+    recordType: 1,
+    recordFile: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    lat: 37.4997288,
+    lng: 127.0468612,
+  },
+];
 
 export default function AlbumMap() {
-  const records = [
-    {
-      recordId: 1,
-      dayCount: 1,
-      recordType: 0,
-      recordFile: 'https://picsum.photos/200',
-      lat: 37.4977288,
-      lng: 127.0448612,
-    },
-    {
-      recordId: 2,
-      dayCount: 1,
-      recordType: 0,
-      recordFile: 'https://picsum.photos/200',
-      lat: 37.4967288,
-      lng: 127.0448612,
-    },
-    {
-      recordId: 3,
-      dayCount: 1,
-      recordType: 0,
-      recordFile: 'https://picsum.photos/200',
-      lat: 37.4987288,
-      lng: 127.0448612,
-    },
-  ];
-  const [targetIndex, setTargetIndex] = useState(0);
+  const [records] = useState(dummyRecords);
+  const [activeStep, setActiveStep] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
+  const maxSteps = records.length;
 
   function handleRecordId(recordId) {
     for (let index = 0; index < records.length; index++) {
       if (records[index].recordId == recordId) {
-        setTargetIndex(index);
+        setActiveStep(index);
         break;
       }
     }
@@ -55,26 +73,45 @@ export default function AlbumMap() {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 400,
-            bgcolor: 'background.paper',
-            border: '2px solid #000',
-            boxShadow: 24,
-            p: 4,
           }}
         >
-          {targetIndex < records.length ? (
-            <ul>
-              <li>recordId : {records[targetIndex].recordId}</li>
-              <li>dayCount : {records[targetIndex].dayCount}</li>
-              <li>recordType : {records[targetIndex].recordType}</li>
-              <li>latitude : {records[targetIndex].lat}</li>
-              <li>longitude : {records[targetIndex].lng}</li>
-              <li>
-                <img src={records[targetIndex].recordFile} alt="random"></img>
-              </li>
-            </ul>
+          {activeStep < maxSteps ? (
+            <Card sx={{ width: 400 }}>
+              <CardHeader title={`${records[activeStep].dayCount}일차 기록`}></CardHeader>
+              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Button disabled={activeStep === 0} onClick={() => setActiveStep(activeStep - 1)}>
+                  <KeyboardArrowLeft></KeyboardArrowLeft>
+                </Button>
+                {records[activeStep].recordType == 0 ? (
+                  <CardMedia
+                    component="img"
+                    src={records[activeStep].recordFile}
+                    sx={{ width: '70%', height: '200px', objectFit: 'contain' }}
+                  ></CardMedia>
+                ) : (
+                  <CardMedia
+                    component="video"
+                    controls
+                    src={records[activeStep].recordFile}
+                    sx={{ width: '70%', height: '200px', objectFit: 'contain' }}
+                  ></CardMedia>
+                )}
+
+                <Button disabled={activeStep === maxSteps - 1} onClick={() => setActiveStep(activeStep + 1)}>
+                  <KeyboardArrowRight></KeyboardArrowRight>
+                </Button>
+              </Box>
+              <CardContent>
+                <ul>
+                  <li>recordId : {records[activeStep].recordId}</li>
+                  <li>recordType : {records[activeStep].recordType}</li>
+                  <li>latitude : {records[activeStep].lat}</li>
+                  <li>longitude : {records[activeStep].lng}</li>
+                </ul>
+              </CardContent>
+            </Card>
           ) : (
-            <div>No Content!</div>
+            <div>No Content</div>
           )}
         </Box>
       </Modal>
