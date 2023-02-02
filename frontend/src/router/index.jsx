@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '@/App';
 import Home from '@/pages/home';
-import Plan, { PlanForm, FindCity } from '@/pages/plan';
+import Plan, { PlanForm, FindCity, PlaceCart } from '@/pages/plan';
 import Record from '@/pages/record';
 import Album, { AlbumList, AlbumMap, AlbumRecordList } from '@/pages/album';
 import User from '@/pages/user';
@@ -26,6 +26,10 @@ const router = createBrowserRouter([
           {
             path: 'find-city',
             element: <FindCity></FindCity>,
+          },
+          {
+            path: 'place-cart',
+            element: <PlaceCart></PlaceCart>,
           },
         ],
       },

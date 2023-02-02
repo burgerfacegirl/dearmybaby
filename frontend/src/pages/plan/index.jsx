@@ -4,3 +4,4 @@ import FindCity from './FindCity';
 
 export default Plan;
 export { PlanForm, FindCity };
+export { default as PlaceCart } from './PlaceCart';
