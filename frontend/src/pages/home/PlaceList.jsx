@@ -4,6 +4,12 @@ import PlaceItem from './PlaceItem';
 const PlaceList = ({ places }) => {
   return (
     <>
+      {/* {places.map((place, index) => (
+        <>
+        <img src={place.placeImg}></img>
+        <p key={index}>{place.placeName} </p>
+        </>
+      ))} */}
       {places.map((place) => (
         <PlaceItem key={place.placeId} place={place}></PlaceItem>
       ))}
