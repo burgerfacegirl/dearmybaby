@@ -1,7 +1,7 @@
 package com.ssafy.dmb.controller;
 
-import com.ssafy.dmb.dto.CommentDto;
-import com.ssafy.dmb.dto.CommentResponseDto;
+import com.ssafy.dmb.dto.comment.CommentDto;
+import com.ssafy.dmb.dto.comment.CommentResponseDto;
 import com.ssafy.dmb.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

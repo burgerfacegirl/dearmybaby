@@ -1,4 +1,4 @@
-package com.ssafy.dmb.dto;
+package com.ssafy.dmb.dto.comment;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

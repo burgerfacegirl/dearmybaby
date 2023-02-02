@@ -17,7 +17,7 @@ public class Comment {
     private Long id;
 
     // FK
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="record_id")
     private Record record;
 
