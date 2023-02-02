@@ -23,7 +23,6 @@ public class Day {
 
     private int dayNumber;
 
-
     @OneToMany(mappedBy = "day")
     private List<Place> places = new ArrayList<>();
 
