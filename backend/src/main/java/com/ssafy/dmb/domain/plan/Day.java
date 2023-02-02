@@ -23,7 +23,8 @@ public class Day {
 
     private int dayNumber;
 
-    @OneToMany(mappedBy = "day", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "day")
     private List<Place> places = new ArrayList<>();
 
     @OneToMany(mappedBy = "day", cascade = CascadeType.ALL)

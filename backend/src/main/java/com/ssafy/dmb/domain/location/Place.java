@@ -43,13 +43,6 @@ public class Place {
         this.placeAddress = placeAddress;
     }
 
-    public Place(int placeOrder, String placeName, LocationType placeType, String placeLatitude, String placeLongitude, String placeAddress) {
-        this.placeOrder = placeOrder;
-        this.placeName = placeName;
-        this.placeType = placeType;
-        this.placeLatitude = placeLatitude;
-        this.placeLongitude = placeLongitude;
-        this.placeAddress = placeAddress;
-    }
+
 
 }
