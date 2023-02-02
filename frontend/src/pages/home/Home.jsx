@@ -3,28 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import Place from './Place';
 
-export default function Home() {
-  // current Plan Id => 현재 여행중인 플랜 id 를 user 테이블에서 user.currentplanid
-  // 여행 중인지 체크
-  // const [isTraveling, setTraveling] = useState(false);
-  const travelDates = JSON.parse(localStorage.getItem('travelDates'));
+// const travelDates = JSON.parse(localStorage.getItem('travelDates'));
 
-  console.log(travelDates[0].startDate);
-  const startDate =
-  travelDates[0].startDate != null
-  ? new Date(travelDates[0].startDate)
-  : new Date('2023-02-01');
-  
-  const dummyUser = {
-    userId: 'ssafy',
-    userName: '김싸피',
-    closestPlan: {
-      planId: 1,
-      planDate: startDate,
-      planCount: 3,
-    },
-    currentPlanId: null,
-  };
+// const startDate = travelDates != null ? new Date(travelDates[0].startDate) : new Date('2023-02-02');
+
+const dummyUser = {
+  userId: 'ssafy',
+  userName: '김싸피',
+  closestPlan: {
+    planId: 1,
+    planDate: new Date('2023-02-02'),
+    planCount: 3,
+  },
+  currentPlanId: null,
+};
+
+export default function Home() {
   const [user, setUser] = useState(dummyUser);
   const closestPlan = user.closestPlan;
   const isTraveling = user.currentPlanId != null;
@@ -51,15 +45,16 @@ export default function Home() {
             여행 기록하러가기
           </button>
         ) : null}
-        
+
         {/* 오늘이 여행 일정 시작 날일때 여행 시작 버튼*/}
         {isToday && !isTraveling ? (
           <button
             onClick={() => {
               // setTraveling(true);
               // localStorage.setItem('isTraveling', 'true');
-              // user.currentPlanId = closestPlan.planId;
-              setUser({ ...user, [user.currentPlanId]: closestPlan.planId});
+              user.currentPlanId = closestPlan.planId;
+              setUser({ ...user });
+              // setUser({ ...user, [user.currentPlanId]: closestPlan.planId});
               navigate(`/record`);
             }}
           >
@@ -67,8 +62,8 @@ export default function Home() {
           </button>
         ) : null}
 
-        {console.log(isTraveling)}
-        {console.log(user.currentPlanId)}
+        {/* {console.log(isTraveling)}
+        {console.log(user.currentPlanId)} */}
 
         <h3>계획 짜기</h3>
         <button

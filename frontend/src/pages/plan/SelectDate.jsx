@@ -30,12 +30,12 @@ const SelectDate = () => {
   const travelDates = JSON.parse(localStorage.getItem('travelDates'));
   // const navigate = useNavigate();
 
-  function checkTravelDates(e) {
-    e.preventDefault();
-    if (travelDates != null && isSameDate(new Date(), new Date(travelDates[0].startDate))) {
-      console.log('오늘은 여행날');
-    }
-  }
+  // function checkTravelDates(e) {
+  //   e.preventDefault();
+  //   if (travelDates != null && isSameDate(new Date(), new Date(travelDates[0].startDate))) {
+  //     console.log('오늘은 여행날');
+  //   }
+  // }
 
   return (
     <div>
@@ -48,12 +48,9 @@ const SelectDate = () => {
       <form onSubmit={saveTravelDates}>
         <button>날짜 저장하기</button>
       </form>
-      <div>test : {state[0].startDate.toString()}</div>
-      <div>test : {JSON.stringify(state)}</div>
-
-      <form onSubmit={checkTravelDates}>
+      {/* <form onSubmit={checkTravelDates}>
         <button>날짜 체크하기</button>
-      </form>
+      </form> */}
     </div>
   );
 };

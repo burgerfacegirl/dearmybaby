@@ -5,7 +5,7 @@ const Place = () => {
     {
       placeId: 1,
       placeName: '헬로키티',
-      placeType: 2,
+      placeType: '관광명소',
       placeImg: 'https://picsum.photos/200',
       lat: '37.49772884365532',
       lng: '127.04486129289809',
@@ -13,7 +13,7 @@ const Place = () => {
     {
       placeId: 2,
       placeName: '한라산',
-      placeType: 2,
+      placeType: '관광명소',
       placeImg: 'https://picsum.photos/200',
       lat: '37.49772884365532',
       lng: '127.04486129289809',
@@ -21,7 +21,7 @@ const Place = () => {
     {
       placeId: 3,
       placeName: '한라산',
-      placeType: 2,
+      placeType: '관광명소',
       placeImg: 'https://picsum.photos/200',
       lat: '37.49772884365532',
       lng: '127.04486129289809',

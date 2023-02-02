@@ -22,7 +22,7 @@ PlaceList.propTypes = {
     PropTypes.shape({
       placeId: PropTypes.number,
       placeName: PropTypes.string,
-      placeType: PropTypes.number,
+      placeType: PropTypes.string,
       placeImg: PropTypes.string,
       lat: PropTypes.string,
       lng: PropTypes.string,
