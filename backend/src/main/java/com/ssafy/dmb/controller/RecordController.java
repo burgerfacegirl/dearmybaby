@@ -1,8 +1,8 @@
 package com.ssafy.dmb.controller;
 
-import com.ssafy.dmb.dto.RecordDetailResponseDto;
-import com.ssafy.dmb.dto.RecordDto;
-import com.ssafy.dmb.dto.RecordResponseDto;
+import com.ssafy.dmb.dto.record.RecordDetailResponseDto;
+import com.ssafy.dmb.dto.record.RecordDto;
+import com.ssafy.dmb.dto.record.RecordResponseDto;
 import com.ssafy.dmb.service.RecordService;
 import com.ssafy.dmb.service.S3Service;
 import lombok.RequiredArgsConstructor;
