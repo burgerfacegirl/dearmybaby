@@ -10,9 +10,11 @@ const PlaceList = ({ places }) => {
         <p key={index}>{place.placeName} </p>
         </>
       ))} */}
-      {places.map((place) => (
-        <PlaceItem key={place.placeId} place={place}></PlaceItem>
-      ))}
+      <div className='placeFrame'>
+        {places.map((place) => (
+          <PlaceItem key={place.placeId} place={place}></PlaceItem>
+        ))}
+      </div>
     </>
   );
 };

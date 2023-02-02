@@ -6,6 +6,7 @@ export default function PlaceItem({ place }) {
       <a href='/'><img src={place.placeImg} alt="random"></img></a>
       {place.placeName} | {place.placeType}
     </div>
+
   );
 }
 

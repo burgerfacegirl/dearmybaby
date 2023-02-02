@@ -1,7 +1,16 @@
 .placeItem {
-  display: inline;
+  /* display: flex; */
+  justify-content: space-between;
   border: none;
+  margin: 1%
 }
+
+.placeFrame {
+  display: flex;
+  /* margin: 5vw; */
+  justify-content: center;
+}
+
 .recommandCard {
   padding: 2.5%;
   margin-inline: 5%;

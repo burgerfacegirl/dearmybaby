@@ -28,7 +28,7 @@ const Place = () => {
     },
   ];
   return (
-    <div>
+    <div className='placeList'>
       <PlaceList places={places}></PlaceList>
     </div>
   );
