@@ -13,7 +13,7 @@ const dummyUser = {
   userName: '김싸피',
   closestPlan: {
     planId: 1,
-    planDate: new Date('2023-02-02'),
+    planDate: new Date('2023-02-03'),
     planCount: 3,
   },
   currentPlanId: null,
@@ -36,32 +36,37 @@ export default function Home() {
   return (
     <div>
       <div className="userplan">
-        <Kids />
         {/* 여행 중일때 record 페이지로 보내주는 버튼*/}
         {isTraveling ? (
-          <button
-            onClick={() => {
-              navigate(`/record`);
-            }}
-          >
-            여행 기록하러가기
-          </button>
+          <div>
+            <h2>제주 여행 중</h2>
+            <button
+              onClick={() => {
+                navigate(`/record`);
+              }}
+            >
+              여행 기록하러가기
+            </button>
+          </div>
         ) : null}
 
         {/* 오늘이 여행 일정 시작 날일때 여행 시작 버튼*/}
         {isToday && !isTraveling ? (
-          <button
-            onClick={() => {
-              // setTraveling(true);
-              // localStorage.setItem('isTraveling', 'true');
-              user.currentPlanId = closestPlan.planId;
-              setUser({ ...user });
-              // setUser({ ...user, [user.currentPlanId]: closestPlan.planId});
-              navigate(`/record`);
-            }}
-          >
-            여행 시작
-          </button>
+          <div>
+            <h2>오늘은 제주 여행 시작날입니다. 기록을 시작해보세요.</h2>
+            <button
+              onClick={() => {
+                // setTraveling(true);
+                // localStorage.setItem('isTraveling', 'true');
+                user.currentPlanId = closestPlan.planId;
+                setUser({ ...user });
+                // setUser({ ...user, [user.currentPlanId]: closestPlan.planId});
+                navigate(`/record`);
+              }}
+            >
+              여행 시작
+            </button>
+          </div>
         ) : null}
 
         {/* {console.log(isTraveling)}

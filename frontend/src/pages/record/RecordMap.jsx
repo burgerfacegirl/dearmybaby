@@ -1,6 +1,7 @@
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useState, useEffect } from 'react';
 import { Modal, Box } from '@mui/material';
+// import PersonPinIcon from '@mui/icons-material/PersonPin';
 
 const RecordMap = () => {
   // 현재 위치에 기록 남기기 (업로드) 추가 해야함 => 아이콘 바꿔서 찍고 기록 데이터 저장
@@ -81,13 +82,14 @@ const RecordMap = () => {
               lng: state.center.lng,
             }}
           >
-            <div className="label" style={{ color: '#000' }}>
-              <span className="left"></span>
-              <span className="center" style={{ color: 'red' }}>
-                현재 위치에 발자국을 남겨보세요!
-              </span>
-              <span className="right"></span>
-            </div>
+            {/* <div className="label" style={{ color: '#000' }} onClick={() => setModalOpen(true)}> */}
+            {/* <PersonPinIcon></PersonPinIcon> */}
+            <span className="left"></span>
+            <span className="center" style={{ color: 'red' }}>
+              현재 위치에 발자국을 남겨보세요!'
+            </span>
+            <span className="right"></span>
+            {/* </div> */}
           </CustomOverlayMap>
         )}
       </Map>
