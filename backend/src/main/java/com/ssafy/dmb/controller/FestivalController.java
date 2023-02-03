@@ -1,31 +1,31 @@
 package com.ssafy.dmb.controller;
 
-import com.ssafy.dmb.dto.recommend.TourResponseDto;
-import com.ssafy.dmb.repository.TourRepository;
+import com.ssafy.dmb.dto.recommend.FestivalDetailResponseDto;
+import com.ssafy.dmb.dto.recommend.FestivalResponseDto;
+import com.ssafy.dmb.service.FestivalService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/location")
+@RequestMapping("/api/festival")
 @RequiredArgsConstructor
 public class FestivalController {
 
-    private final TourRepository locationRepository;
+    private final FestivalService festivalService;
 
-    private final LocationServiceImpl locationService;
-
-    @GetMapping("/{regionId}")
-    @ResponseBody
-    public ResponseEntity<List<TourResponseDto.Response>> getLocationList(@PathVariable("regionId") Long regionId) {
-        return ResponseEntity.status(HttpStatus.OK).body(locationService.getLocationList(regionId));
+    @GetMapping()
+    public  List<FestivalResponseDto> getRecommendFestivalList(@RequestParam("familyId") Long familyId, @RequestParam("regionId") Long regionId) {
+        return festivalService.getRecommendFestivalList(familyId, regionId);
     }
 
-
-
-
+    @GetMapping("/detail")
+    public FestivalDetailResponseDto getRecommendFestivalDetail(@RequestParam("festivalId") Long festivalId){
+        return festivalService.getRecommendFestivalDetail(festivalId);
+    }
 
 }

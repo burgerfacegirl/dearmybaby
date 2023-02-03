@@ -11,7 +11,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/day")
+@RequestMapping("/api/day")
 public class DayController {
     private final DayService dayService;
 
