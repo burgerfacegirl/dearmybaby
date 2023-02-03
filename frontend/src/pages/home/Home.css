@@ -2,13 +2,19 @@
   /* display: flex; */
   justify-content: space-between;
   border: none;
-  margin: 1%
+  margin: 1%;
 }
 
 .placeFrame {
   display: flex;
   /* margin: 5vw; */
   justify-content: center;
+}
+.mainFrame {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding-block: 5vh;
 }
 
 .recommandCard {

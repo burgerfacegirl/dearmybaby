@@ -10,7 +10,7 @@ const PlaceList = ({ places }) => {
         <p key={index}>{place.placeName} </p>
         </>
       ))} */}
-      <div className='placeFrame'>
+      <div className="placeFrame">
         {places.map((place) => (
           <PlaceItem key={place.placeId} place={place}></PlaceItem>
         ))}

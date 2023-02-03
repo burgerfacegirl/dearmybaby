@@ -36,7 +36,7 @@ export default function Home() {
   return (
     <div>
       <div className="userplan">
-        <Kids/>
+        <Kids />
         {/* 여행 중일때 record 페이지로 보내주는 버튼*/}
         {isTraveling ? (
           <button
@@ -77,12 +77,15 @@ export default function Home() {
         </button>
       </div>
       <hr />
+      <div className="mainFrame">
+        <h3>어린이와 겨울에 가기 좋은 여행지</h3>
+        <Place />
+      </div>
 
-      <h3>어린이와 겨울에 가기 좋은 여행지</h3>
-      <Place />
-
-      <h3>N세 어린이를 위한 추천 여행지</h3>
-      <Place />
+      <div className="mainFrame">
+        <h3>N세 어린이를 위한 추천 여행지</h3>
+        <Place />
+      </div>
     </div>
   );
 }
