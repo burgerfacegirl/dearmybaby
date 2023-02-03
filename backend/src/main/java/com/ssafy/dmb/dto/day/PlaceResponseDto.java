@@ -1,6 +1,5 @@
 package com.ssafy.dmb.dto.day;
 
-import com.ssafy.dmb.domain.location.LocationType;
 import com.ssafy.dmb.domain.location.Place;
 import lombok.*;
 
@@ -14,8 +13,6 @@ public class PlaceResponseDto {
     private int placeOrder;
 
     private String placeName;
-
-    private LocationType placeType;
 
     private String placeLatitude;
 
@@ -31,11 +28,10 @@ public class PlaceResponseDto {
         this.placeLatitude = place.getPlaceLatitude();
         this.placeLongitude = place.getPlaceLongitude();
         this.placeAddress = place.getPlaceAddress();
-        this.placeType = place.getPlaceType();
         this.dayId = place.getDay().getId();
     }
 
     public Place toEntity() {
-        return new Place(placeOrder, placeName, placeType, placeLatitude, placeLongitude, placeAddress);
+        return new Place(placeOrder, placeName, placeLatitude, placeLongitude, placeAddress);
     }
 }
