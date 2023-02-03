@@ -32,10 +32,12 @@ public class RestaurantService {
         List<Baby> babyList = babyRepository.findByFamily(familyId);
         Set<String> favorites = new HashSet<>();
         for(Baby b: babyList){
-            Set<String> favoriteFood = b.getFavoriteSpot();
+            Set<String> favoriteFood = b.getFavoriteFood();
             favorites.addAll(favoriteFood);
         }
-
+        for(String s : favorites){
+            System.out.println(s);
+        }
         List<Restaurant> restaurantList = restaurantRepository.findTourByFavoriteRestaurant(favorites);
 
         List<RestaurantResponseDto> restaurants = restaurantList.stream()

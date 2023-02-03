@@ -27,20 +27,17 @@ public class BookmarkController {
 //    }
 
     @GetMapping("/{planId}")
-    @ResponseBody
     public ResponseEntity<List<BookmarkDto.Detail>> getBookmarkList(@PathVariable("planId") Long planId) {
         return ResponseEntity.status(HttpStatus.OK).body(bookmarkService.getBookmarkList(planId));
     }
 
     @PostMapping("/new")
-    @ResponseBody
     public ResponseEntity<BookmarkDto.Detail> saveBookmark(@RequestBody BookmarkDto.Request request) {
 
         return ResponseEntity.status(HttpStatus.OK).body(bookmarkService.create(request));
     }
 
     @DeleteMapping("/{bookmarkId}")
-    @ResponseBody
     public void deleteBookmark(@PathVariable("bookmarkId") Long bookmarkId) {
         bookmarkService.delete(bookmarkId);
     }
