@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import Place from './Place';
-import Kids from '../user/Kids';
 
 // const travelDates = JSON.parse(localStorage.getItem('travelDates'));
 
@@ -34,7 +33,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="main-div">
       <div className="userplan">
         {/* 여행 중일때 record 페이지로 보내주는 버튼*/}
         {isTraveling ? (

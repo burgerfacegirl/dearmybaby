@@ -7,7 +7,7 @@
 
 .placeFrame {
   display: flex;
-  /* margin: 5vw; */
+  margin: 5vw;
   justify-content: center;
 }
 .mainFrame {
@@ -25,4 +25,8 @@
 
 .recomandCityCard {
   margin-inline: 5%;
+}
+
+.main-div {
+  padding: 2%;
 }

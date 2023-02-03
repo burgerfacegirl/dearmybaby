@@ -86,7 +86,7 @@ const RecordMap = () => {
             {/* <PersonPinIcon></PersonPinIcon> */}
             <span className="left"></span>
             <span className="center" style={{ color: 'red' }}>
-              현재 위치에 발자국을 남겨보세요!'
+              현재 위치에 발자국을 남겨보세요!
             </span>
             <span className="right"></span>
             {/* </div> */}
