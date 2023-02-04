@@ -16,7 +16,7 @@
   padding: 1%;
 }
 
-.mainFrame {
+.main-frame {
   /* text-align: center; */
   align-items: center;
   justify-content: center;
@@ -36,17 +36,13 @@
 */
 
 .main-div {
-  padding: 2%;
+  padding: 3% 2%
 }
 
-button {
-  color: white;
-  border: none;
-  border-radius: 10px;
-  background-color: rgba(252, 163, 17, 1);
-  padding: 5px 10px;
+.plus-plan {
+  padding-block: 3vh;
 }
 
-button:hover {
+.plus-plan:hover {
   cursor: pointer;
 }

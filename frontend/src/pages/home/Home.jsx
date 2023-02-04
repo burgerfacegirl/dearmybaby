@@ -2,9 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import Place from './Place';
-// const travelDates = JSON.parse(localStorage.getItem('travelDates'));
-
-// const startDate = travelDates != null ? new Date(travelDates[0].startDate) : new Date('2023-02-02');
 
 const dummyUser = {
   userId: 'ssafy',
@@ -33,7 +30,7 @@ export default function Home() {
 
   return (
     <div className="main-div">
-      <div className="userplan">
+      <div className="user-plan">
         {/* 여행 중일때 record 페이지로 보내주는 버튼*/}
         {isTraveling ? (
           <div>
@@ -67,25 +64,45 @@ export default function Home() {
           </div>
         ) : null}
 
-        {/* {console.log(isTraveling)}
-        {console.log(user.currentPlanId)} */}
+        <h3>...님 여행할 지역을 고르셨나요?</h3>
 
-        <h3>계획 짜기</h3>
-        <button
+        <div
+          className="plus-plan"
           onClick={() => {
             navigate('/plan');
           }}
+          style={{ display: 'flex', alignItems: 'center', boxSizing: 'content-box' }}
         >
-          여행 계획 추가하기
-        </button>
+          <button
+            onClick={() => {
+              navigate('/plan');
+            }}
+            style={{
+              backgroundColor: 'rgba(229, 229, 229, 1)',
+              color: 'orange',
+              border: 'none',
+              height: '50px',
+              width: '50px',
+              borderRadius: '50%',
+              fontSize: '2rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginRight: '1%',
+            }}
+          >
+            +
+          </button>
+          <h4>여행 계획 추가하기</h4>
+        </div>
       </div>
       <hr />
-      <div className="mainFrame">
+      <div className="main-frame">
         <h3>어린이와 겨울에 가기 좋은 여행지</h3>
         <Place />
       </div>
 
-      <div className="mainFrame">
+      <div className="main-frame">
         <h3>N세 어린이를 위한 추천 여행지</h3>
         <Place />
       </div>

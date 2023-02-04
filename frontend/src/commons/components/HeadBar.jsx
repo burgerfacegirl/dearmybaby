@@ -42,7 +42,7 @@ export default function HeadBar() {
           edge="start"
           color="inherit"
           aria-label="menu"
-          sx={{ mr: 1 }}
+          // sx={{ mr: 1 }}
           onClick={() => navigate(-1)}
         >
           <ArrowBackIcon />
@@ -58,7 +58,7 @@ export default function HeadBar() {
           edge="end"
           color="inherit"
           aria-label="menu"
-          sx={{ mr: 1 }}
+          // sx={{ mr: 1 }}
           onClick={(event) => toggleDrawer(event, true)}
         >
           <MenuIcon />
