@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import Place from './Place';
-
 // const travelDates = JSON.parse(localStorage.getItem('travelDates'));
 
 // const startDate = travelDates != null ? new Date(travelDates[0].startDate) : new Date('2023-02-02');

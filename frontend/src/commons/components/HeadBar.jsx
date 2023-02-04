@@ -42,13 +42,14 @@ export default function HeadBar() {
           edge="start"
           color="inherit"
           aria-label="menu"
-          sx={{ mr: 2 }}
+          sx={{ mr: 1 }}
           onClick={() => navigate(-1)}
         >
           <ArrowBackIcon />
         </IconButton>
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to="/" style={{ textDecoration: 'none', color: 'inherit', display: 'flex' }}>
+            <img src="/assets/logo.png" style={{ height: '30px', width: '30px', marginRight: '1%' }}></img>
             DearMyBaby
           </Link>
         </Typography>
@@ -57,7 +58,7 @@ export default function HeadBar() {
           edge="end"
           color="inherit"
           aria-label="menu"
-          sx={{ ml: 2 }}
+          sx={{ mr: 1 }}
           onClick={(event) => toggleDrawer(event, true)}
         >
           <MenuIcon />

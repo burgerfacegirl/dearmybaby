@@ -1,18 +1,20 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import PlaceItem from './PlaceItem';
-// import { Slider } from 'react-slick';
-// import 'slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const PlaceList = ({ places }) => {
   const settings = {
-    centerPadding: '0px',
+    swipe: true,
     centerMode: true,
-    dots: true,
+    centerPadding: '20px',
     infinite: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
+    className: 'carousel-slider',
   };
 
   return (
@@ -23,13 +25,13 @@ const PlaceList = ({ places }) => {
         <p key={index}>{place.placeName} </p>
         </>
       ))} */}
-      {/* <Slider {...settings}> */}
-        <div className="placeFrame">
+      <Slider {...settings}>
+        {/* <div className="placeFrame"> */}
         {places.map((place) => (
           <PlaceItem key={place.placeId} place={place}></PlaceItem>
         ))}
-        </div>
-      {/* </Slider> */}
+        {/* </div> */}
+      </Slider>
     </div>
   );
 };

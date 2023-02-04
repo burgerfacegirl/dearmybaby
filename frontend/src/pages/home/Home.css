@@ -1,5 +1,6 @@
 .placeItem {
-  /* display: flex; */
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   border: none;
   margin: 1%;
@@ -10,13 +11,19 @@
   margin: 5vw;
   justify-content: center;
 }
-.mainFrame {
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  padding-block: 5vh;
+
+.carousel-slider {
+  padding: 1%;
 }
 
+.mainFrame {
+  /* text-align: center; */
+  align-items: center;
+  justify-content: center;
+  padding-block: 3vh;
+}
+
+/*
 .recommandCard {
   padding: 2.5%;
   margin-inline: 5%;
@@ -26,7 +33,20 @@
 .recomandCityCard {
   margin-inline: 5%;
 }
+*/
 
 .main-div {
   padding: 2%;
+}
+
+button {
+  color: white;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(252, 163, 17, 1);
+  padding: 5px 10px;
+}
+
+button:hover {
+  cursor: pointer;
 }
