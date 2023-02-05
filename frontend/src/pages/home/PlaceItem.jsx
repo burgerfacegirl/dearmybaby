@@ -16,6 +16,7 @@ export default function PlaceItem({ place }) {
           <CardCover>
             <img
               src="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800"
+              // src={place.placeImg}
               srcSet="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800&dpr=2 2x"
               loading="lazy"
               alt=""

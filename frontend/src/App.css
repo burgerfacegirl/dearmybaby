@@ -43,3 +43,8 @@ button {
 button:hover {
   cursor: pointer;
 }
+
+
+:root {
+  --main-orange: rgba(252, 163, 17, 1);
+}

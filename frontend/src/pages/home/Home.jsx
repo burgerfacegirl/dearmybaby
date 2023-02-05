@@ -8,7 +8,7 @@ const dummyUser = {
   userName: '김싸피',
   closestPlan: {
     planId: 1,
-    planDate: new Date('2023-02-03'),
+    planDate: new Date(),
     planCount: 3,
   },
   currentPlanId: null,
@@ -51,7 +51,7 @@ export default function Home() {
       <div className="user-plan">
         {/* 여행 중일때 record 페이지로 보내주는 버튼*/}
         {isTraveling ? (
-          <div>
+          <div style={{marginBottom: '3vh'}}>
             <h2>제주 여행 중</h2>
             <button
               onClick={() => {
@@ -65,7 +65,7 @@ export default function Home() {
 
         {/* 오늘이 여행 일정 시작 날일때 여행 시작 버튼*/}
         {isToday && !isTraveling ? (
-          <div>
+          <div style={{marginBottom: '3vh'}}>
             <h2>오늘은 제주 여행 시작날입니다. 기록을 시작해보세요.</h2>
             <button
               onClick={() => {

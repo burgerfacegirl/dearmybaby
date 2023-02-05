@@ -49,7 +49,7 @@ export default function HeadBar() {
         </IconButton>
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
           <Link to="/" style={{ textDecoration: 'none', color: 'inherit', display: 'flex' }}>
-            <img src="/assets/logo.png" style={{ height: '30px', width: '30px', marginRight: '1%' }}></img>
+            <img src="/assets/logo.png" style={{ height: '30px', width: '30px', marginRight: '10px' }}></img>
             DearMyBaby
           </Link>
         </Typography>

@@ -39,7 +39,7 @@ const SelectDate = () => {
   // }
 
   return (
-    <div>
+    <div style={{padding: '3vh', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <h2>여행하실 날짜를 선택해주세요</h2>
       <DateRange
         editableDateInputs={true}
@@ -51,6 +51,7 @@ const SelectDate = () => {
         <button
           onClick={() => {
             navigate('../select-place');
+            // 날짜 저장
           }}
         >
           날짜 저장하기
