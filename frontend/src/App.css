@@ -32,7 +32,6 @@ body {
   }
 }
 
-
 button {
   color: white;
   border: none;
@@ -44,4 +43,3 @@ button {
 button:hover {
   cursor: pointer;
 }
-

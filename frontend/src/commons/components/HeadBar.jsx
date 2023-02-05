@@ -35,7 +35,7 @@ export default function HeadBar() {
   }
 
   return (
-    <AppBar color="inherit" position="sticky">
+    <AppBar color="inherit" position="sticky" style={{ backgroundColor: 'rgba(0, 55, 86, 1)', boxShadow: '0 0' }}>
       <Toolbar>
         <IconButton
           size="large"

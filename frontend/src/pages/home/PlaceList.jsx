@@ -9,7 +9,7 @@ const PlaceList = ({ places }) => {
   const settings = {
     swipe: true,
     centerMode: true,
-    centerPadding: '20px',
+    centerPadding: '10px',
     infinite: true,
     speed: 500,
     slidesToShow: 3,

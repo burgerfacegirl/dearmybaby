@@ -21,8 +21,12 @@
   align-items: center;
   justify-content: center;
   padding-block: 3vh;
+  padding: 3vh;
 }
 
+.user-plan {
+  padding: 4vh;
+}
 /*
 .recommandCard {
   padding: 2.5%;
@@ -35,14 +39,16 @@
 }
 */
 
+/* 
 .main-div {
   padding: 3% 2%
-}
-
-.plus-plan {
-  padding-block: 3vh;
-}
+} */
 
 .plus-plan:hover {
   cursor: pointer;
+}
+
+.head-bar {
+  background-color: 'rgba(0, 55, 86, 1)';
+  box-shadow: '0';
 }

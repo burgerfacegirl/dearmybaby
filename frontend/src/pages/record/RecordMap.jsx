@@ -58,11 +58,11 @@ const RecordMap = () => {
         level={3}
         draggable={true}
       >
-        {!state.isLoading && (
+        {/* {!state.isLoading && (
           <MapMarker
             position={state.center}
             image={{
-              src: 'http://simpleicon.com/wp-content/uploads/map-marker-17.png',
+              src: '/assets/footprint.png',
               size: {
                 width: 40,
                 height: 40,
@@ -71,25 +71,35 @@ const RecordMap = () => {
             clickable={true}
             onClick={() => setModalOpen(true)}
           ></MapMarker>
-        )}
+        )} */}
 
-        {state.errMsg ? (
+        {!state.isLoading && state.errMsg ? (
           state.errMsg
         ) : (
           <CustomOverlayMap
             position={{
-              lat: state.center.lat - 0.0001,
+              lat: state.center.lat,
               lng: state.center.lng,
             }}
           >
-            {/* <div className="label" style={{ color: '#000' }} onClick={() => setModalOpen(true)}> */}
-            {/* <PersonPinIcon></PersonPinIcon> */}
-            <span className="left"></span>
-            <span className="center" style={{ color: 'red' }}>
-              현재 위치에 발자국을 남겨보세요!
-            </span>
-            <span className="right"></span>
-            {/* </div> */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <img
+                src="/assets/footprint.png"
+                style={{
+                  width: 40,
+                  height: 40,
+                  margin: '1.5%',
+                }}
+                onClick={() => setModalOpen(true)}
+                className="recording-foot"
+              />
+              <div
+                className="center recording-msg"
+                style={{ backgroundColor: 'rgba(252, 202, 201, 1)', color: 'rgba(0, 31, 92, 1)', padding: '3px' }}
+              >
+                현재 위치에 발자국을 남겨보세요
+              </div>
+            </div>
           </CustomOverlayMap>
         )}
       </Map>

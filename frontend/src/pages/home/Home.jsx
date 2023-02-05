@@ -27,9 +27,27 @@ export default function Home() {
     today.getMonth() === closestPlan.planDate.getMonth() &&
     today.getDate() === closestPlan.planDate.getDate();
   const navigate = useNavigate();
-
   return (
     <div className="main-div">
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '6%',
+          backgroundColor: 'rgba(0, 55, 86, 1)',
+          height: '280px',
+        }}
+      >
+        <div>
+          <h3 style={{ fontWeight: '20', fontSize: '0.8rem', color: 'white' }}>dear my baby</h3>
+          <h2 style={{ fontWeight: '100', color: 'rgba(152, 77, 26, 1)' }}>당신의 아이에게 따뜻한 추억을 선물하세요</h2>
+        </div>
+        <img
+          src="/assets/family.jpeg"
+          style={{ height: '150px', width: '150px', borderRadius: '50%', boxShadow: '0px 2px 2px 3' }}
+        ></img>
+      </div>
       <div className="user-plan">
         {/* 여행 중일때 record 페이지로 보내주는 버튼*/}
         {isTraveling ? (
@@ -101,7 +119,6 @@ export default function Home() {
         <h3>어린이와 겨울에 가기 좋은 여행지</h3>
         <Place />
       </div>
-
       <div className="main-frame">
         <h3>N세 어린이를 위한 추천 여행지</h3>
         <Place />
