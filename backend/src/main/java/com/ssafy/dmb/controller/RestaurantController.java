@@ -4,6 +4,7 @@ import com.ssafy.dmb.dto.recommend.RestaurantDetailResponseDto;
 import com.ssafy.dmb.dto.recommend.RestaurantResponseDto;
 import com.ssafy.dmb.service.RestaurantService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,13 +22,13 @@ public class RestaurantController {
 
     private final RestaurantService restaurantService;
 
-    @ApiOperation(value = "추천 식당 조회", notes = "<strong> familyId </strong>를 통해 추천 식당 조회한다.")
+    @Operation(summary = "추천 식당 조회", description = "<strong> familyId </strong>를 통해 추천 식당 조회한다.")
     @GetMapping()
     public  List<RestaurantResponseDto> getRecommendRestaurantList(@RequestParam("familyId") Long familyId, @RequestParam("regionId") Long regionId) {
         return restaurantService.getRecommendRestaurantList(familyId, regionId);
     }
 
-    @ApiOperation(value = "추천 식당 단일 조회", notes = "<strong> familyId </strong>를 통해 추천식당 단일 조회한다.")
+    @Operation(summary = "추천 식당 단일 조회", description = "<strong> familyId </strong>를 통해 추천식당 단일 조회한다.")
     @GetMapping("/detail")
     public RestaurantDetailResponseDto getRecommendRestaurantDetail(@RequestParam("restaurantId") Long restaurantId){
         return restaurantService.getRecommendRestaurantDetail(restaurantId);
