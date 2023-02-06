@@ -1,4 +1,4 @@
-import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
+import { Map, MapMarker, CustomOverlayMap, Polyline } from 'react-kakao-maps-sdk';
 import { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 // color pallete
@@ -61,6 +61,12 @@ const dummyCart = [
     day: 0,
   },
 ];
+const points = []
+// dummyCart.map((point) => {
+//   points.push({ lat: point.position.lat, lng: point.position.lng })
+//   // console.log(points)
+// })
+
 
 const PlaceCart = () => {
   const [color, setColor] = useState('');
@@ -75,6 +81,7 @@ const PlaceCart = () => {
       if (places[i].content == content) {
         places[i].color = color;
         setPlaces([...places]);
+        points.push({ lat: places[i].position.lat, lng: places[i].position.lng })
         break;
       }
     }
@@ -94,15 +101,14 @@ const PlaceCart = () => {
     alert('경로가 저장되었습니다.');
   }
   return (
-    <div>
-      <p>장소 바구니</p>
-
-      {/* 여행 기간 만큼 버튼 자동생성하기 */}
-
-      {/*  */}
-      <button onClick={() => setColor(colorPallete[0])}>day1</button>
-      <button onClick={() => setColor(colorPallete[1])}>day2</button>
-      <button onClick={() => setColor(colorPallete[2])}>day3</button>
+    <div >
+      <div style={{ position: 'absolute', left: '0vw', top: '8vh', backgroundColor: 'white', zIndex: '2' }}>
+        {/* 여행 기간 만큼 버튼 자동생성하기 */}
+        {/*  */}
+        <button onClick={() => setColor(colorPallete[0])}>day1</button>
+        <button onClick={() => setColor(colorPallete[1])}>day2</button>
+        <button onClick={() => setColor(colorPallete[2])}>day3</button>
+      </div>
       {/*  */}
 
       <Map
@@ -114,10 +120,18 @@ const PlaceCart = () => {
         style={{
           // 지도의 크기
           width: '100%',
-          height: '450px',
+          height: '100vh',
         }}
         level={4} // 지도의 확대 레벨
       >
+
+        <Polyline
+          path={[points]}
+          strokeWeight={5} // 선의 두께 입니다
+          strokeColor={'#FFAE00'} // 선의 색깔입니다
+          strokeOpacity={0.7} // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+          strokeStyle={'solid'} // 선의 스타일입니다
+        />
         {places.map((place) => (
           // 북마크된 장소 띄우기.
           <Fragment key={`cart-${place.content}`}>
@@ -133,10 +147,13 @@ const PlaceCart = () => {
           </Fragment>
         ))}
       </Map>
-      <button onClick={pushPlacePerDay}>경로 확인하기</button>
-      <Link to={'/'}>
-        <button>계획 완료하기</button>
-      </Link>
+      <div style={{ position: 'absolute', right: '0vw', bottom: '2vh', backgroundColor: 'white', zIndex: '2' }}>
+        <button onClick={pushPlacePerDay}>경로 추가</button>
+        {/* 이어진 경로가 있는 상태에서 경로 추가 누르면 선 안 없어지고 냅두기, 경로가 추가되지 않은 상태에서 다른날 누르면 이어진선 사라지게하기 */}
+        <Link to={'/'}>
+          <button >계획 완료하기</button>
+        </Link>
+      </div>
     </div>
   );
 };

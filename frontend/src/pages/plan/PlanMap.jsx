@@ -1,5 +1,8 @@
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import zIndex from '@mui/material/styles/zIndex';
+import { Bookmark } from '@mui/icons-material';
 
 const kakao = window.kakao;
 
@@ -9,6 +12,7 @@ export default function PlanMap() {
   const [map, setMap] = useState();
   const [keyWord, setKeyWord] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  let addedBookMark = []
 
   // 검색어 상태 변화
   const onChange = (e) => {
@@ -16,7 +20,6 @@ export default function PlanMap() {
   };
 
   // 검색 키워드
-  let searchWord = '역삼';
   const onClick = () => {
     searchWord = keyWord;
     // console.log({ info });
@@ -28,7 +31,7 @@ export default function PlanMap() {
     const ps = new kakao.maps.services.Places();
     ps.keywordSearch(keyWord, (data, status, _pagination) => {
       if (status === kakao.maps.services.Status.OK) {
-        console.log('data', data);
+        // console.log('data', data);
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
         const bounds = new kakao.maps.LatLngBounds();
@@ -56,10 +59,27 @@ export default function PlanMap() {
     });
   }, [keyWord]);
 
+  // 북마크 추가 버튼 눌려을때
+  const addToBookMark = () => {
+    // console.log(bookMark)
+    addedBookMark.push(info)
+    console.log(addedBookMark)
+
+  }
+
   return (
     <div>
-      <input className="searchInput" value={keyWord} onChange={onChange} type="text" placeholder="장소 검색 하세요" />
-      <button onClick={onClick}>검색</button>
+      <div style={{ position: 'absolute', left: '0vw', top: '7vh', backgroundColor: 'white', zIndex: '2' }}>
+        <input
+
+          value={keyWord} onChange={onChange} type="text" placeholder="장소 검색 하세요" />
+        <button
+          onClick={onClick}>검색</button>
+        <button>
+          <Link to="../place-cart" style={{ textDecoration: 'none', color: 'white' }}>장소바구니 보러가기</Link>
+
+        </button>
+      </div>
 
       <Map // 로드뷰를 표시할 Container
         center={{
@@ -68,7 +88,7 @@ export default function PlanMap() {
         }}
         style={{
           width: '100%',
-          height: '350px',
+          height: '100vh',
         }}
         level={3}
         onCreate={setMap}
@@ -80,10 +100,10 @@ export default function PlanMap() {
               position={marker.position}
               onClick={() => {
                 setInfo(marker);
-                // console.log(marker);
                 setIsOpen(true);
               }}
             />
+
             {isOpen && (
               <CustomOverlayMap
                 key={`${marker.position.lng}`}
@@ -119,7 +139,7 @@ export default function PlanMap() {
                           <a href={info.placeURL} target="_blank" className="link" rel="noreferrer">
                             디테일
                           </a>
-                          <button>추가</button>
+                          <button onClick={addToBookMark}>추가</button>
                         </div>
                       </div>
                     </div>
@@ -129,6 +149,7 @@ export default function PlanMap() {
             )}
           </>
         ))}
+
       </Map>
     </div>
   );

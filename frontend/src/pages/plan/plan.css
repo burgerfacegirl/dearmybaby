@@ -1,3 +1,5 @@
-.searchInput {
-  background-color: black;
+.planMapFloat {
+  position: absolute;
+  background-color: white;
+  z-index: '2';
 }
