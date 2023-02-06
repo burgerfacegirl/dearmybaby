@@ -91,6 +91,7 @@ const RecordMap = () => {
                 }}
                 onClick={() => setModalOpen(true)}
                 className="recording-foot"
+                alt="record foot"
               />
               <div className="center recording-msg">현재 위치에 발자국을 남겨보세요</div>
             </div>

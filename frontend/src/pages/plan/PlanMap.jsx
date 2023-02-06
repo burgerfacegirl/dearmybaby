@@ -28,7 +28,7 @@ export default function PlanMap() {
     const ps = new kakao.maps.services.Places();
     ps.keywordSearch(keyWord, (data, status, _pagination) => {
       if (status === kakao.maps.services.Status.OK) {
-        // console.log('data', data);
+        console.log('data', data);
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
         const bounds = new kakao.maps.LatLngBounds();
@@ -58,7 +58,7 @@ export default function PlanMap() {
 
   return (
     <div>
-      <input value={keyWord} onChange={onChange} type="text" placeholder="장소 검색 하세요" />
+      <input className="searchInput" value={keyWord} onChange={onChange} type="text" placeholder="장소 검색 하세요" />
       <button onClick={onClick}>검색</button>
 
       <Map // 로드뷰를 표시할 Container
