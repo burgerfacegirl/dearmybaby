@@ -1,6 +1,9 @@
 package com.ssafy.dmb.domain;
 
+import com.ssafy.dmb.domain.location.Coordinate;
+import com.ssafy.dmb.domain.plan.Day;
 import com.ssafy.dmb.domain.record.Comment;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,4 +39,13 @@ public class User {
     @OneToMany(mappedBy = "record", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
+    @Builder
+    public Record(String fileUrl, String recordFile, String recordText, int recordType, Day day, Coordinate recordCoordinate) {
+        this.fileUrl = fileUrl;
+        this.recordFile = recordFile;
+        this.recordText = recordText;
+        this.recordType = recordType;
+        this.day = day;
+        this.recordCoordinate = recordCoordinate;
+    }
 }
