@@ -1,11 +1,7 @@
 package com.ssafy.dmb.domain;
 
-import com.ssafy.dmb.domain.location.Coordinate;
-import com.ssafy.dmb.domain.plan.Day;
 import com.ssafy.dmb.domain.record.Comment;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,6 +9,7 @@ import java.util.List;
 
 @Getter @Setter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
     @Id @GeneratedValue
@@ -40,12 +37,12 @@ public class User {
     private List<Comment> comments = new ArrayList<>();
 
     @Builder
-    public Record(String fileUrl, String recordFile, String recordText, int recordType, Day day, Coordinate recordCoordinate) {
-        this.fileUrl = fileUrl;
-        this.recordFile = recordFile;
-        this.recordText = recordText;
-        this.recordType = recordType;
-        this.day = day;
-        this.recordCoordinate = recordCoordinate;
+    public User(String userName, String userEmail, String userPassword, String userId, String userImg) {
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.userId = userId;
+        this.userImg = userImg;
     }
+
 }
