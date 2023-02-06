@@ -106,17 +106,22 @@ const RecordMap = () => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 200,
             bgcolor: 'background.paper',
             border: '1px solid #000',
             boxShadow: 24,
             p: 4,
+            width: '50%',
+            height: '50%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px'
           }}
         >
           {!state.errMsg ? (
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <button className="recording-btn">카메라</button>
-              <RecordUpload></RecordUpload>
+            <div>
+              <RecordUpload recordLocation={state} ></RecordUpload>
             </div>
           ) : (
             <div>위치를 불러올 수 없어요!</div>

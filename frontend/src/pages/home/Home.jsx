@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import Place from './Place';
+import {apiGetPlans} from '@/commons/api/plan.jsx'
 
 const dummyUser = {
   userId: 'ssafy',
@@ -27,6 +28,8 @@ export default function Home() {
     today.getMonth() === closestPlan.planDate.getMonth() &&
     today.getDate() === closestPlan.planDate.getDate();
   const navigate = useNavigate();
+
+  console.log(apiGetPlans())
   return (
     <div className="main-div">
       <div
