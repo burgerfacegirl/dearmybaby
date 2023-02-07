@@ -62,6 +62,45 @@ const dummyCart = [
     color: 'black',
     day: 0,
   },
+  {
+    position: {
+      lat: 37.4948288,
+      lng: 127.0445612,
+    },
+    content: '스타벅스4',
+    adressName: '강남구 저기어디로',
+    placeURL: 'https://place.map.kakao.com/17884744',
+    categoryCode: '카페',
+    roadAddressName: '로',
+    color: 'black',
+    day: 0,
+  },
+  {
+    position: {
+      lat: 37.4918288,
+      lng: 127.0445612,
+    },
+    content: '스타벅스5',
+    adressName: '강남구 저기어디로',
+    placeURL: 'https://place.map.kakao.com/17884744',
+    categoryCode: '카페',
+    roadAddressName: '로',
+    color: 'black',
+    day: 0,
+  },
+  {
+    position: {
+      lat: 37.4878288,
+      lng: 127.0445612,
+    },
+    content: '스타벅스6',
+    adressName: '강남구 저기어디로',
+    placeURL: 'https://place.map.kakao.com/17884744',
+    categoryCode: '카페',
+    roadAddressName: '로',
+    color: 'black',
+    day: 0,
+  },
 ];
 
 const PlaceCart = () => {
