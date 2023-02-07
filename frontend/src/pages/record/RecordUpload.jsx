@@ -3,14 +3,15 @@ import React, { useState } from 'react';
 
 const RecordUpload = (recordLocation) => {
   const [source, setSource] = useState();
-  
+  const [recordText, setRecordText] = useState('');
+
   const inputRef = React.useRef();
   const formData = {
     multipartFile: source ? source.url : 'string',
     recordDto: {
       dayId: 0,
       recordFile: 'string',
-      recordText: 'string',
+      recordText: recordText,
       latitude: recordLocation.recordLocation.center.lat,
       longitude: recordLocation.recordLocation.center.lng,
       recordType: 0,
@@ -46,6 +47,10 @@ const RecordUpload = (recordLocation) => {
     console.log(formData);
   };
 
+  const onChange = (e) => {
+    setRecordText(e.target.value);
+  };
+
   return (
     <div className="RecordUpload">
       {source != null &&
@@ -77,7 +82,7 @@ const RecordUpload = (recordLocation) => {
         ) : (
           <div>
             <form action="#" style={{ display: 'flex', flexDirection: 'column' }}>
-              <textarea style={{ margin: '20px 0px', border: '1px solid black' }} />
+              <textarea style={{ margin: '20px 0px', border: '1px solid black' }} onChange={onChange} />
               <button className="recording-btn" onClick={handleChoose}>
                 다시선택하기
               </button>

@@ -4,9 +4,42 @@ import { Modal, Box } from '@mui/material';
 import './Record.css';
 import RecordUpload from './RecordUpload';
 
+const dummyRecords = [
+  {
+    recordId: 1,
+    dayId: 1,
+    recordFile: 'string',
+    latitude: 'string',
+    longitude: 'string',
+    recordType: 0,
+    fileUrl: 'string',
+    recordDate: '2023-02-06T10:44:59.097Z',
+  },
+  {
+    recordId: 2,
+    dayId: 1,
+    recordFile: 'string',
+    latitude: 'string',
+    longitude: 'string',
+    recordType: 0,
+    fileUrl: 'string',
+    recordDate: '2023-02-06T10:44:59.097Z',
+  },
+  {
+    recordId: 3,
+    dayId: 1,
+    recordFile: 'string',
+    latitude: 'string',
+    longitude: 'string',
+    recordType: 0,
+    fileUrl: 'string',
+    recordDate: '2023-02-06T10:44:59.097Z',
+  },
+];
+
 const RecordMap = () => {
   // 현재 위치에 기록 남기기 (업로드) 추가 해야함 => 아이콘 바꿔서 찍고 기록 데이터 저장
-
+  const [records, setRecords] = useState(dummyRecords);
   const [modalOpen, setModalOpen] = useState(false);
 
   const [state, setState] = useState({
@@ -17,6 +50,17 @@ const RecordMap = () => {
     errMsg: null,
     isLoading: true,
   });
+
+ const makeFootprint = () => {
+  const prev = records
+  setRecords(prev.map((e) => {
+    return {
+      ...e,
+      latitude: state.center.lat,
+      longitude: state.center.lng,
+    }
+  }))
+ }
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -89,7 +133,19 @@ const RecordMap = () => {
                   height: '40px',
                   marginBottom: '5px',
                 }}
-                onClick={() => setModalOpen(true)}
+                onClick={
+                  () => {
+                  // for (const i = 0; i <= records.length; i++) {
+                  //   console.log("lllll")
+                  //   console.log(records[0])
+                  //   records[i].latitude = state.center.lat;
+                  //   records[i].longitude = state.center.lng;
+                  // }
+                  // setRecords([...records]);
+                  makeFootprint()
+                  setModalOpen(true);
+                }
+              }
                 className="recording-foot"
                 alt="record foot"
               />
@@ -97,6 +153,22 @@ const RecordMap = () => {
             </div>
           </CustomOverlayMap>
         )}
+
+        {console.log(records)}
+
+        <Polyline
+          path={[
+            [
+              { lat: state.center.lat, lng: state.center.lng },
+              { lat: state.center.lat - 0.002, lng: state.center.lng - 0.004 },
+              { lat: state.center.lat - 0.004, lng: state.center.lng - 0.003 },
+            ],
+          ]}
+          strokeWeight={5} // 선의 두께 입니다
+          strokeColor={'#FFAE00'} // 선의 색깔입니다
+          strokeOpacity={0.7} // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+          strokeStyle={'solid'} // 선의 스타일입니다
+        />
       </Map>
 
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
@@ -110,18 +182,16 @@ const RecordMap = () => {
             border: '1px solid #000',
             boxShadow: 24,
             p: 4,
-            width: '50%',
-            height: '50%',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '20px'
+            padding: '20px',
           }}
         >
           {!state.errMsg ? (
             <div>
-              <RecordUpload recordLocation={state} ></RecordUpload>
+              <RecordUpload recordLocation={state}></RecordUpload>
             </div>
           ) : (
             <div>위치를 불러올 수 없어요!</div>

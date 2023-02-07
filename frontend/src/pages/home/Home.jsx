@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import Place from './Place';
-import {apiGetPlans} from '@/commons/api/plan.jsx'
+// import {apiGetPlans} from '@/commons/api/plan.jsx'
 
+// 접속한 유저 그룹의 plans 다 가져와야함
 const dummyUser = {
   userId: 'ssafy',
   userName: '김싸피',
@@ -21,7 +22,6 @@ export default function Home() {
   const isTraveling = user.currentPlanId != null;
 
   // 오늘 날짜가 계획 시작 날짜와 같은지 체크 (여행 시작 중이 아니면)
-  // const [isToday, checkDate] = useState(false);
   const today = new Date();
   const isToday =
     today.getFullYear() === closestPlan.planDate.getFullYear() &&
@@ -29,7 +29,7 @@ export default function Home() {
     today.getDate() === closestPlan.planDate.getDate();
   const navigate = useNavigate();
 
-  console.log(apiGetPlans())
+  // console.log(apiGetPlans())
   return (
     <div className="main-div">
       <div
@@ -54,7 +54,7 @@ export default function Home() {
       <div className="user-plan">
         {/* 여행 중일때 record 페이지로 보내주는 버튼*/}
         {isTraveling ? (
-          <div style={{marginBottom: '3vh'}}>
+          <div style={{ marginBottom: '3vh' }}>
             <h2>제주 여행 중</h2>
             <button
               onClick={() => {
@@ -68,7 +68,7 @@ export default function Home() {
 
         {/* 오늘이 여행 일정 시작 날일때 여행 시작 버튼*/}
         {isToday && !isTraveling ? (
-          <div style={{marginBottom: '3vh'}}>
+          <div style={{ marginBottom: '3vh' }}>
             <h2>오늘은 제주 여행 시작날입니다. 기록을 시작해보세요.</h2>
             <button
               onClick={() => {
