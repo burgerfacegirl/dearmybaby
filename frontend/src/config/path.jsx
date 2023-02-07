@@ -12,7 +12,6 @@ const path = {
   myTravels: '/my-travels',
   serviceCenter: '/service-center',
   travelBasket: '/travel-basket',
-  KidsInformaton: '/kids',
 };
 
 export default path;

@@ -36,7 +36,7 @@ const SelectGroup = () => {
           </button>
         ))}
       </form>
-      <button style={{ display: 'flex', flexDirection: 'column' }} > 새로운 그룹 생성하기</button>
+      <button style={{ display: 'flex', flexDirection: 'column' }} onClick={() => {navigate('../user/make-group')}} > 새로운 그룹 생성하기</button>
       <p>  user/ groupCreation 만들기</p>
     </div>
   );

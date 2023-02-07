@@ -1,3 +1,4 @@
+import { apiCreateRecord } from '@/commons/api/record';
 import React, { useState } from 'react';
 // import styled from 'styled-components';
 
@@ -5,19 +6,17 @@ const RecordUpload = (recordLocation) => {
   const [source, setSource] = useState();
   const [recordText, setRecordText] = useState('');
 
-  const inputRef = React.useRef();
-  const formData = {
-    multipartFile: source ? source.url : 'string',
-    recordDto: {
-      dayId: 0,
-      recordFile: 'string',
-      recordText: recordText,
-      latitude: recordLocation.recordLocation.center.lat,
-      longitude: recordLocation.recordLocation.center.lng,
-      recordType: 0,
-    },
+  const record = source ? source.url : 'string';
+  const recordFile = {
+    dayId: 0,
+    recordFile: 'record..test..',
+    recordText: recordText,
+    latitude: recordLocation.recordLocation.center.lat,
+    longitude: recordLocation.recordLocation.center.lng,
+    recordType: 0,
   };
-  console.log(formData);
+
+  const inputRef = React.useRef();
 
   const handleFileChange = (e) => {
     // const file = event.target.files[0]
@@ -37,20 +36,23 @@ const RecordUpload = (recordLocation) => {
   };
 
   const saveRecord = (e) => {
+    e.preventDefault();
     // 기록 저장하는 post 요청
-    formData.multipartFile = source.url;
-    formData.recordDto.dayId = 1;
-    formData.recordDto.recordFile = 1;
-    formData.recordDto.recordText = 1;
-    formData.recordDto.latitude = 1;
-    formData.recordDto.longitude = recordLocation.formData.recordDto.recordType = 0;
-    console.log(formData);
+    // formData.multipartFile = source.url;
+    // formData.recordDto.dayId = 1;
+    // formData.recordDto.recordFile = 1;
+    // formData.recordDto.recordText = 1;
+    // formData.recordDto.latitude = 1;
+    // formData.recordDto.longitude = recordLocation.formData.recordDto.recordType = 0;
+    // console.log(formData);
+    apiCreateRecord(record, recordFile);
   };
 
   const onChange = (e) => {
     setRecordText(e.target.value);
   };
 
+  console.log(source);
   return (
     <div className="RecordUpload">
       {source != null &&

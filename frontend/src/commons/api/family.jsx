@@ -3,13 +3,14 @@ import axios from 'axios';
 
 const api = getApiInstance();
 
-export async function apiCreateFamily() {
+export async function apiCreateFamily(memberId, familyName) {
+  // return { memberId, familyName };
   await axios({
     method: 'POST',
     url: 'https://i8a206.p.ssafy.io/api/family/new',
     data: {
-      familyName: 'family2',
-      memberId: 'ssafy',
+      familyName: familyName,
+      memberId: memberId,
     },
     headers: { 'Content-Type': 'application/json' },
   })
@@ -19,4 +20,3 @@ export async function apiCreateFamily() {
     })
     .catch((e) => console.log(e));
 }
-

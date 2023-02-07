@@ -1,5 +1,5 @@
 import { getApiInstance } from './http';
-
+import axios from 'axios';
 // 날짜별 여행 기록 전체 조회
 const dummyRecords = [
   {
@@ -15,32 +15,28 @@ const dummyRecords = [
 ];
 
 const api = getApiInstance();
-export async function apiGetRecords() {
-  let response = null;
-  try {
-    response = await api.post(`https://i8a206.p.ssafy.io/api/record`, {
-      headers: {
-        'Content-Type': 'application/json',
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: JSON.stringify({
-        multipartFile: 'string',
-        recordDto: {
-          dayId: 0,
-          recordFile: 'string',
-          recordText: 'string',
-          latitude: 'string',
-          longitude: 'string',
-          recordType: 0,
-        },
-      }),
-    });
-  } catch (e) {
-    console.log(e);
-    // return null;
-    throw Error('djdjf');
-  }
 
-  console.log(response);
-  return response;
+export async function apiCreateRecord(record, recordFile) {
+  if (record != null && recordFile != null) {
+    const formData = new FormData();
+    formData.append(
+      'recordDto',
+      new Blob([JSON.stringify(record)], {
+        type: 'application/json',
+      }),
+    );
+    formData.append('multipartFile', recordFile);
+
+    console.log(record, recordFile);
+    await axios({
+      method: 'POST',
+      url: 'https://i8a206.p.ssafy.io/api/record',
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }).catch((e) => console.log(e));
+    console.log(response);
+    return response;
+  }
 }

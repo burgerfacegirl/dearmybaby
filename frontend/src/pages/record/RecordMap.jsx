@@ -132,8 +132,8 @@ const RecordMap = () => {
               <img
                 src="/assets/footprint.png"
                 style={{
-                  width: '40px',
-                  height: '40px',
+                  width: '10vw',
+                  height: '5vh',
                   marginBottom: '5px',
                 }}
                 onClick={() => {
@@ -152,7 +152,6 @@ const RecordMap = () => {
           return <RecordMapItem key={record.recordId} record={record}></RecordMapItem>;
         })}
 
-        {/* <RecordMapItem record={records[2]}></RecordMapItem> */}
 
         <Polyline
           path={[points]}

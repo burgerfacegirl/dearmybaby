@@ -1,5 +1,6 @@
 import Login from './Login';
 import SignUp from './SignUp';
+import { Outlet } from 'react-router-dom';
 
 export default function User() {
   const dummyChildFavor = [
@@ -15,9 +16,7 @@ export default function User() {
 
   return (
     <div>
-      <h1>User Component</h1>
-      <Login />
-      <SignUp />
+      <Outlet></Outlet>
     </div>
   );
 }
