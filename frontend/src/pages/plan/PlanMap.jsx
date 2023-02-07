@@ -12,7 +12,7 @@ export default function PlanMap() {
   const [map, setMap] = useState();
   const [keyWord, setKeyWord] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  let addedBookMark = []
+  let addedBookMark = [];
 
   // 검색어 상태 변화
   const onChange = (e) => {
@@ -62,22 +62,19 @@ export default function PlanMap() {
   // 북마크 추가 버튼 눌려을때
   const addToBookMark = () => {
     // console.log(bookMark)
-    addedBookMark.push(info)
-    console.log(addedBookMark)
-
-  }
+    addedBookMark.push(info);
+    console.log(addedBookMark);
+  };
 
   return (
     <div>
-      <div style={{ position: 'absolute', left: '0vw', top: '7vh', backgroundColor: 'white', zIndex: '2' }}>
-        <input
-
-          value={keyWord} onChange={onChange} type="text" placeholder="장소 검색 하세요" />
-        <button
-          onClick={onClick}>검색</button>
+      <div style={{ position: 'absolute', left: '0vw', top: '9vh', backgroundColor: 'transparent', zIndex: '2' }}>
+        <input value={keyWord} onChange={onChange} type="text" placeholder="장소 검색 하세요" />
+        <button onClick={onClick}>검색</button>
         <button>
-          <Link to="../place-cart" style={{ textDecoration: 'none', color: 'white' }}>장소바구니 보러가기</Link>
-
+          <Link to="../place-cart" style={{ textDecoration: 'none', color: 'white' }}>
+            장소바구니 보러가기
+          </Link>
         </button>
       </div>
 
@@ -149,7 +146,6 @@ export default function PlanMap() {
             )}
           </>
         ))}
-
       </Map>
     </div>
   );
