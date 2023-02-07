@@ -7,11 +7,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 
 public interface MemberRepository extends JpaRepository<Member,Long> {
 
     @Query("select u from Member u where u.memberId = :memberId")
     Member findByMemberId(@Param("memberId") String memberId);
+
+    @Query("select u from Member u where u.memberId = :memberId")
+    Optional<Member> findOptionalByMemberId(@Param("memberId") String memberId);
 
     @Modifying
     @Transactional

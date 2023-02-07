@@ -1,9 +1,11 @@
 package com.ssafy.dmb.controller;
 
+import com.ssafy.dmb.dto.login.MemberLoginRequestDto;
+import com.ssafy.dmb.dto.login.TokenInfo;
 import com.ssafy.dmb.dto.user.MemberDto;
 import com.ssafy.dmb.dto.user.MemberResponseDto;
-import com.ssafy.dmb.service.S3Service;
 import com.ssafy.dmb.service.MemberService;
+import com.ssafy.dmb.service.S3Service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -57,6 +59,18 @@ public class MemberController {
     @Operation(summary = "회원 정보 수정", description = "<strong> memberDto</strong>를 통해 회원정보를 수정한다.")
     public void changeUserInfo(@RequestBody MemberDto memberDto) throws IOException {
         memberService.changeMemberInfo(memberDto);
+    }
+
+    @PostMapping("/login")
+    public TokenInfo login(@RequestBody MemberLoginRequestDto memberLoginRequestDto) {
+        System.out.println("login request");
+        String memberId = memberLoginRequestDto.getMemberId();
+        System.out.println("done getmemberId");
+        String password = memberLoginRequestDto.getPassword();
+        System.out.println("done getPassword");
+        TokenInfo tokenInfo = memberService.login(memberId, password);
+        System.out.println("done memberService.login");
+        return tokenInfo;
     }
 
 }
