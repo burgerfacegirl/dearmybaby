@@ -1,9 +1,13 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import React from 'react';
 
 const Signup = () => {
-  // 초기값 세팅 - 아이디, 닉네임, 비밀번호, 비밀번호확인, 이메일, 전화번호, 생년월일
+  // 라우팅
+  const navigate = useNavigate();
 
+  // 초기값 세팅 - 아이디, 닉네임, 비밀번호, 비밀번호확인, 이메일, 전화번호, 생년월일
   const [id, setId] = React.useState('');
   const [name, setName] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -101,14 +105,10 @@ const Signup = () => {
     const data = { id, password, email, name };
     console.log(data);
     console.log(id);
-    // setUserInfo({
-    //   ...userInfo,
-    //   [userId]: id,
-    //   [userName]: name,
-    //   [userPassword]: password,
-    //   [userEmail]: email,
-    // });
-    // console.log(userInfo);
+    // 회원정보 front에서 valid 판단하는 함수 만들기
+
+    // 아이정보 묻는 창으로 넘어가기
+    navigate(`../kids`)
   };
   return (
     <>

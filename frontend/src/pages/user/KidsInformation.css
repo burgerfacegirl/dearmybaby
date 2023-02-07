@@ -6,3 +6,11 @@
     text-align: center;
     color: rgba(252, 163, 17, 1);
 }
+
+.noshow {
+    display: none;
+}
+
+.show {
+    display: block;
+}

@@ -23,11 +23,11 @@ export default function Home() {
   // 오늘 날짜가 계획 시작 날짜와 같은지 체크 (여행 시작 중이 아니면)
   const today = new Date();
   const isToday =
-  today.getFullYear() === closestPlan.planDate.getFullYear() &&
-  today.getMonth() === closestPlan.planDate.getMonth() &&
-  today.getDate() === closestPlan.planDate.getDate();
+    today.getFullYear() === closestPlan.planDate.getFullYear() &&
+    today.getMonth() === closestPlan.planDate.getMonth() &&
+    today.getDate() === closestPlan.planDate.getDate();
   const navigate = useNavigate();
-  
+
   return (
     <div className="main-div">
       <div
