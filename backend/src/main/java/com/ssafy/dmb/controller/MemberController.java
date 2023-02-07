@@ -11,14 +11,18 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "Member", description = "Member API 입니다.")
+@Transactional
 @RequestMapping("/api/member")
 public class MemberController {
 
@@ -62,15 +66,31 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public TokenInfo login(@RequestBody MemberLoginRequestDto memberLoginRequestDto) {
-        System.out.println("login request");
+    public HttpServletResponse login(@RequestBody MemberLoginRequestDto memberLoginRequestDto, HttpServletResponse httpServletResponse) {
         String memberId = memberLoginRequestDto.getMemberId();
-        System.out.println("done getmemberId");
         String password = memberLoginRequestDto.getPassword();
-        System.out.println("done getPassword");
         TokenInfo tokenInfo = memberService.login(memberId, password);
-        System.out.println("done memberService.login");
-        return tokenInfo;
+
+        String accesstoken = tokenInfo.getGrantType() + tokenInfo.getAccessToken(); // 얘는 헤더에?
+        String refreshToken = tokenInfo.getRefreshToken(); // 얘는 쿠키로 and DB저장
+
+        Cookie cookie = new Cookie("refresh-token", refreshToken);
+        // expires in 7 days
+        cookie.setMaxAge(7*86400000);
+
+        // optional properties
+        cookie.setSecure(true);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+
+        // add cookie to response
+        httpServletResponse.addCookie(cookie);
+        httpServletResponse.addHeader("access-token", accesstoken);
+
+        //db저장 코드 refreshtoken 유효기간 설정하는거랑, 저장할때 기존꺼 지우고 저장하는거 추가해야함
+        memberService.changeMemberRefreshToken(memberId, refreshToken);
+
+        return httpServletResponse;
     }
 
 }

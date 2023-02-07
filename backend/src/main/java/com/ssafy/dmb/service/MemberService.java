@@ -72,6 +72,12 @@ public class MemberService {
         return null;
     }
 
+    public void changeMemberRefreshToken(String memberId, String refreshToken) {
+        Member changeRefreshToken = memberRepository.findByMemberId(memberId);
+        changeRefreshToken.setRefreshToken(refreshToken);
+        memberRepository.save(changeRefreshToken);
+    }
+
     public void deleteMember(String memberId) {
         memberRepository.deleteByMemberId(memberId);
     }

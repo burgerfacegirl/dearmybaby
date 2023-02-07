@@ -16,7 +16,7 @@ public interface MemberRepository extends JpaRepository<Member,Long> {
     Member findByMemberId(@Param("memberId") String memberId);
 
     @Query("select u from Member u where u.memberId = :memberId")
-    Optional<Member> findOptionalByMemberId(@Param("memberId") String memberId);
+    Optional<Member> findOptionalById(@Param("memberId") String memberId);
 
     @Modifying
     @Transactional

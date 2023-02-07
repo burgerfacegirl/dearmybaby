@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 @Entity
 public class Member implements UserDetails {
 
-    @Id @GeneratedValue
-    @Column(name = "member_no")
-    private Long no;
+//    @Id @GeneratedValue
+//    @Column(name = "member_no")
+//    private Long no;
 
     @Column(nullable = false)
     private String memberName;
@@ -30,7 +30,8 @@ public class Member implements UserDetails {
     @Column(nullable = false)
     private String memberPassword;
 
-    @Column(nullable = false)
+    @Id @GeneratedValue
+    @Column(name = "member_id")
     private String memberId;
 
     private String memberImg;
@@ -59,11 +60,16 @@ public class Member implements UserDetails {
     @Builder.Default
     private List<String> roles = new ArrayList<>();
 
+    public Member() {
+
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles.stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
+//        return null;
     }
 
     @Override
