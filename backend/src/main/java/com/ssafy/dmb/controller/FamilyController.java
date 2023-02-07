@@ -22,18 +22,18 @@ public class FamilyController {
         return ResponseEntity.status(HttpStatus.OK).body(familyService.createFamily(request));
     }
 
-    @GetMapping("/{familyId}/invitation")
+    @GetMapping("/invitation/{familyId}")
     @ResponseBody
     public ResponseEntity<String> getInvitationCode(@PathVariable("familyId") Long familyId) {
         return ResponseEntity.status(HttpStatus.OK).body(familyService.getInvitationCode(familyId));
     }
     @PostMapping("/join")
     @ResponseBody
-    public ResponseEntity<FamilyDto.Response> joinFamily(@RequestParam("invitationCode") String invitationCode, @RequestParam("userId") String userId) {
-        return ResponseEntity.status(HttpStatus.OK).body(familyService.joinFamily(invitationCode, userId));
+    public ResponseEntity<FamilyDto.Response> joinFamily(@RequestParam("invitationCode") String invitationCode, @RequestParam("memberId") String memberId) {
+        return ResponseEntity.status(HttpStatus.OK).body(familyService.joinFamily(invitationCode, memberId));
     }
 
-    @GetMapping("/{familyId}/detail")
+    @GetMapping("/detail/{familyId}")
     @ResponseBody
     public ResponseEntity<FamilyDto.Response> getFamilyDetail(@PathVariable("familyId") Long familyId) {
         return ResponseEntity.status(HttpStatus.OK).body(familyService.getFamilyDetail(familyId));
