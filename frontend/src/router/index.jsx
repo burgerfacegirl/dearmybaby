@@ -1,10 +1,27 @@
+import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
+
 import App from '@/App';
 import Home from '@/pages/home';
-import Plan, { PlanForm, FindCity, PlaceCart, SelectDate, SelectGroup, SelectPlace } from '@/pages/plan';
-import Record from '@/pages/record';
-import Album, { AlbumList, AlbumMap, AlbumRecordList } from '@/pages/album';
 import User from '@/pages/user';
+import Plan from '@/pages/plan';
+import Record from '@/pages/record';
+import Album from '@/pages/album';
+
+// Plan, lazily loaded components
+const FindCity = lazy(() => import('@/pages/plan').then((module) => ({ default: module.FindCity })));
+const PlaceCart = lazy(() => import('@/pages/plan').then((module) => ({ default: module.PlaceCart })));
+const SelectDate = lazy(() => import('@/pages/plan').then((module) => ({ default: module.SelectDate })));
+const SelectGroup = lazy(() => import('@/pages/plan').then((module) => ({ default: module.SelectGroup })));
+const SelectPlace = lazy(() => import('@/pages/plan').then((module) => ({ default: module.SelectPlace })));
+
+// Record, lazily loaded components
+const RecordMap = lazy(() => import('@/pages/record').then((module) => ({ default: module.RecordMap })));
+
+// Album, lazily loaded components
+const AlbumList = lazy(() => import('@/pages/album').then((module) => ({ default: module.AlbumList })));
+const AlbumMap = lazy(() => import('@/pages/album').then((module) => ({ default: module.AlbumMap })));
+const AlbumRecordList = lazy(() => import('@/pages/album').then((module) => ({ default: module.AlbumRecordList })));
 
 const router = createBrowserRouter([
   {
@@ -16,12 +33,16 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
+        path: 'user',
+        element: <User></User>,
+      },
+      {
         path: 'plan',
         element: <Plan></Plan>,
         children: [
           {
             index: true,
-            element: <PlanForm></PlanForm>,
+            element: <SelectGroup></SelectGroup>,
           },
           {
             path: 'find-city',
@@ -30,10 +51,6 @@ const router = createBrowserRouter([
           {
             path: 'place-cart',
             element: <PlaceCart></PlaceCart>,
-          },
-          {
-            path: 'select-group',
-            element: <SelectGroup></SelectGroup>,
           },
           {
             path: 'select-date',
@@ -48,6 +65,12 @@ const router = createBrowserRouter([
       {
         path: 'record',
         element: <Record></Record>,
+        children: [
+          {
+            index: true,
+            element: <RecordMap></RecordMap>,
+          },
+        ],
       },
       {
         path: 'album',
@@ -66,10 +89,6 @@ const router = createBrowserRouter([
             element: <AlbumRecordList></AlbumRecordList>,
           },
         ],
-      },
-      {
-        path: 'user',
-        element: <User></User>,
       },
     ],
   },
