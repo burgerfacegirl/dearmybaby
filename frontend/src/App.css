@@ -24,7 +24,7 @@ body {
 
 @media (max-width: 650px) {
   .App {
-    /* background-color: green; */
+    background-color: rgb(241, 244, 255);
     height: auto;
     width: 100vw;
     justify-items: center;
