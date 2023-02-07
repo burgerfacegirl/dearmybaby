@@ -1,3 +1,5 @@
+import { getApiInstance } from './http';
+
 // 날짜별 여행 기록 전체 조회
 const dummyRecords = [
   {
@@ -12,17 +14,33 @@ const dummyRecords = [
   },
 ];
 
-
+const api = getApiInstance();
 export async function apiGetRecords() {
-  return {
-    multipartFile: 'string',
-    recordDto: {
-      dayId: 0,
-      recordFile: 'string',
-      recordText: 'string',
-      latitude: 'string',
-      longitude: 'string',
-      recordType: 0,
-    },
-  };
+  let response = null;
+  try {
+    response = await api.post(`https://i8a206.p.ssafy.io/api/record`, {
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({
+        multipartFile: 'string',
+        recordDto: {
+          dayId: 0,
+          recordFile: 'string',
+          recordText: 'string',
+          latitude: 'string',
+          longitude: 'string',
+          recordType: 0,
+        },
+      }),
+    });
+  } catch (e) {
+    console.log(e);
+    // return null;
+    throw Error('djdjf');
+  }
+
+  console.log(response);
+  return response;
 }

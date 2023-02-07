@@ -39,10 +39,21 @@ export async function apiGetPlans() {
   //     groupID: 1,
   //   },
   // };
-
   let response = null;
   try {
-    response = await api.get(`/plan/0`);
+    response = await api.get('https://i8a206.p.ssafy.io/api/plan/0', {
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      // body: JSON.stringify({
+      //   familyId: 1,
+      //   planName: '제주여행1',
+      //   planDestination: '제주',
+      //   startDate: '2023-02-07',
+      //   endDate: '2023-02-08',
+      // }),
+    });
   } catch (e) {
     console.log(e);
     // return null;

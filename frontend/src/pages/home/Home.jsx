@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import Place from './Place';
-// import {apiGetPlans} from '@/commons/api/plan.jsx'
 
 // 접속한 유저 그룹의 plans 다 가져와야함
 const dummyUser = {
@@ -24,12 +23,11 @@ export default function Home() {
   // 오늘 날짜가 계획 시작 날짜와 같은지 체크 (여행 시작 중이 아니면)
   const today = new Date();
   const isToday =
-    today.getFullYear() === closestPlan.planDate.getFullYear() &&
-    today.getMonth() === closestPlan.planDate.getMonth() &&
-    today.getDate() === closestPlan.planDate.getDate();
+  today.getFullYear() === closestPlan.planDate.getFullYear() &&
+  today.getMonth() === closestPlan.planDate.getMonth() &&
+  today.getDate() === closestPlan.planDate.getDate();
   const navigate = useNavigate();
-
-  // console.log(apiGetPlans())
+  
   return (
     <div className="main-div">
       <div

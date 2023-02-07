@@ -7,6 +7,7 @@ import User from '@/pages/user';
 import Plan from '@/pages/plan';
 import Record from '@/pages/record';
 import Album from '@/pages/album';
+import KidsInformation from '@/pages/user/KidsInformation';
 
 // Plan, lazily loaded components
 const FindCity = lazy(() => import('@/pages/plan').then((module) => ({ default: module.FindCity })));
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
         path: 'user',
         element: <User></User>,
       },
+      { path: 'kids', element: <KidsInformation></KidsInformation> },
       {
         path: 'plan',
         element: <Plan></Plan>,
