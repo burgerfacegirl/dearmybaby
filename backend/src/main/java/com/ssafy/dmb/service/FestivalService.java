@@ -54,10 +54,8 @@ public class FestivalService {
         Festival festivalDetail = festivalRepository.findById(festivalId).
                 orElseThrow(() -> new NoSuchElementException());
 
-        FestivalDetailResponseDto festivalDetailResponseDto = new FestivalDetailResponseDto(festivalDetail);
-
-        return festivalDetailResponseDto;
+        return new FestivalDetailResponseDto(festivalDetail);
 
     }
-    
+
 }
