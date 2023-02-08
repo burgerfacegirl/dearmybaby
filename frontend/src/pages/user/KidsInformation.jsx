@@ -18,7 +18,6 @@ const qNum = [...new Array(2)].map((_, i) => i + 1);
 export default function KidsInformation() {
   const [food, setFood] = useState([]);
   const [place, setPlace] = useState([]);
-  const [festival, setFestival] = useState([]);
   const navigate = useNavigate();
   let quizAnswer = [
     false,
