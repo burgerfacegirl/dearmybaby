@@ -42,14 +42,17 @@ export default function Home() {
           height: '280px',
         }}
       >
-        <div>
+        <div className='main-animation'>
           <h3 style={{ fontWeight: '20', fontSize: '0.8rem', color: 'white' }}>dear my baby</h3>
           <h2 style={{ fontWeight: '100', color: 'white' }}>당신의 아이에게 따뜻한 추억을 선물하세요</h2>
         </div>
-        <img
-          src="/assets/family.jpeg"
-          style={{ height: '130px', width: '130px', borderRadius: '50%', boxShadow: '0px 2px 2px 3' }}
-        ></img>
+        <div className='family-photo-animation'>
+          <img
+            src="/assets/family.jpeg"
+            style={{ height: '130px', width: '130px', borderRadius: '50%', boxShadow: '0px 2px 2px' }}>
+
+          </img>
+        </div>
       </div>
       <div className="user-plan">
         {/* 여행 중일때 record 페이지로 보내주는 버튼*/}
