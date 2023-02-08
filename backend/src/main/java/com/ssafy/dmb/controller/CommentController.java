@@ -22,12 +22,12 @@ public class CommentController {
     private final CommentService commentService;
     private final RecordRepository recordRepository;
 
+    @Transactional
     @Operation(summary = "댓글 저장", description = "댓글을 저장한다.")
     @PostMapping()
-    public String saveComment(@RequestBody CommentDto commentDto) throws IOException {
-        System.out.println("요청옴");
+    public List<CommentResponseDto> saveComment(@RequestBody CommentDto commentDto) throws IOException {
         commentService.saveComment(commentDto);
-        return "ok";
+        return commentService.getCommentList(commentDto.getRecordId());
     }
 
     @Operation(summary = "댓글 리스트 조회", description = "<strong> recordId </strong>를 통해 댓글 리스트를 전체 조회한다.")
