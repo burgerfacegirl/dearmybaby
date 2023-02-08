@@ -35,7 +35,7 @@ public class TourController {
     public TourDetailResponseDto getRecommendTourDetail(@RequestParam("tourId") Long tourId){
 
         return tourService.getRecommendTourDetail(tourId);
-        
+
     }
 
 }
