@@ -1,4 +1,4 @@
-/* 배경 색 : rgba(255, 255, 255, 0.922) */
+/* 배경 색 : rgba(255, 255, 255, 0.922)
 /* 시그니쳐 색 : rgb(59, 45, 142) */
 
 
@@ -55,7 +55,6 @@
 .main-div {
   padding: 0% 0%;
   background-color: rgb(59, 45, 142);
-  
 }
 
 .plus-plan:hover {
@@ -85,6 +84,11 @@
 .dday-alarm-button {
   margin-bottom: 15px;
   margin-left: 15px;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(95, 67, 255);
+  padding: 5px 10px;
 
 }
 .plan-append {
@@ -99,9 +103,8 @@
 .plan-append-text {
   padding: 10px;
   padding-left: 10px;
-
-
 }
+
 .plan-append-text {
   margin-bottom: 10px;
   margin-left: 15px;
@@ -170,4 +173,4 @@
     margin-right: 0%;
     width: 100%
   }
-}
+} 
