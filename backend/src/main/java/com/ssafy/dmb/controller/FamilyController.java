@@ -17,25 +17,21 @@ public class FamilyController {
     private final FamilyRepository familyRepository;
 
     @PostMapping("/new")
-    @ResponseBody
     public ResponseEntity<FamilyDto.familyResponse> createFamily(@RequestBody FamilyDto.familyRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(familyService.createFamily(request));
     }
 
     @GetMapping("/invitation/{familyId}")
-    @ResponseBody
     public ResponseEntity<String> getInvitationCode(@PathVariable("familyId") Long familyId) {
         return ResponseEntity.status(HttpStatus.OK).body(familyService.getInvitationCode(familyId));
     }
     @PostMapping("/join")
-    @ResponseBody
     public ResponseEntity<FamilyDto.familyResponse> joinFamily(@RequestParam("invitationCode") String invitationCode
             , @RequestParam("memberId") String memberId) {
         return ResponseEntity.status(HttpStatus.OK).body(familyService.joinFamily(invitationCode, memberId));
     }
 
     @GetMapping("/detail/{familyId}")
-    @ResponseBody
     public ResponseEntity<FamilyDto.familyResponse> getFamilyDetail(@PathVariable("familyId") Long familyId) {
         return ResponseEntity.status(HttpStatus.OK).body(familyService.getFamilyDetail(familyId));
     }
