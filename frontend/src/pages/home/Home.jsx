@@ -38,13 +38,13 @@ export default function Home() {
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '6%',
-          backgroundColor: 'rgb(249, 255, 202)',
+          // backgroundColor: 'rgba(47, 54, 129, 0.597)',
           height: '280px',
         }}
       >
         <div>
-          <h3 style={{ fontWeight: '20', fontSize: '0.8rem', color: 'orange' }}>dear my baby</h3>
-          <h2 style={{ fontWeight: '100', color: 'rgba(152, 77, 26, 1)' }}>당신의 아이에게 따뜻한 추억을 선물하세요</h2>
+          <h3 style={{ fontWeight: '20', fontSize: '0.8rem', color: 'white' }}>dear my baby</h3>
+          <h2 style={{ fontWeight: '100', color: 'white' }}>당신의 아이에게 따뜻한 추억을 선물하세요</h2>
         </div>
         <img
           src="/assets/family.jpeg"

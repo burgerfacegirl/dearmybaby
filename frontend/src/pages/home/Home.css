@@ -1,3 +1,7 @@
+/* 배경 색 : rgba(255, 255, 255, 0.922) */
+/* 시그니쳐 색 : rgb(59, 45, 142) */
+
+
 .placeItem {
   display: flex;
   flex-direction: column;
@@ -23,15 +27,17 @@
   padding-block: 3vh;
   padding: 3vh;
   /* background-color: rgb(249, 255, 202); */
-  background-color: rgb(249, 255, 202);
+  background-color: rgb(255, 255, 255);
   border-radius: 15px;
 }
 
 .user-plan {
   padding: 3vh;
   /* background-color: rgb(249, 255, 202); */
-  background-color: rgb(249, 255, 202);
-  border-radius: 5%;
+  background-color: rgba(255, 255, 255, 0.922);
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
+  box-shadow: 1px 1px 1px 1px rgb(255, 255, 255);
 }
 /*
 .recommandCard {
@@ -48,7 +54,7 @@
 
 .main-div {
   padding: 0% 0%;
-  background-color: rgb(249, 255, 202);
+  background-color: rgb(59, 45, 142);
   
 }
 
@@ -63,9 +69,9 @@
 
 .dday-alarm {
   /* background-color: rgb(255, 243, 152); */
-  background-color: rgb(255, 247, 187);
+  background-color: rgb(255, 255, 255);
   border-radius: 20px;
-  box-shadow: 1px 1px 1px rgb(255, 243, 152);
+  box-shadow: px 2px 0px rgba(255, 255, 255, 0.314);
   
 }
 
@@ -80,9 +86,9 @@
 }
 .plan-append {
   /* background-color: rgb(255, 243, 152); */
-  background-color: rgb(255, 247, 187);
+  background-color: rgb(255, 255, 255);
   border-radius: 15px;
-  box-shadow: 1px 1px 1px rgb(255, 247, 187);
+  box-shadow: 2px 2px 1px rgba(255, 255, 255, 0.429);
 }
 
 .plan-append-text {
@@ -96,4 +102,5 @@
 
 .recommend {
   padding: 20px;
+  background-color: rgba(255, 255, 255, 0.922);
 }
