@@ -11,7 +11,7 @@ const FamilyForm = () => {
   };
 
   // memberId 는 member api 요청 보내서 받아와야 함
-  const memberId = 'ssafy';
+  const memberId = 'hoguangel';
   const makeGroup = (e) => {
     e.preventDefault();
     // console.log(apiCreateFamily(memberId, familyName));

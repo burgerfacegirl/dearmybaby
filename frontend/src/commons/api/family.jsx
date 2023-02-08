@@ -2,7 +2,7 @@ import { getApiInstance } from './http';
 
 const api = getApiInstance();
 
-// 가족(그룹) 생성 
+// 가족(그룹) 생성
 export async function apiCreateFamily(memberId, familyName) {
   if (memberId != null && familyName != null) {
     const response = await api.post(`/family/new`, {
@@ -18,6 +18,18 @@ export async function apiCreateFamily(memberId, familyName) {
 export async function apiGetFamily(familyId) {
   if (familyId != null) {
     const response = await api.get(`/family/detail/${familyId}`);
+    // console.log(response);
+    return response;
+  }
+  throw Error('apiGetFamily : familyId and familyName must be provided');
+}
+
+// 가족 초대
+export async function apiInviteFamily(familyId) {
+  // ${query}&display={display}
+  if (familyId != null) {
+    const response = await api.post(`/family/join?InvitationCode=TY26SFbN0m&memberId=testid`);
+    // console.log(response);
     return response;
   }
   throw Error('apiGetFamily : familyId and familyName must be provided');

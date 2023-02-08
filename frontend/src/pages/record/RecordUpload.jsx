@@ -58,7 +58,7 @@ const RecordUpload = (recordLocation) => {
         (source.image ? (
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <input className="upload-input upload-title" type="text" placeholder="제목"></input>
-            <img style={{ height: '260px', width: '20px' }} src={source.url} alt="uploaded img" />
+            <img style={{ height: '260px', width: '200px' }} src={source.url} alt="uploaded img" />
           </div>
         ) : (
           <div>
