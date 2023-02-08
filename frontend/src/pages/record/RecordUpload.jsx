@@ -9,7 +9,6 @@ const RecordUpload = (recordLocation) => {
   const record = source ? source.url : 'string';
   const recordFile = {
     dayId: 0,
-    recordFile: 'record..test..',
     recordText: recordText,
     latitude: recordLocation.recordLocation.center.lat,
     longitude: recordLocation.recordLocation.center.lng,
@@ -45,7 +44,7 @@ const RecordUpload = (recordLocation) => {
     // formData.recordDto.latitude = 1;
     // formData.recordDto.longitude = recordLocation.formData.recordDto.recordType = 0;
     // console.log(formData);
-    apiCreateRecord(record, recordFile);
+    // apiCreateRecord(record, recordFile);
   };
 
   const onChange = (e) => {
@@ -57,20 +56,20 @@ const RecordUpload = (recordLocation) => {
     <div className="RecordUpload">
       {source != null &&
         (source.image ? (
-          <div>
-            <input type="text" placeholder="제목"></input>
-            <img src={source.url} alt="uploaded img" />
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <input className="upload-input upload-title" type="text" placeholder="제목"></input>
+            <img style={{ height: '260px', width: '20px' }} src={source.url} alt="uploaded img" />
           </div>
         ) : (
           <div>
-            <input type="text" placeholder="제목"></input>
+            <input className="upload-input upload-title" type="text" placeholder="제목"></input>
             <video src={source.url} alt="uploaded video" />
           </div>
         ))}
       <input
         ref={inputRef}
         type="file"
-        className="Record_input"
+        className="record-input"
         onChange={handleFileChange}
         accept="image/*, video/*"
       />
@@ -78,17 +77,17 @@ const RecordUpload = (recordLocation) => {
 
       <div>
         {!source ? (
-          <button className="recording-btn" onClick={handleChoose}>
-            기록 남기기
-          </button>
+          <button onClick={handleChoose}>기록 남기기</button>
         ) : (
           <div>
             <form action="#" style={{ display: 'flex', flexDirection: 'column' }}>
-              <textarea style={{ margin: '20px 0px', border: '1px solid black' }} onChange={onChange} />
-              <button className="recording-btn" onClick={handleChoose}>
-                다시선택하기
-              </button>
-              <input type="submit" className="recording-btn" value="업로드" onClick={saveRecord} />
+              <textarea className="upload-input" style={{ marginBottom: '10%', height: '100px' }} onChange={onChange} />
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <button className="recording-btn" onClick={handleChoose}>
+                  다시선택하기
+                </button>
+                <input type="submit" className="upload-btn" value="업로드" onClick={saveRecord} />
+              </div>
             </form>
           </div>
         )}

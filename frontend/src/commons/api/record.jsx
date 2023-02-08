@@ -35,8 +35,12 @@ export async function apiCreateRecord(record, recordFile) {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-    }).catch((e) => console.log(e));
-    console.log(response);
-    return response;
+    })
+      .then((res) => {
+        console.log(res);
+        return res;
+      })
+      .catch((e) => console.log(e));
+    // console.log(response);
   }
 }

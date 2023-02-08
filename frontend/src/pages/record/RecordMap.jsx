@@ -132,8 +132,8 @@ const RecordMap = () => {
               <img
                 src="/assets/footprint.png"
                 style={{
-                  width: '10vw',
-                  height: '5vh',
+                  width: '40px',
+                  height: '40px',
                   marginBottom: '5px',
                 }}
                 onClick={() => {
@@ -152,7 +152,6 @@ const RecordMap = () => {
           return <RecordMapItem key={record.recordId} record={record}></RecordMapItem>;
         })}
 
-
         <Polyline
           path={[points]}
           strokeWeight={5} // 선의 두께 입니다
@@ -170,14 +169,13 @@ const RecordMap = () => {
             left: '50%',
             transform: 'translate(-50%, -50%)',
             bgcolor: 'background.paper',
-            border: '1px solid #000',
-            boxShadow: 24,
-            p: 4,
+            boxShadow: '50',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '20px',
+            borderRadius: '10px',
+            p: 2,
           }}
         >
           {!state.errMsg ? (
