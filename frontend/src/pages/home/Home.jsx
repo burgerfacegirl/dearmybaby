@@ -1,4 +1,6 @@
-import { apiCreatePlan } from '@/commons/api/plan';
+// import { apiCreatePlan, apiUpdatePlan, apiDeletePlan } from '@/commons/api/plan';
+// import { apiCreateBaby, apiUpdateBaby, apiDeleteBaby, apiGetBaby, apiGetBabyList } from '@/commons/api/baby';
+// import { apiGetFamily } from '@/commons/api/family';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
@@ -31,7 +33,20 @@ export default function Home() {
 
   return (
     <div className="main-div">
-      {/* <button onClick={()=>{apiCreatePlan(1)}}>계획 생성</button> */}
+      {/* <button
+        onClick={() => {
+          apiCreatePlan();
+        }}
+      >
+        계획 생성
+      </button>
+      <button
+        onClick={() => {
+          apiUpdatePlan(235);
+        }}
+      >
+        계획 수정
+      </button> */}
       <div
         style={{
           display: 'flex',
@@ -71,9 +86,10 @@ export default function Home() {
 
         {/* 오늘이 여행 일정 시작 날일때 여행 시작 버튼*/}
         {isToday && !isTraveling ? (
-          <div className='dday-alarm' style={{ marginBottom: '3vh' }}>
-            <h2 className='dday-alarm-text'>오늘은 제주 여행 시작날입니다. 기록을 시작해보세요.</h2>
-            <button className='dday-alarm-button'
+          <div className="dday-alarm" style={{ marginBottom: '3vh' }}>
+            <h2 className="dday-alarm-text">오늘은 제주 여행 시작날입니다. 기록을 시작해보세요.</h2>
+            <button
+              className="dday-alarm-button"
               onClick={() => {
                 // setTraveling(true);
                 // localStorage.setItem('isTraveling', 'true');
@@ -88,8 +104,8 @@ export default function Home() {
           </div>
         ) : null}
 
-        <div className='plan-append'>
-          <h3 className='plan-append-text'>...님 여행할 지역을 고르셨나요?</h3>
+        <div className="plan-append">
+          <h3 className="plan-append-text">...님 여행할 지역을 고르셨나요?</h3>
 
           <div
             className="plus-plan"
@@ -98,7 +114,8 @@ export default function Home() {
             }}
             style={{ display: 'flex', alignItems: 'center', boxSizing: 'content-box' }}
           >
-            <button className='plan-append-text'
+            <button
+              className="plan-append-text"
               onClick={() => {
                 navigate('/plan');
               }}

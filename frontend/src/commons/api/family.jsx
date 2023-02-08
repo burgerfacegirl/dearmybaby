@@ -1,22 +1,24 @@
 import { getApiInstance } from './http';
-import axios from 'axios';
 
 const api = getApiInstance();
 
+// 가족(그룹) 생성 
 export async function apiCreateFamily(memberId, familyName) {
-  // return { memberId, familyName };
-  await axios({
-    method: 'POST',
-    url: 'https://i8a206.p.ssafy.io/api/family/new',
-    data: {
+  if (memberId != null && familyName != null) {
+    const response = await api.post(`/family/new`, {
       familyName: familyName,
       memberId: memberId,
-    },
-    headers: { 'Content-Type': 'application/json' },
-  })
-    .then((res) => {
-      console.log(res);
-      return res;
-    })
-    .catch((e) => console.log(e));
+    });
+    return response;
+  }
+  throw Error('apiCreateFamily : memberId and familyName must be provided');
+}
+
+// 가족(그룹) 정보 조회 - familyName, 초대코드
+export async function apiGetFamily(familyId) {
+  if (familyId != null) {
+    const response = await api.get(`/family/detail/${familyId}`);
+    return response;
+  }
+  throw Error('apiGetFamily : familyId and familyName must be provided');
 }

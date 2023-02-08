@@ -21,9 +21,9 @@ const dummyGroup = [
 const SelectGroup = () => {
   const navigate = useNavigate();
   return (
-    <div style={{ padding: '3vh', textAlign: 'center' }}>
+    <div className="plan-frame" style={{ padding: '3vh', textAlign: 'center' }}>
       <h2>함께 여행하실 그룹을 선택해주세요</h2>
-      <form style={{ display: 'flex', flexDirection: 'column' }} action="#">
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
         {dummyGroup.map((group, index) => (
           <button
             onClick={() => {
@@ -35,9 +35,17 @@ const SelectGroup = () => {
             그룹 {group.groupId}
           </button>
         ))}
-      </form>
-      <button style={{ display: 'flex', flexDirection: 'column' }} onClick={() => {navigate('../user/make-group')}} > 새로운 그룹 생성하기</button>
-      <p>  user/ groupCreation 만들기</p>
+      </div>
+      <button
+        style={{ display: 'flex', flexDirection: 'column' }}
+        onClick={() => {
+          navigate('../user/make-group');
+        }}
+      >
+        {' '}
+        새로운 그룹 생성하기
+      </button>
+      <p> user/ groupCreation 만들기</p>
     </div>
   );
 };
