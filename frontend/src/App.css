@@ -19,6 +19,7 @@ body {
     width: 100vw;
     justify-items: center;
     /* background-color: black; */
+    overflow: hidden;
   }
 }
 
@@ -29,7 +30,11 @@ body {
     width: 100vw;
     justify-items: center;
     text-align: left;
+<<<<<<< Updated upstream
     overflow-x: hidden;
+=======
+    overflow: hidden;
+>>>>>>> Stashed changes
   }
 }
 
@@ -44,7 +49,6 @@ button {
 button:hover {
   cursor: pointer;
 }
-
 
 :root {
   --main-orange: rgba(252, 163, 17, 1);
