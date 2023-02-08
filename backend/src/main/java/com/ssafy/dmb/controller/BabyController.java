@@ -1,6 +1,6 @@
 package com.ssafy.dmb.controller;
 
-import com.ssafy.dmb.dto.BabyDto;
+import com.ssafy.dmb.dto.user.BabyDto;
 import com.ssafy.dmb.repository.BabyRepository;
 import com.ssafy.dmb.service.BabyServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;

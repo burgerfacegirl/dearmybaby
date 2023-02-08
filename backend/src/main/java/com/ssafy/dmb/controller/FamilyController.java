@@ -1,6 +1,6 @@
 package com.ssafy.dmb.controller;
 
-import com.ssafy.dmb.dto.FamilyDto;
+import com.ssafy.dmb.dto.user.FamilyDto;
 import com.ssafy.dmb.repository.FamilyRepository;
 import com.ssafy.dmb.service.FamilyService;
 import lombok.RequiredArgsConstructor;

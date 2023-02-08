@@ -1,4 +1,4 @@
-package com.ssafy.dmb.dto;
+package com.ssafy.dmb.dto.user;
 
 import com.ssafy.dmb.domain.baby.Baby;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
-package com.ssafy.dmb.dto;
+package com.ssafy.dmb.dto.user;
 
-import com.ssafy.dmb.domain.Family;
+import com.ssafy.dmb.domain.user.Family;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
