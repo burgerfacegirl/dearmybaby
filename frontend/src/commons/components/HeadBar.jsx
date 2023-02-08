@@ -35,42 +35,6 @@ export default function HeadBar() {
   }
 
   return (
-<<<<<<< Updated upstream
-    <AppBar color="inherit" position="sticky" style={{ backgroundColor: 'rgb(59, 45, 142)', boxShadow: '1px 1px 1' }}>
-      <Toolbar>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          // sx={{ mr: 1 }}
-          onClick={() => navigate(-1)}
-        >
-          <ArrowBackIcon />
-        </IconButton>
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex' }}>
-            <img src="/assets/logo.png" style={{ height: '30px', width: '30px', marginRight: '10px'}}></img>
-            DearMyBaby
-          </Link>
-        </Typography>
-        <IconButton
-          size="large"
-          edge="end"
-          color="inherit"
-          aria-label="menu"
-          // sx={{ mr: 1 }}
-          onClick={(event) => toggleDrawer(event, true)}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Drawer anchor="right" open={open} onClose={(event) => toggleDrawer(event, false)}>
-          <Box
-            sx={{ width: '50vw' }}
-            role="presentation"
-            onClick={(event) => toggleDrawer(event, false)}
-            onKeyDown={(event) => toggleDrawer(event, false)}
-=======
     <div>
       <AppBar
         color="inherit"
@@ -85,7 +49,6 @@ export default function HeadBar() {
             aria-label="menu"
             // sx={{ mr: 1 }}
             onClick={() => navigate(-1)}
->>>>>>> Stashed changes
           >
             <ArrowBackIcon />
           </IconButton>
