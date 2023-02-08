@@ -16,6 +16,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Slf4j
 @Service
@@ -45,7 +49,12 @@ public class MemberService {
                 memberEmail(memberDto.getMemberEmail()).
                 memberImg(url).
                 memberPassword(memberDto.getMemberPassword()).
+                joinDate(LocalDateTime.now()).
                 build();
+
+        List<String> list = new ArrayList<>();
+        list.add("User");
+        member.setRoles(list);
 
         Member saveMember = memberRepository.save(member);
         // 뭐가 필요한지 말해라 front
@@ -54,13 +63,13 @@ public class MemberService {
     public MemberResponseDto changeMemberInfo(MemberDto memberDto) {
         Member changeMember = memberRepository.findByMemberId(memberDto.getMemberId());
 
-        if(memberDto.getMemberPassword() != null) {
+        if (memberDto.getMemberPassword() != null) {
             changeMember.setMemberId(memberDto.getMemberId());
             changeMember.setMemberImg(memberDto.getMemberImg());
             changeMember.setMemberEmail(memberDto.getMemberEmail());
             changeMember.setMemberName(memberDto.getMemberName());
             changeMember.setMemberPassword(memberDto.getMemberPassword());
-        }else{
+        } else {
             changeMember.setMemberId(memberDto.getMemberId());
             changeMember.setMemberImg(memberDto.getMemberImg());
             changeMember.setMemberEmail(memberDto.getMemberEmail());
@@ -85,7 +94,7 @@ public class MemberService {
     public boolean checkMemberId(String memberId) {
         Member member = memberRepository.findByMemberId(memberId);
 
-        if(member == null) return true;
+        if (member == null) return true;
         else return false;
     }
 
@@ -95,16 +104,36 @@ public class MemberService {
         // 이때 authentication 는 인증 여부를 확인하는 authenticated 값이 false
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(memberId, password);
 
-        System.out.println("done get authetivationToken");
         // 2. 실제 검증 (사용자 비밀번호 체크)이 이루어지는 부분
         // authenticate 매서드가 실행될 때 CustomUserDetailsService 에서 만든 loadUserByUsername 메서드가 실행
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-        System.out.println("done get authentication");
 
         // 3. 인증 정보를 기반으로 JWT 토큰 생성
         TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
-        System.out.println("done get tokenInfo");
 
         return tokenInfo;
     }
+
+    @Transactional
+    public String getMemberToken(String refreshToken) {
+        Member member = memberRepository.findByRefreshToken(refreshToken);
+
+        if (member != null) {
+            String memberId = member.getMemberId();
+            String memberPassword = member.getMemberPassword();
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(memberId, memberPassword);
+            Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+            String accessToken = jwtTokenProvider.generateAccessToken(authentication);
+
+            return accessToken;
+        }
+
+        return null;
+    }
+    public void deleteMemberToken(String memberId) {
+        Member tokenDeleteMember = memberRepository.findByMemberId(memberId);
+        tokenDeleteMember.setRefreshToken(null);
+        memberRepository.save(tokenDeleteMember);
+    }
+
 }

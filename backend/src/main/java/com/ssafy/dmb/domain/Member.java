@@ -1,7 +1,10 @@
 package com.ssafy.dmb.domain;
 
 import com.ssafy.dmb.domain.record.Comment;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,11 +18,12 @@ import java.util.stream.Collectors;
 
 @Getter @Setter
 @Entity
+@AllArgsConstructor
 public class Member implements UserDetails {
 
-//    @Id @GeneratedValue
-//    @Column(name = "member_no")
-//    private Long no;
+    @Id @GeneratedValue
+    @Column(name = "member_no")
+    private Long no;
 
     @Column(nullable = false)
     private String memberName;
@@ -30,8 +34,6 @@ public class Member implements UserDetails {
     @Column(nullable = false)
     private String memberPassword;
 
-    @Id @GeneratedValue
-    @Column(name = "member_id")
     private String memberId;
 
     private String memberImg;
@@ -48,12 +50,13 @@ public class Member implements UserDetails {
     private LocalDateTime joinDate;
 
     @Builder
-    public Member(String memberName, String memberEmail, String memberPassword, String memberId, String memberImg) {
+    public Member(String memberName, String memberEmail, String memberPassword, String memberId, String memberImg,  LocalDateTime joinDate) {
         this.memberName = memberName;
         this.memberEmail = memberEmail;
         this.memberPassword = memberPassword;
         this.memberId = memberId;
         this.memberImg = memberImg;
+        this.joinDate = joinDate;
     }
 
     @ElementCollection(fetch = FetchType.EAGER)

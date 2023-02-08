@@ -19,7 +19,7 @@ public class FamilyUser {
 
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_no")
     private Member member;
 
     @Enumerated(EnumType.STRING)
