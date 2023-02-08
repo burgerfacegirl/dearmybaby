@@ -3,6 +3,7 @@ package com.ssafy.dmb.service;
 import com.ssafy.dmb.domain.location.Coordinate;
 import com.ssafy.dmb.domain.plan.Day;
 import com.ssafy.dmb.domain.record.Record;
+import com.ssafy.dmb.dto.record.RecordChangeDto;
 import com.ssafy.dmb.dto.record.RecordDetailResponseDto;
 import com.ssafy.dmb.dto.record.RecordDto;
 import com.ssafy.dmb.dto.record.RecordResponseDto;
@@ -85,11 +86,13 @@ public class RecordService {
 
     }
 
-    public void changeRecordText(Long recordId, String recordText) {
+    public void changeRecord(RecordChangeDto recordChangeDto) {
 
-        Record foundRecord = recordRepository.findById(recordId).get();
+        Record foundRecord = recordRepository.findById(recordChangeDto.getRecordId()).get();
 
-        foundRecord.setRecordText(recordText);
+        foundRecord.setRecordText(recordChangeDto.getRecordText());
+        foundRecord.setRecordName(recordChangeDto.getRecordName());
+
         recordRepository.save(foundRecord);
 
     }

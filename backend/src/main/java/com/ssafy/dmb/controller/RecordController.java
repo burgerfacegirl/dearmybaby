@@ -1,5 +1,6 @@
 package com.ssafy.dmb.controller;
 
+import com.ssafy.dmb.dto.record.RecordChangeDto;
 import com.ssafy.dmb.dto.record.RecordDetailResponseDto;
 import com.ssafy.dmb.dto.record.RecordDto;
 import com.ssafy.dmb.dto.record.RecordResponseDto;
@@ -74,11 +75,11 @@ public class RecordController {
 
     @Operation(summary = "기록 내용 수정", description = "<strong> recordId </strong>를 통해 여행 기록을 수정한다.")
     @PutMapping()
-    public RecordDetailResponseDto changeRecordText(@RequestParam("recordId") Long recordId, @RequestParam("recordText") String recordText) throws IOException {
+    public RecordDetailResponseDto changeRecord(@RequestBody RecordChangeDto recordChangeDto) throws IOException {
         // recordchangedto 만들어서 이름, 내용 수정할 수 있도록 하자.
-        recordService.changeRecordText(recordId, recordText);
+        recordService.changeRecord(recordChangeDto);
 
-        return recordService.getRecord(recordId);
+        return recordService.getRecord(recordChangeDto.getRecordId());
 
     }
 
