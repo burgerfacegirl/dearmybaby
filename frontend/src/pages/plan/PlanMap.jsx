@@ -21,7 +21,7 @@ export default function PlanMap() {
 
   // 검색 키워드
   const onClick = () => {
-    searchWord = keyWord;
+    let searchWord = keyWord;
     // console.log({ info });
     // console.log(searchWord);
   };
