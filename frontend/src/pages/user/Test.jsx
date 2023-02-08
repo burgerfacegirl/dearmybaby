@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { apiGetFamily } from '@/commons/api/family';
+import { apiGetFamily, apiInviteFamily } from '@/commons/api/family';
 
 export default function Test() {
   const [familyInfo, setFamilyInfo] = useState();
@@ -16,6 +16,13 @@ export default function Test() {
         }}
       >
         Panic Button
+      </button>
+      <button
+        onClick={() => {
+          // apiInviteFamily(ss, 0);
+        }}
+      >
+        가족 초대
       </button>
       {!!familyInfo && JSON.stringify(familyInfo)}
       {!!familyInfo && familyInvitationCode}

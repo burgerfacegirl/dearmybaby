@@ -5,10 +5,10 @@ const api = getApiInstance();
 // 여행 계획 생성
 export async function apiCreatePlan(data) {
   data = {
-    familyId: 211,
-    planName: '도현하이',
-    planDestination: '바이',
-    startDate: '2023-02-07',
+    familyId: 2,
+    planName: '호우',
+    planDestination: '한강',
+    startDate: '2023-02-08',
     endDate: '2023-02-15',
   };
 
@@ -31,10 +31,10 @@ export async function apiGetPlanList(familyId) {
 // 여행 계획 단일 조회
 export async function apiGetPlan(planId) {
   if (planId != null) {
-    const response = await axios.get(`/plan/detail/${planId}`);
+    const response = await api.get(`/plan/detail/${planId}`);
     return response;
   }
-  throw new Error('apiGetPlanList : familyId must be provided');
+  throw new Error('apiGetPlan : planId must be provided');
 }
 
 // 여행 계획 수정

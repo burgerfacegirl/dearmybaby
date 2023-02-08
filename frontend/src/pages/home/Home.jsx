@@ -1,11 +1,12 @@
-// import { apiCreatePlan, apiUpdatePlan, apiDeletePlan } from '@/commons/api/plan';
+import { apiCreatePlan, apiUpdatePlan, apiDeletePlan, apiGetPlan, apiGetPlanList } from '@/commons/api/plan';
 // import { apiCreateBaby, apiUpdateBaby, apiDeleteBaby, apiGetBaby, apiGetBabyList } from '@/commons/api/baby';
 // import { apiGetFamily } from '@/commons/api/family';
+import { apiGetRecordList } from '@/commons/api/record';
+import { apiCreateDay } from '@/commons/api/day';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import Place from './Place';
-
 // 접속한 유저 그룹의 plans 다 가져와야함
 const dummyUser = {
   userId: 'ssafy',
@@ -33,7 +34,7 @@ export default function Home() {
 
   return (
     <div className="main-div">
-      {/* <button
+      <button
         onClick={() => {
           apiCreatePlan();
         }}
@@ -42,11 +43,18 @@ export default function Home() {
       </button>
       <button
         onClick={() => {
-          apiUpdatePlan(235);
+          apiGetRecordList(6, 13);
         }}
       >
-        계획 수정
-      </button> */}
+        기록 조회
+      </button>
+      <button
+        onClick={() => {
+          apiCreateDay(4);
+        }}
+      >
+        날짜 생성
+      </button>
       <div
         style={{
           display: 'flex',

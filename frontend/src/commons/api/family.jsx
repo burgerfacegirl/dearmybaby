@@ -25,12 +25,12 @@ export async function apiGetFamily(familyId) {
 }
 
 // 가족 초대
-export async function apiInviteFamily(familyId) {
+export async function apiInviteFamily(invitationCode, memberId) {
   // ${query}&display={display}
-  if (familyId != null) {
-    const response = await api.post(`/family/join?InvitationCode=TY26SFbN0m&memberId=testid`);
+  if (memberId != null && invitationCode != null) {
+    const response = await api.post(`/family/join?invitationCode=${invitationCode}&memberId=${memberId}`);
     // console.log(response);
     return response;
   }
-  throw Error('apiGetFamily : familyId and familyName must be provided');
+  throw Error('apiInviteFamily : invitationCode and memberId must be provided');
 }

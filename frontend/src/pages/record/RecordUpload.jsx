@@ -6,14 +6,18 @@ const RecordUpload = (recordLocation) => {
   const [source, setSource] = useState();
   const [recordText, setRecordText] = useState('');
 
-  const record = source ? source.url : 'string';
-  const recordFile = {
-    dayId: 0,
+  const recordFile = source ? source.url : 'string';
+  const record = {
+    dayId: 6,
     recordText: recordText,
-    latitude: recordLocation.recordLocation.center.lat,
-    longitude: recordLocation.recordLocation.center.lng,
+    recordFile: 'family',
+    latitude: recordLocation.recordLocation.center.lat-0.5,
+    longitude: recordLocation.recordLocation.center.lng-0.5,
+    recordDate: new Date(),
     recordType: 0,
   };
+
+  console.log({'record': record, 'recordFile': recordFile});
 
   const inputRef = React.useRef();
 
@@ -23,11 +27,12 @@ const RecordUpload = (recordLocation) => {
     const videoType = e.target.files[0].type.includes('video');
 
     setSource({
-      url: URL.createObjectURL(e.target.files[0]),
+      url: e.target.files[0],
+      // url: URL.createObjectURL(e.target.files[0]),
       image: imageType,
       video: videoType,
     });
-    console.log(videoType, imageType);
+    // console.log(videoType, imageType);
   };
 
   const handleChoose = (e) => {
@@ -44,26 +49,27 @@ const RecordUpload = (recordLocation) => {
     // formData.recordDto.latitude = 1;
     // formData.recordDto.longitude = recordLocation.formData.recordDto.recordType = 0;
     // console.log(formData);
-    // apiCreateRecord(record, recordFile);
+    console.log(record, recordFile)
+    apiCreateRecord(record, recordFile);
   };
 
   const onChange = (e) => {
     setRecordText(e.target.value);
   };
 
-  console.log(source);
+  // console.log(source);
   return (
     <div className="RecordUpload">
       {source != null &&
         (source.image ? (
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <input className="upload-input upload-title" type="text" placeholder="제목"></input>
-            <img style={{ height: '260px', width: '200px' }} src={source.url} alt="uploaded img" />
+            <img style={{ height: '260px', width: '200px' }} src={URL.createObjectURL(source.url)} alt="uploaded img" />
           </div>
         ) : (
           <div>
             <input className="upload-input upload-title" type="text" placeholder="제목"></input>
-            <video src={source.url} alt="uploaded video" />
+            <video src={URL.createObjectURL(source.url)} alt="uploaded video" />
           </div>
         ))}
       <input
