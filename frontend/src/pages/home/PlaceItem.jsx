@@ -17,16 +17,15 @@ export default function PlaceItem({ place }) {
         <Card component="li" sx={{ minWidth: 40, flexGrow: 1 }}>
           <CardCover>
             <img
-              src="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800"
-              // src={place.placeImg}
-              srcSet="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800&dpr=2 2x"
+              src={place.imgUrl}
+              // srcSet="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&w=800&dpr=2 2x"
               loading="lazy"
               alt=""
             />
           </CardCover>
           <CardContent>
             <Typography level="h6" fontWeight="sm" textColor="#fff" mt={{ xs: 12, sm: 18 }}>
-              {place.placeName} | {place.placeType}
+              {place.placeName}
             </Typography>
           </CardContent>
         </Card>
