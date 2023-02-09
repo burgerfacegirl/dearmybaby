@@ -33,7 +33,17 @@ public class MemberService {
     private final JwtTokenProvider jwtTokenProvider;
 
     public MemberResponseDto getMemberDetail(String memberId) {
+
         Member memberDetail = memberRepository.findByMemberId(memberId);
+
+        MemberResponseDto memberResponseDto = new MemberResponseDto(memberDetail);
+
+        return memberResponseDto;
+    }
+
+    public MemberResponseDto getFamilyList(Long memberNo) {
+
+        Member member = memberRepository.findById(memberNo).get();
 
         MemberResponseDto memberResponseDto = new MemberResponseDto(memberDetail);
 
@@ -100,6 +110,7 @@ public class MemberService {
 
     @Transactional
     public TokenInfo login(String memberId, String password) {
+
         // 1. Login ID/PW 를 기반으로 Authentication 객체 생성
         // 이때 authentication 는 인증 여부를 확인하는 authenticated 값이 false
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(memberId, password);
@@ -112,10 +123,12 @@ public class MemberService {
         TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
 
         return tokenInfo;
+
     }
 
     @Transactional
     public String getMemberToken(String refreshToken) {
+
         Member member = memberRepository.findByRefreshToken(refreshToken);
 
         if (member != null) {
@@ -129,11 +142,14 @@ public class MemberService {
         }
 
         return null;
+
     }
     public void deleteMemberToken(String memberId) {
+
         Member tokenDeleteMember = memberRepository.findByMemberId(memberId);
         tokenDeleteMember.setRefreshToken(null);
         memberRepository.save(tokenDeleteMember);
+
     }
 
 }
