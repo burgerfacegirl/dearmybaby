@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 const dummyRecommendFoodList = [
   {
+    id: 1,
     name: '모이세해장국',
     catagory: '밥',
     imgUrl: 'http://tong.visitkorea.or.kr/cms/resource/50/1860750_image2_1.jpg',
@@ -17,6 +18,7 @@ const dummyRecommendFoodList = [
     mainMenu: '해장국',
   },
   {
+    id: 2,
     name: '돼지꿈	',
     catagory: '한식',
     imgUrl: 'http://tong.visitkorea.or.kr/cms/resource/88/1937288_image2_1.jpg',
@@ -31,6 +33,7 @@ const dummyRecommendFoodList = [
     mainMenu: '	고기국수',
   },
   {
+    id: 3,
     name: '흑돈가 제주',
     catagory: '고기',
     imgUrl: 'http://tong.visitkorea.or.kr/cms/resource/27/1023927_image2_1.jpg',
@@ -49,6 +52,7 @@ const dummyRecommendFoodList = [
 
 const dummyRecommendPlaceList = [
   {
+    id: 4,
     name: 'aaa',
     catagory: 'type',
     imgUrl: 'url',
@@ -63,6 +67,7 @@ const dummyRecommendPlaceList = [
     mainMenu: 'dongas',
   },
   {
+    id: 5,
     name: 'abb',
     catagory: 'type2',
     imgUrl: 'url12',
@@ -77,6 +82,7 @@ const dummyRecommendPlaceList = [
     mainMenu: 'dongas',
   },
   {
+    id: 6,
     name: 'aaa',
     catagory: 'type3',
     imgUrl: 'url213',
