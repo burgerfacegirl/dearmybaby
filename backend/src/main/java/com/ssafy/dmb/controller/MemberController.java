@@ -73,7 +73,7 @@ public class MemberController {
 
     @GetMapping("/familylist")
     @Operation(summary = "회원이 가진 가족 list 구하기", description = "<strong> memberId </strong>를 통해 회원이 가진 가족 list 구한다.")
-    public List<FamilyDto.familyList> getFamilyList(@RequestParam String memberNo) throws IOException {
+    public List<FamilyDto.familyList> getFamilyList(@RequestParam Long memberNo) throws IOException {
 
         return memberService.getFamilyList(memberNo);
 

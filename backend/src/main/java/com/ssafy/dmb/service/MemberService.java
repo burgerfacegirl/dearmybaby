@@ -1,10 +1,13 @@
 package com.ssafy.dmb.service;
 
+import com.ssafy.dmb.domain.user.Family;
 import com.ssafy.dmb.domain.user.Member;
+import com.ssafy.dmb.dto.user.FamilyDto;
 import com.ssafy.dmb.jwt.JwtTokenProvider;
 import com.ssafy.dmb.dto.login.TokenInfo;
 import com.ssafy.dmb.dto.user.MemberDto;
 import com.ssafy.dmb.dto.user.MemberResponseDto;
+import com.ssafy.dmb.repository.FamilyUserRepository;
 import com.ssafy.dmb.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +32,7 @@ public class MemberService {
     private final Logger LOGGER = LoggerFactory.getLogger(MemberService.class);
 
     private final MemberRepository memberRepository;
+    private final FamilyUserRepository familyUserRepository;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtTokenProvider jwtTokenProvider;
 
@@ -41,13 +45,18 @@ public class MemberService {
         return memberResponseDto;
     }
 
-    public MemberResponseDto getFamilyList(Long memberNo) {
+    public List<FamilyDto.familyList> getFamilyList(Long memberNo) {
 
-        Member member = memberRepository.findById(memberNo).get();
+        List<Family> families = familyUserRepository.findFamilyIdByMemberNo(memberNo);
 
-        MemberResponseDto memberResponseDto = new MemberResponseDto(memberDetail);
+        List<FamilyDto.familyList> familyLists = new ArrayList<>();
+        for(Family f:families){
+            FamilyDto.familyList familyList = new FamilyDto.familyList(f);
+            familyLists.add(familyList);
+        }
 
-        return memberResponseDto;
+        return familyLists;
+
     }
 
     public void saveMember(String url, MemberDto memberDto) {
