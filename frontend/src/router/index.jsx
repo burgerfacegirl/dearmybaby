@@ -78,6 +78,11 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
+            // path: 'select-date',
+            element: <SelectDate></SelectDate>,
+          },
+          {
+            index: 'select-group',
             element: <SelectGroup></SelectGroup>,
           },
           {
@@ -87,10 +92,6 @@ const router = createBrowserRouter([
           {
             path: 'place-cart',
             element: <PlaceCart></PlaceCart>,
-          },
-          {
-            path: 'select-date',
-            element: <SelectDate></SelectDate>,
           },
           {
             path: 'select-place',

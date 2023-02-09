@@ -3,6 +3,7 @@ import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import SelectPlace from './SelectPlace';
 
 const SelectDate = () => {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ const SelectDate = () => {
       <form onSubmit={saveTravelDates}>
         <button
           onClick={() => {
-            navigate('../select-place');
+            navigate('/plan/find-city');
             // 날짜 저장
           }}
         >
@@ -60,6 +61,7 @@ const SelectDate = () => {
       {/* <form onSubmit={checkTravelDates}>
         <button>날짜 체크하기</button>
       </form> */}
+      <SelectPlace />
     </div>
   );
 };
