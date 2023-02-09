@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { useMember, useMemberReload } from '@/commons/MemberContext';
 
 /** API 설명용 */
@@ -16,6 +18,17 @@ export default function UserInfo() {
   return (
     <div>
       <h1>회원정보</h1>
+      <div>
+        <ul>
+          <li>
+            <Link to="login">로그인하기</Link>
+          </li>
+          <li>
+            <Link to="sign-up">회원가입하기</Link>
+          </li>
+        </ul>
+      </div>
+      <hr></hr>
       <button onClick={memberReload}>memberReload1</button>
       {!!member && (
         <div>

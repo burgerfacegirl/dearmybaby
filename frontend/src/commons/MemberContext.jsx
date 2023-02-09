@@ -1,11 +1,12 @@
 import { createContext, useContext, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
-import { apiGetMemberToken, apiGetMember } from '@/commons/api/member';
+import { apiGetMemberToken, apiGetMember, apiLoginMember, apiLogoutMember } from '@/commons/api/member';
 
 const MemberContext = createContext(null);
 const MemberAuthContext = createContext(null);
 const MemberReloadContext = createContext(null);
+const MemberMethodContext = createContext(null);
 
 export function MemberProvider({ children }) {
   const [member, setMember] = useState(null);
@@ -50,10 +51,30 @@ export function MemberProvider({ children }) {
     [auth],
   );
 
+  const login = useCallback(async function (memberId, password) {
+    const response = await apiLoginMember(memberId, password);
+    const accessToken = response.data;
+    setToken(accessToken);
+  }, []);
+
+  const logout = useCallback(
+    async function () {
+      try {
+        await auth((accessToken) => apiLogoutMember(accessToken));
+      } finally {
+        setMember(null);
+        setToken(null);
+      }
+    },
+    [auth],
+  );
+
   return (
     <MemberContext.Provider value={member}>
       <MemberAuthContext.Provider value={auth}>
-        <MemberReloadContext.Provider value={reload}>{children}</MemberReloadContext.Provider>
+        <MemberReloadContext.Provider value={reload}>
+          <MemberMethodContext.Provider value={{ login, logout }}>{children}</MemberMethodContext.Provider>
+        </MemberReloadContext.Provider>
       </MemberAuthContext.Provider>
     </MemberContext.Provider>
   );
@@ -69,6 +90,10 @@ export function useMemberAuth() {
 
 export function useMemberReload() {
   return useContext(MemberReloadContext);
+}
+
+export function useMemberMethod() {
+  return useContext(MemberMethodContext);
 }
 
 MemberProvider.propTypes = {

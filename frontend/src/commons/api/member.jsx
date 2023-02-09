@@ -38,7 +38,19 @@ export async function apiLoginMember(memberId, password) {
     const response = await api.post(`/member/login`, { memberId, password }, { withCredentials: true });
     return response;
   }
-  throw new Error('apiCreateMember : memberId, password must be provided');
+  throw new Error('apiLoginMember : memberId, password must be provided');
+}
+
+export async function apiLogoutMember(accessToken) {
+  if (accessToken != null) {
+    const response = await api.put(`/member/logout`, null, {
+      headers: {
+        'Access-Token': accessToken,
+      },
+    });
+    return response;
+  }
+  throw new Error('apiLogoutMember : accessToken must be provided');
 }
 
 // access-token으로 회원 정보를 가져온다

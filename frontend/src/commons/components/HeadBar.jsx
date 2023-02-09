@@ -16,6 +16,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
+import { useMember } from '@/commons/MemberContext';
+
 const links = [
   { name: 'Home', path: '/' },
   { name: 'Plan', path: 'plan' },
@@ -24,6 +26,8 @@ const links = [
 ];
 
 export default function HeadBar() {
+  const member = useMember();
+
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -54,7 +58,11 @@ export default function HeadBar() {
           </IconButton>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex' }}>
-              <img src="/assets/logo.png" style={{ height: '30px', width: '30px', marginRight: '10px' }}></img>
+              <img
+                src="/assets/logo.png"
+                style={{ height: '30px', width: '30px', marginRight: '10px' }}
+                alt="logo"
+              ></img>
               DearMyBaby
             </Link>
           </Typography>
@@ -78,8 +86,10 @@ export default function HeadBar() {
               <List>
                 <ListItem disablePadding>
                   <ListItemButton component={Link} to="user">
-                    <Avatar sx={{ width: 32, height: 32, mr: 2 }}>M</Avatar>
-                    <ListItemText primary="MyAccount"></ListItemText>
+                    <Avatar src={member != null && member.memberImg} sx={{ width: 32, height: 32, mr: 2 }}>
+                      M
+                    </Avatar>
+                    <ListItemText primary={member != null ? member.memberName : '회원정보'}></ListItemText>
                   </ListItemButton>
                 </ListItem>
                 <Divider></Divider>
