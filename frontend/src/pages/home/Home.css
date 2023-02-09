@@ -1,7 +1,6 @@
 /* 배경 색 : rgba(255, 255, 255, 0.922)
 /* 시그니쳐 색 : rgb(59, 45, 142) */
 
-
 .placeItem {
   display: flex;
   flex-direction: column;
@@ -51,7 +50,6 @@
 }
 */
 
-
 .main-div {
   padding: 0% 0%;
   background-color: rgb(59, 45, 142);
@@ -74,7 +72,6 @@
   margin-top: 3px;
   /* animation-duration: 3s;
   animation-name: slidein; */
-  
 }
 
 .dday-alarm-text {
@@ -90,7 +87,6 @@
   border-radius: 10px;
   background-color: rgb(95, 67, 255);
   padding: 5px 10px;
-
 }
 .plan-append {
   /* background-color: rgb(255, 243, 152); */
@@ -121,7 +117,6 @@
   -moz-animation: fadein 5s;
   -webkit-animation: fadein 5s;
   -o-animation: fadein 5s;
-  
 }
 @keyframes fadein {
   from {
@@ -130,7 +125,6 @@
   to {
     opacity: 1;
   }
-
 }
 
 @-moz-keyframes fadein {
@@ -143,22 +137,20 @@
 }
 @-webkit-keyframes fadein {
   from {
-      opacity: 0;
+    opacity: 0;
   }
   to {
-      opacity: 1;
+    opacity: 1;
   }
 }
 @-o-keyframes fadein {
   from {
-      opacity: 0;
+    opacity: 0;
   }
   to {
-      opacity: 1;
+    opacity: 1;
   }
 }
-
-
 
 /* .family-photo-animation {
   animation-duration: 3s;
@@ -172,6 +164,58 @@
   }
   to {
     margin-right: 0%;
-    width: 100%
+    width: 100%;
   }
-} 
+}
+
+/*  음식점 추천 하는 칸에 들어가는 CSS임 
+파일위치: RecommandfoodList */
+
+.food-item {
+  display: flex;
+  /* margin-block: 3vh; */
+  margin-inline: 3vw;
+  border-bottom: solid 0.3px;
+  padding-block: 1vh;
+  width: 95vw;
+  height: 20vh;
+}
+
+.food-info {
+  width: 70%;
+  margin-right: 5vw;
+  margin-bottom: 0.5vh;
+  padding-left: 0.3vw;
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+}
+.food-info-outline {
+  height: 57%;
+  display: inline-block;
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+}
+.food-info-outline > p {
+  height: 100%;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* .outline-ptag {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} */
+
+.food-img {
+  width: 30%;
+  height: 100%;
+}
+.food-catagory {
+  /* height: 30%; */
+}
+
+.food-src {
+  width: 100%;
+  height: 100%;
+}
