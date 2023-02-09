@@ -2,22 +2,23 @@ import { apiCreateRecord } from '@/commons/api/record';
 import React, { useState } from 'react';
 // import styled from 'styled-components';
 
-const RecordUpload = (recordLocation) => {
+const RecordUpload = (props) => {
   const [source, setSource] = useState();
   const [recordText, setRecordText] = useState('');
+  const [recordTitle, setRecordTitle] = useState('');
 
   const recordFile = source ? source.url : 'string';
   const record = {
     dayId: 6,
     recordText: recordText,
-    recordFile: 'family',
-    latitude: recordLocation.recordLocation.center.lat-0.5,
-    longitude: recordLocation.recordLocation.center.lng-0.5,
+    recordName: recordTitle,
+    latitude: props.recordLocation.center.lat + 0.4,
+    longitude: props.recordLocation.center.lng + 0.6,
     recordDate: new Date(),
     recordType: 0,
   };
 
-  console.log({'record': record, 'recordFile': recordFile});
+  console.log({ record: record, recordFile: recordFile });
 
   const inputRef = React.useRef();
 
@@ -49,29 +50,41 @@ const RecordUpload = (recordLocation) => {
     // formData.recordDto.latitude = 1;
     // formData.recordDto.longitude = recordLocation.formData.recordDto.recordType = 0;
     // console.log(formData);
-    console.log(record, recordFile)
+    console.log(record, recordFile);
+    console.log(source ? source.image : 'no');
     apiCreateRecord(record, recordFile);
+    alert('발자국이 찍혔습니다!');
+    props.handleRecordReload();
   };
 
   const onChange = (e) => {
     setRecordText(e.target.value);
   };
 
-  // console.log(source);
+  const onChangeTitle = (e) => {
+    setRecordTitle(e.target.value);
+  };
+
   return (
     <div className="RecordUpload">
-      {source != null &&
-        (source.image ? (
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <input className="upload-input upload-title" type="text" placeholder="제목"></input>
-            <img style={{ height: '260px', width: '200px' }} src={URL.createObjectURL(source.url)} alt="uploaded img" />
-          </div>
-        ) : (
-          <div>
-            <input className="upload-input upload-title" type="text" placeholder="제목"></input>
-            <video src={URL.createObjectURL(source.url)} alt="uploaded video" />
-          </div>
-        ))}
+      {source != null && source.image && (
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <input className="upload-input upload-title" type="text" placeholder="제목" onChange={onChangeTitle}></input>
+          <img style={{ height: '260px', width: '200px' }} src={URL.createObjectURL(source.url)} alt="uploaded img" />
+        </div>
+      )}
+
+      {source != null && source.video && (
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <input className="upload-input upload-title" type="text" placeholder="제목" onChange={onChangeTitle}></input>
+          <video
+            style={{ height: '260px', width: '200px' }}
+            src={URL.createObjectURL(source.url)}
+            controls
+            alt="uploaded video"
+          />
+        </div>
+      )}
       <input
         ref={inputRef}
         type="file"
@@ -80,7 +93,6 @@ const RecordUpload = (recordLocation) => {
         accept="image/*, video/*"
       />
       {/* 파일을 올리면 미리보기 생성하기 */}
-
       <div>
         {!source ? (
           <button onClick={handleChoose}>기록 남기기</button>

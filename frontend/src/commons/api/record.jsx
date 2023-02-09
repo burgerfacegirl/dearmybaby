@@ -15,9 +15,9 @@ const dummyRecords = [
 
 const api = getApiInstance();
 
-
 // day별 기록 저장
 export async function apiCreateRecord(record, recordFile) {
+  console.log(record, recordFile);
   if (record != null && recordFile != null) {
     const formData = new FormData();
     formData.append(
@@ -39,7 +39,6 @@ export async function apiCreateRecord(record, recordFile) {
   }
   throw new Error('apiCreateRecord : record, recordFile must be provided');
 }
-
 
 // 날짜별 여행 기록 전체 조회
 export async function apiGetRecordList(dayId, planId) {

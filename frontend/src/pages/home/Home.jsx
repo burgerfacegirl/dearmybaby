@@ -1,4 +1,4 @@
-import { apiCreatePlan, apiUpdatePlan, apiDeletePlan, apiGetPlan, apiGetPlanList } from '@/commons/api/plan';
+// import { apiCreatePlan, apiUpdatePlan, apiDeletePlan, apiGetPlan, apiGetPlanList } from '@/commons/api/plan';
 // import { apiCreateBaby, apiUpdateBaby, apiDeleteBaby, apiGetBaby, apiGetBabyList } from '@/commons/api/baby';
 // import { apiGetFamily } from '@/commons/api/family';
 import { apiGetRecordList } from '@/commons/api/record';
@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import Place from './Place';
+import { apiGetMemberFamilys } from '@/commons/api/member';
 // 접속한 유저 그룹의 plans 다 가져와야함
 const dummyUser = {
   userId: 'ssafy',
@@ -32,29 +33,33 @@ export default function Home() {
     today.getDate() === closestPlan.planDate.getDate();
   const navigate = useNavigate();
 
+  const [records, setRecords] = useState('');
+
   return (
     <div className="main-div">
-      <button
-        onClick={() => {
-          apiCreatePlan();
-        }}
-      >
-        계획 생성
-      </button>
-      <button
-        onClick={() => {
-          apiGetRecordList(6, 13);
-        }}
-      >
-        기록 조회
-      </button>
+      {/* //   <button
+    //     onClick={() => {
+    //       apiCreateDay();
+    //     }}
+    //   >
+    //     생성
+    //   </button>
+    //   <button
+    //     onClick={() => {
+    //       apiGetRecordList(6, 13).then(({ data }) => setRecords(data));
+    //     }}
+    //   >
+    //     기록 조회
+    //   </button> */}
+
+      {/* {records ? console.log(records) : null}
       <button
         onClick={() => {
           apiCreateDay(4);
         }}
       >
         날짜 생성
-      </button>
+      </button> */}
       <div
         style={{
           display: 'flex',
@@ -153,7 +158,11 @@ export default function Home() {
         <Place />
       </div>
       <div className="recommend">
-        <h3>N세 어린이를 위한 추천 여행지</h3>
+        <h3>4~6세 어린이와 함께 가기 좋은 여행지</h3>
+        <Place />
+      </div>
+      <div className="recommend">
+        <h3>7~10세 어린이를 위한 추천 여행지</h3>
         <Place />
       </div>
     </div>

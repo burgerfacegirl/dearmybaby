@@ -34,3 +34,4 @@ export async function apiInviteFamily(invitationCode, memberId) {
   }
   throw Error('apiInviteFamily : invitationCode and memberId must be provided');
 }
+
