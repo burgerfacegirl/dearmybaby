@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 @Transactional(readOnly = true)
@@ -85,11 +88,34 @@ public class FamilyService {
         return result;
     }
 
-    public FamilyDto.familyResponse getFamilyDetail(Long familyId) {
+    //familyUser 에서 Member 정보 반환하는 함수 선언
+    public MemberResponseDto familyUserToMemberResponseDto(FamilyUser familyUser) {
+        Member member = familyUser.getMember();
+        MemberResponseDto result = new MemberResponseDto(member);
+        return result;
+    }
+
+    public FamilyDto.FamilyUserList getFamilyDetail(Long familyId) {
         Family family = familyRepository.findById(familyId).get();
         LOGGER.info("[getFamilyDetail] family: {}", family.getFamilyUser());
-        FamilyDto.familyResponse result = new FamilyDto.familyResponse(family);
+
+        List<FamilyUser> familyUserList = family.getFamilyUser();
+
+        LOGGER.info("[getFamilyDetail] familyUserList: {}", familyUserList);
+
+        List<MemberResponseDto> familyMemberList = familyUserList.stream()
+                .map(u -> familyUserToMemberResponseDto(u))
+                .collect(Collectors.toList());
+
+        LOGGER.info("[getFamilyDetail] familyMemberList: {}", familyMemberList);
+
+        FamilyDto.FamilyUserList result = new FamilyDto.FamilyUserList(family, familyMemberList);
+
         LOGGER.info("[getFamilyDetail] result: {}", result);
         return result;
+
+//        FamilyDto.Response result = new FamilyDto.Response(family);
+//        LOGGER.info("[getFamilyDetail] result: {}", result);
+//        return result;
     }
 }

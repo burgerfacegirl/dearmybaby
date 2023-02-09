@@ -32,7 +32,8 @@ public class FamilyController {
     }
 
     @GetMapping("/detail/{familyId}")
-    public ResponseEntity<FamilyDto.familyResponse> getFamilyDetail(@PathVariable("familyId") Long familyId) {
+    @ResponseBody
+    public ResponseEntity<FamilyDto.FamilyUserList> getFamilyDetail(@PathVariable("familyId") Long familyId) {
         return ResponseEntity.status(HttpStatus.OK).body(familyService.getFamilyDetail(familyId));
     }
 }
