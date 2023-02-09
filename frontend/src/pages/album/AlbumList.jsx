@@ -33,7 +33,7 @@ const plans = [
 
 export default function AlbumList() {
   return (
-    <>
+    <body className='album-list-div'>
       <Box p={2}>
         <Typography className='travel-record' variant="h4"> 내 여행 기록들 </Typography>
       </Box>
@@ -57,6 +57,6 @@ export default function AlbumList() {
           </ListItem>
         ))}
       </List>
-    </>
+    </body>
   );
 }

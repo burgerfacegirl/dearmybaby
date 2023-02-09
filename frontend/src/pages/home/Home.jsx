@@ -67,17 +67,17 @@ export default function Home() {
           justifyContent: 'space-between',
           padding: '6%',
           // backgroundColor: 'rgba(47, 54, 129, 0.597)',
-          height: '280px',
+          height: '260px',
         }}
       >
         <div className="main-animation">
           <h3 style={{ fontWeight: '20', fontSize: '0.8rem', color: 'white' }}>dear my baby</h3>
-          <h2 style={{ fontWeight: '100', color: 'white' }}>당신의 아이에게 따뜻한 추억을 선물하세요</h2>
+          <h3 style={{ fontWeight: '100', color: 'white' }}>당신의 아이에게 <br></br>따뜻한 추억을 선물하세요</h3>
         </div>
         <div className="family-photo-animation">
           <img
-            src="/assets/family.jpeg"
-            style={{ height: '130px', width: '130px', borderRadius: '50%', boxShadow: '0px 2px 2px' }}
+            src="public\assets\baby.jpg"
+            style={{ height: '110px', width: '110px', borderRadius: '50%', boxShadow: '0px 2px 2px' }}
             alt="img"
           />
         </div>
@@ -86,7 +86,7 @@ export default function Home() {
         {/* 여행 중일때 record 페이지로 보내주는 버튼*/}
         {isTraveling ? (
           <div style={{ marginBottom: '3vh' }}>
-            <h2>제주 여행 중</h2>
+            <h4>제주 여행 중</h4>
             <button
               onClick={() => {
                 navigate(`/record`);
@@ -99,8 +99,8 @@ export default function Home() {
 
         {/* 오늘이 여행 일정 시작 날일때 여행 시작 버튼*/}
         {isToday && !isTraveling ? (
-          <div className="dday-alarm" style={{ marginBottom: '3vh' }}>
-            <h2 className="dday-alarm-text">오늘은 제주 여행 시작날입니다. 기록을 시작해보세요.</h2>
+          <div className="dday-alarm" style={{ marginBottom: '3vh'}}>
+            <h4 className="dday-alarm-text">오늘은 제주 여행 시작날입니다. 기록을 시작해보세요.</h4>
             <button
               className="dday-alarm-button"
               onClick={() => {
@@ -118,7 +118,7 @@ export default function Home() {
         ) : null}
 
         <div className="plan-append">
-          <h3 className="plan-append-text">...님 여행할 지역을 고르셨나요?</h3>
+          <h4 className="plan-append-text">...님 여행할 지역을 고르셨나요?</h4>
 
           <div
             className="plus-plan"
@@ -133,22 +133,26 @@ export default function Home() {
                 navigate('/plan');
               }}
               style={{
-                backgroundColor: 'rgba(229, 229, 229, 1)',
+                background: '#FFFFFF',
                 color: 'orange',
-                border: 'none',
-                height: '50px',
-                width: '50px',
+                border: '0.4px solid #EEEEEE',
+                height: '35px',
+                width: '35px',
                 borderRadius: '50%',
                 fontSize: '2rem',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginRight: '1%',
+                paddin:'10px',
+                marginRight: '3%',
+                boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.25)'
+
+           
               }}
             >
               +
             </button>
-            <h4>여행 계획 추가하기</h4>
+            <h5>여행 계획 추가하기</h5>
           </div>
         </div>
       </div>
