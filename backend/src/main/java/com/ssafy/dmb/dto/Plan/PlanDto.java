@@ -18,6 +18,8 @@ public class PlanDto {
     @AllArgsConstructor
     public static class Detail {
 
+        private Long planId;
+
         private String planName;
         private String planDestination;
         private LocalDate startDate;
@@ -26,6 +28,7 @@ public class PlanDto {
         private Long familyId;
 
         public Detail(Plan plan) {
+            this.planId = plan.getId();
             this.planName = plan.getPlanName();
             this.planDestination = plan.getPlanDestination();
             this.startDate = plan.getStartDate();
