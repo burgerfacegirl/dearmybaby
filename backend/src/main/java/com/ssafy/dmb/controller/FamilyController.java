@@ -17,7 +17,7 @@ public class FamilyController {
     private final FamilyRepository familyRepository;
 
     @PostMapping("/new")
-    public ResponseEntity<FamilyDto.familyResponse> createFamily(@RequestBody FamilyDto.familyRequest request) {
+    public ResponseEntity<FamilyDto.familyResponse> createFamily(@RequestBody FamilyDto.FamilyRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(familyService.createFamily(request));
     }
 

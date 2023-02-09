@@ -2,6 +2,7 @@ package com.ssafy.dmb.service;
 
 import com.ssafy.dmb.domain.user.*;
 import com.ssafy.dmb.dto.user.FamilyDto;
+import com.ssafy.dmb.dto.user.MemberResponseDto;
 import com.ssafy.dmb.repository.FamilyRepository;
 import com.ssafy.dmb.repository.FamilyUserRepository;
 import com.ssafy.dmb.repository.MemberRepository;
@@ -27,7 +28,7 @@ public class FamilyService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public FamilyDto.familyResponse createFamily(FamilyDto.familyRequest request) {
+    public FamilyDto.familyResponse createFamily(FamilyDto.FamilyRequest request) {
         LOGGER.info("[createFamily] input request: {}", request);
 
         String memberId = request.getMemberId();

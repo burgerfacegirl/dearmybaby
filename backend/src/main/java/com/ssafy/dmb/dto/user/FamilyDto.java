@@ -3,6 +3,7 @@ package com.ssafy.dmb.dto.user;
 import com.ssafy.dmb.domain.user.Family;
 import com.ssafy.dmb.dto.user.MemberResponseDto;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -42,7 +43,7 @@ public class FamilyDto {
     @Getter
     @Builder
     @AllArgsConstructor
-    public static class Request {
+    public static class FamilyRequest {
         private String familyName;
 
         private String memberId;
