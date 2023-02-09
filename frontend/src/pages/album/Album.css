@@ -36,10 +36,10 @@
 /* 기록 모아보기 */
 .record-list {
     /* border: solid; */
-    border-top-left-radius: 6%;
-    border-top-right-radius: 6%;
-    background-color: rgba(255, 255, 255, 0.922);
-    box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.922);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: rgba(255, 255, 255);
+    box-shadow: 0px 0px 2px rgba(255, 255, 255);
 }
 
 .record-detail {
@@ -121,5 +121,5 @@ li {
 }
 
 .album-list-div {
-    /* background-color: aliceblue; */
+    background-color: g
 }

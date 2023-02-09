@@ -35,7 +35,7 @@ export default function AlbumList() {
   return (
     <body className='album-list-div'>
       <Box p={2}>
-        <Typography className='travel-record' variant="h4"> 내 여행 기록들 </Typography>
+        <Typography className='travel-record' variant="h4">My 여행 Record</Typography>
       </Box>
       <List className='record-list'>
         {plans.map((plan) => (

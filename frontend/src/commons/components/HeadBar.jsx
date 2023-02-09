@@ -54,7 +54,7 @@ export default function HeadBar() {
             // sx={{ mr: 1 }}
             onClick={() => navigate(-1)}
           >
-            <ArrowBackIcon />
+            <ArrowBackIcon style={{color:'white'}}/>
           </IconButton>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex' }}>
@@ -74,7 +74,7 @@ export default function HeadBar() {
             // sx={{ mr: 1 }}
             onClick={(event) => toggleDrawer(event, true)}
           >
-            <MenuIcon />
+            <MenuIcon style={{color:'white'}}/>
           </IconButton>
           <Drawer anchor="right" open={open} onClose={(event) => toggleDrawer(event, false)}>
             <Box

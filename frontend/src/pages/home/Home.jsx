@@ -75,7 +75,7 @@ export default function Home() {
           justifyContent: 'space-between',
           padding: '6%',
           // backgroundColor: 'rgba(47, 54, 129, 0.597)',
-          height: '260px',
+          height: '220px',
         }}
       >
         <div className="main-animation">
@@ -165,7 +165,7 @@ export default function Home() {
           <div className="plan-append">
             <h3 className="plan-append-text">username님 가족과 함께 해보세요!</h3>
 
-            <div className="plus-plan" style={{ display: 'flex', alignItems: 'center', boxSizing: 'content-box' }}>
+            <div className="plus-plan">
               <ul
                 onClick={() => {
                   setView(!view);
@@ -174,9 +174,11 @@ export default function Home() {
                 가족 선택하기 {view ? ' ⌃' : ' ⌄'}
                 {view && <Dropdown setSelectFamily={setSelectFamily} />}
               </ul>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', boxSizing: 'content-box' }}>
               <ul>
                 <button
-                  className="dday-alarm-button"
+                  className="dday-alarm-button2"
                   onClick={() => {
                     navigate(`/user/make-group`);
                   }}
@@ -186,7 +188,7 @@ export default function Home() {
               </ul>
               <ul>
                 <button
-                  className="dday-alarm-button"
+                  className="dday-alarm-button2"
                   onClick={() => {
                     //
                     navigate(`/record`);
