@@ -24,17 +24,20 @@ public class MemberDetailResponseDto {
 
     private String memberImg;
 
-    private Plan plan;
+    private Plan closetPlan;
+
+    private Plan currentPlan;
 
     private Long familyId;
 
-    public MemberDetailResponseDto(Member member, Plan plan, Family family){
+    public MemberDetailResponseDto(Member member, Plan closetPlan, Plan currentPlan,Family family){
         this.memberNo = member.getNo();
         this.memberId = member.getMemberId();
         this.memberName = member.getMemberName();
         this.memberEmail = member.getMemberEmail();
         this.memberImg = member.getMemberImg();
-        this.plan = plan;
+        this.currentPlan = currentPlan;
+        this.closetPlan = closetPlan;
         this.familyId = family.getId();
     }
 
