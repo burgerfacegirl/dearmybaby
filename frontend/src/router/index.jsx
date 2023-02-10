@@ -8,6 +8,7 @@ import Plan from '@/pages/plan';
 import Record from '@/pages/record';
 import Album from '@/pages/album';
 import Recommend from '@/pages/home/Recommend';
+import CheckList from '@/pages/checklist/CheckList';
 
 import KidsInformation from '@/pages/user/KidsInformation';
 import FamilyForm from '@/pages/user/FamilyForm';
@@ -58,6 +59,7 @@ const router = createBrowserRouter([
         ],
       },
       { path: 'kids', element: <KidsInformation></KidsInformation> },
+      { path: 'checklist', element: <CheckList></CheckList> },
       {
         path: 'recommend',
         element: <Recommend></Recommend>,
