@@ -14,7 +14,7 @@ export default function PlaceItem({ place }) {
       {place.placeName} | {place.placeType} */}
 
       <Box component="ul" sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', p: 0, m: 0 }}>
-        <Card component="li" sx={{ minWidth: 40, flexGrow: 1, height: '20vh'}}>
+        <Card component="li" sx={{ minWidth: 40, flexGrow: 1, height: '25vh' }}>
           <CardCover>
             <img
               src={place.imgUrl}

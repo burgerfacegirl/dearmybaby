@@ -8,6 +8,7 @@ import { apiGetMemberFamilys } from '@/commons/api/member';
 
 const SelectDate = () => {
   const navigate = useNavigate();
+  const [memberFamily, setmemberFamily] = useState('이 없습니다');
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -32,6 +33,7 @@ const SelectDate = () => {
   const getGroupData = () => {
     apiGetMemberFamilys(1).then(({ data }) => {
       console.log(data);
+      setmemberFamily(data[0].familyName);
       return data;
     });
   };
@@ -39,13 +41,14 @@ const SelectDate = () => {
   return (
     <div
       className="plan-frame"
-      style={{ padding: '2vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      style={{ padding: '3vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
       <div className="planning-div" style={{ backgroundColor: 'pink' }}>
         <h2>함께 여행할 그룹</h2>
         <button onClick={getGroupData} style={{ marginBottom: '10px' }}>
           그룹 데이터 띄우기
         </button>
+        {memberFamily}
       </div>
 
       <div
@@ -70,7 +73,6 @@ const SelectDate = () => {
           onClick={() => {
             navigate('/plan/find-city');
             saveTravelDates();
-            // 날짜 저장
           }}
         >
           날짜 저장하기
