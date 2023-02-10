@@ -4,7 +4,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import SelectPlace from './SelectPlace';
-import { apiGetMemberFamilys } from '@/commons/api/member';
+import { apiGetMemberFamilyList } from '@/commons/api/member';
 
 const SelectDate = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const SelectDate = () => {
   }
 
   const getGroupData = () => {
-    apiGetMemberFamilys(1).then(({ data }) => {
+    apiGetMemberFamilyList(1).then(({ data }) => {
       console.log(data);
       setmemberFamily(data[0].familyName);
       return data;

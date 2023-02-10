@@ -1,12 +1,12 @@
-// import { apiCreatePlan, apiUpdatePlan, apiDeletePlan, apiGetPlan, apiGetPlanList } from '@/commons/api/plan';
-// import { apiCreateBaby, apiUpdateBaby, apiDeleteBaby, apiGetBaby, apiGetBabyList } from '@/commons/api/baby';
-// import { apiGetFamily } from '@/commons/api/family';
-import { apiGetRecordList } from '@/commons/api/record';
-import { apiCreateDay } from '@/commons/api/day';
-import { useState } from 'react';
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Dropdown from '@/commons/components/Dropdown';
+
 import './Home.css';
+import Dropdown from '@/commons/components/Dropdown';
 import Place from './Place';
 import Weather from './Weather.jsx';
 import Baby from './Baby.jsx';
@@ -14,7 +14,10 @@ import Baby2 from './Baby2';
 import Baby3 from './Baby3';
 import Man from './Man';
 import Woman from './Woman';
-import { width } from '@mui/system';
+
+import { useMember, useMemberReload, useMemberAuth } from '@/commons/MemberContext';
+import { apiUpdateMemberCurrentPlanId } from '@/commons/api/member';
+
 // 접속한 유저 그룹의 plans 다 가져와야함
 const dummyUser = {
   userId: 'ssafy',
@@ -24,25 +27,32 @@ const dummyUser = {
     planDate: new Date(),
     planCount: 3,
   },
-  currentPlanId: null,
+  currentPlan: {
+    planId: 1,
+    planDate: new Date(),
+    planCount: 3,
+  },
 };
 
 export default function Home() {
-  const [user, setUser] = useState(dummyUser);
+  const member = useMember();
+  const memberReload = useMemberReload();
+  const auth = useMemberAuth();
+
+  // 최초에 한번 회원정보를 최신화한다
+  useEffect(() => memberReload, []);
+
   const [selectFamily, setSelectFamily] = useState(null);
-  const closestPlan = user.closestPlan;
-  const isTraveling = user.currentPlanId != null;
   const [view, setView] = useState(false);
+  const navigate = useNavigate();
 
   // 오늘 날짜가 계획 시작 날짜와 같은지 체크 (여행 시작 중이 아니면)
   const today = new Date();
-  const isToday =
-    today.getFullYear() === closestPlan.planDate.getFullYear() &&
-    today.getMonth() === closestPlan.planDate.getMonth() &&
-    today.getDate() === closestPlan.planDate.getDate();
-  const navigate = useNavigate();
-
-  const [records, setRecords] = useState('');
+  // const isToday =
+  // member.closestPlan != null &&
+  // today.getFullYear() === member.closestPlan.planDate.getFullYear() &&
+  // today.getMonth() === member.closestPlan.planDate.getMonth() &&
+  // today.getDate() === member.closestPlan.planDate.getDate();
 
   return (
     <div className="main-div">
@@ -87,128 +97,132 @@ export default function Home() {
         </div>
         <div className="family-photo-animation">
           <img
-            src="public\assets\baby.jpg"
+            src="/assets/baby.jpg"
             style={{ height: '110px', width: '110px', borderRadius: '50%', boxShadow: '0px 2px 2px' }}
             alt="img"
           />
         </div>
       </div>
-      <div className="user-plan">
-        {/* 여행 중일때 record 페이지로 보내주는 버튼*/}
-        {isTraveling ? (
-          <div style={{ marginBottom: '3vh' }}>
-            <h4>제주 여행 중</h4>
-            <button
-              onClick={() => {
-                navigate(`/record`);
-              }}
-            >
-              여행 기록하러가기
-            </button>
-          </div>
-        ) : null}
-
-        {/* 오늘이 여행 일정 시작 날일때 여행 시작 버튼*/}
-        {isToday && !isTraveling ? (
-          <div className="dday-alarm" style={{ marginBottom: '3vh' }}>
-            <h4 className="dday-alarm-text">
-              오늘은 제주 여행 시작날입니다.<p></p> 기록을 시작해보세요.
-            </h4>
-            <button
-              className="dday-alarm-button"
-              onClick={() => {
-                // setTraveling(true);
-                // localStorage.setItem('isTraveling', 'true');
-                user.currentPlanId = closestPlan.planId;
-                setUser({ ...user });
-                // setUser({ ...user, [user.currentPlanId]: closestPlan.planId});
-                navigate(`/record`);
-              }}
-            >
-              여행 시작
-            </button>
-          </div>
-        ) : null}
-        {selectFamily ? (
-          <div className="plan-append">
-            <h3 className="plan-append-text">babyname과 여행할 지역을 고르셨나요?</h3>
-
-            <div
-              className="plus-plan"
-              onClick={() => {
-                navigate('/plan');
-              }}
-              style={{ display: 'flex', alignItems: 'center', boxSizing: 'content-box' }}
-            >
+      {member != null && (
+        <div className="user-plan">
+          {/* 여행 중일때 record 페이지로 보내주는 버튼*/}
+          {member.currentPlan != null ? (
+            <div style={{ marginBottom: '3vh' }}>
+              <h4>제주 여행 중</h4>
               <button
-                className="plan-append-text"
                 onClick={() => {
-                  navigate('/plan');
-                }}
-                style={{
-                  backgroundColor: 'rgba(229, 229, 229, 1)',
-                  color: 'orange',
-                  border: 'none',
-                  height: '30px',
-                  width: '30px',
-                  margin: '10px',
-                  borderRadius: '50%',
-                  background: '#FFFFFF',
-                  border: '0.4px solid #EEEEEE',
-                  boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.25)',
-                  fontSize: '2rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginRight: '10px',
-                  marginLeft: '30px',
-                  marginBottom: '15px',
-                }}
-              >
-                +
-              </button>
-              <h4>여행 계획 추가하기</h4>
-            </div>
-          </div>
-        ) : (
-          <div className="plan-append">
-            <h4 className="plan-append-text">username님 가족과 함께 해보세요!</h4>
-
-            <div className="plus-plan">
-              <ul
-                onClick={() => {
-                  setView(!view);
-                }}
-              >
-                가족 선택하기 {view ? ' ⌃' : ' ⌄'}
-                {view && <Dropdown setSelectFamily={setSelectFamily} />}
-              </ul>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'content-box' }}>
-              <button
-                style={{ height: '30px', width: '130px', margin: '10px', marginRight: '10px', fontSize: '13px' }}
-                className="dday-alarm-button2"
-                onClick={() => {
-                  navigate(`/user/make-group`);
-                }}
-              >
-                가족 그룹 만들기
-              </button>
-
-              <button
-                style={{ height: '30px', width: '130px', margin: '10px', marginLeft: '5px', fontSize: '13px' }}
-                className="dday-alarm-button2"
-                onClick={() => {
-                  //
                   navigate(`/record`);
                 }}
               >
-                가족 그룹 들어가기
+                여행 기록하러가기
               </button>
             </div>
-          </div>
-        )}
-      </div>
+          ) : null}
+
+          {/* 오늘이 여행 일정 시작 날일때 여행 시작 버튼*/}
+          {member.closestPlan != null &&
+          today.getFullYear() === member.closestPlan.planDate.getFullYear() &&
+          today.getMonth() === member.closestPlan.planDate.getMonth() &&
+          today.getDate() === member.closestPlan.planDate.getDate() &&
+          member.currentPlan == null ? (
+            <div className="dday-alarm" style={{ marginBottom: '3vh' }}>
+              <h4 className="dday-alarm-text">
+                오늘은 제주 여행 시작날입니다.<p></p> 기록을 시작해보세요.
+              </h4>
+              <button
+                className="dday-alarm-button"
+                onClick={async () => {
+                  await auth((token) => apiUpdateMemberCurrentPlanId(member.closestPlan.planId, token));
+                  await memberReload();
+                  navigate('record');
+                }}
+              >
+                여행 시작
+              </button>
+            </div>
+          ) : null}
+          {selectFamily ? (
+            <div className="plan-append">
+              <h3 className="plan-append-text">babyname과 여행할 지역을 고르셨나요?</h3>
+
+              <div
+                className="plus-plan"
+                onClick={() => {
+                  navigate('/plan');
+                }}
+                style={{ display: 'flex', alignItems: 'center', boxSizing: 'content-box' }}
+              >
+                <button
+                  className="plan-append-text"
+                  onClick={() => {
+                    navigate('/plan');
+                  }}
+                  style={{
+                    backgroundColor: 'rgba(229, 229, 229, 1)',
+                    color: 'orange',
+                    height: '30px',
+                    width: '30px',
+                    margin: '10px',
+                    borderRadius: '50%',
+                    background: '#FFFFFF',
+                    border: '0.4px solid #EEEEEE',
+                    boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.25)',
+                    fontSize: '2rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginRight: '10px',
+                    marginLeft: '30px',
+                    marginBottom: '15px',
+                  }}
+                >
+                  +
+                </button>
+                <h4>여행 계획 추가하기</h4>
+              </div>
+            </div>
+          ) : (
+            <div className="plan-append">
+              <h4 className="plan-append-text">{member.memberName}님 가족과 함께 해보세요!</h4>
+
+              <div className="plus-plan">
+                <ul
+                  onClick={() => {
+                    setView(!view);
+                  }}
+                >
+                  가족 선택하기 {view ? ' ⌃' : ' ⌄'}
+                  {view && <Dropdown setSelectFamily={setSelectFamily} />}
+                </ul>
+              </div>
+              <div
+                style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'content-box' }}
+              >
+                <button
+                  style={{ height: '30px', width: '130px', margin: '10px', marginRight: '10px', fontSize: '13px' }}
+                  className="dday-alarm-button2"
+                  onClick={() => {
+                    navigate(`/user/make-group`);
+                  }}
+                >
+                  가족 그룹 만들기
+                </button>
+
+                <button
+                  style={{ height: '30px', width: '130px', margin: '10px', marginLeft: '5px', fontSize: '13px' }}
+                  className="dday-alarm-button2"
+                  onClick={() => {
+                    //
+                    navigate(`/record`);
+                  }}
+                >
+                  가족 그룹 들어가기
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
       {/* <hr /> */}
       {selectFamily ? (
         <div className="recommend">
