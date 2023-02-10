@@ -55,6 +55,22 @@ public class PlanController {
 
     }
 
+    @Operation(summary = "여행 시작", description = "<strong> planId </strong>를 통해 planState를 시작으로 수정")
+    @PutMapping("/start/{planId}")
+    public ResponseEntity<PlanDto.Detail> startPlan(@PathVariable("planId") Long planId) {
+
+        return ResponseEntity.status(HttpStatus.OK).body(planService.startPlan(planId));
+
+    }
+
+    @Operation(summary = "여행 끝", description = "<strong> planId </strong>를 통해 여행 종료로 수정.")
+    @PutMapping("/end/{planId}")
+    public ResponseEntity<PlanDto.Detail> endPlan(@PathVariable("planId") Long planId) {
+
+        return ResponseEntity.status(HttpStatus.OK).body(planService.endPlan(planId));
+
+    }
+
     @Operation(summary = "여행 계획 삭제", description = "<strong> planId </strong>를 통해 여행 계획을 삭제한다.")
     @DeleteMapping("{planId}")
     public ResponseEntity<List<PlanDto.Detail>> deletePlan(@PathVariable("planId") Long planId) {

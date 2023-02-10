@@ -1,14 +1,18 @@
 package com.ssafy.dmb.service;
 
+import com.ssafy.dmb.domain.plan.Plan;
 import com.ssafy.dmb.domain.user.Family;
+import com.ssafy.dmb.domain.user.FamilyUser;
 import com.ssafy.dmb.domain.user.Member;
-import com.ssafy.dmb.dto.user.FamilyDto;
-import com.ssafy.dmb.jwt.JwtTokenProvider;
 import com.ssafy.dmb.dto.login.TokenInfo;
+import com.ssafy.dmb.dto.user.FamilyDto;
+import com.ssafy.dmb.dto.user.MemberDetailResponseDto;
 import com.ssafy.dmb.dto.user.MemberDto;
 import com.ssafy.dmb.dto.user.MemberResponseDto;
+import com.ssafy.dmb.jwt.JwtTokenProvider;
 import com.ssafy.dmb.repository.FamilyUserRepository;
 import com.ssafy.dmb.repository.MemberRepository;
+import com.ssafy.dmb.repository.PlanRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -35,14 +39,27 @@ public class MemberService {
     private final FamilyUserRepository familyUserRepository;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtTokenProvider jwtTokenProvider;
+    private final PlanRepository planRepository;
 
-    public MemberResponseDto getMemberDetail(String memberId) {
+    public MemberDetailResponseDto getMemberDetail(String memberId) {
 
         Member memberDetail = memberRepository.findByMemberId(memberId);
 
-        MemberResponseDto memberResponseDto = new MemberResponseDto(memberDetail);
+        Long memberNo = memberDetail.getNo();
 
-        return memberResponseDto;
+        // 이거 수정해야함 ------------
+        Plan currentPlan = planRepository.findCurrentPlanByPlanState();
+        //--------------------------
+        Plan closetPlan = planRepository.findCurrentPlanByPlanState();
+        List<FamilyUser> familyUserList = familyUserRepository.findByMemberNo(memberNo);
+
+        List<Long> familyIdList = new ArrayList<>();
+        for (FamilyUser fu : familyUserList){
+            familyIdList.add(fu.getFamily().getId());
+        }
+        MemberDetailResponseDto memberDetailResponseDto = new MemberDetailResponseDto(memberDetail,closetPlan,currentPlan,familyIdList);
+
+        return memberDetailResponseDto;
     }
 
     public List<FamilyDto.familyList> getFamilyList(Long memberNo) {

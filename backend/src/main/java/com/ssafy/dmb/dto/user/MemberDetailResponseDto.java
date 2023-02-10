@@ -1,12 +1,13 @@
 package com.ssafy.dmb.dto.user;
 
 import com.ssafy.dmb.domain.plan.Plan;
-import com.ssafy.dmb.domain.user.Family;
 import com.ssafy.dmb.domain.user.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,9 +29,9 @@ public class MemberDetailResponseDto {
 
     private Plan currentPlan;
 
-    private Long familyId;
+    private List<Long> familyIdList;
 
-    public MemberDetailResponseDto(Member member, Plan closetPlan, Plan currentPlan,Family family){
+    public MemberDetailResponseDto(Member member, Plan closetPlan, Plan currentPlan,List<Long> familyIdList){
         this.memberNo = member.getNo();
         this.memberId = member.getMemberId();
         this.memberName = member.getMemberName();
@@ -38,7 +39,7 @@ public class MemberDetailResponseDto {
         this.memberImg = member.getMemberImg();
         this.currentPlan = currentPlan;
         this.closetPlan = closetPlan;
-        this.familyId = family.getId();
+        this.familyIdList = familyIdList;
     }
 
 }
