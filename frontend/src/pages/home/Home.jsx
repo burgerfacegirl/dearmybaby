@@ -110,7 +110,9 @@ export default function Home() {
         {/* 오늘이 여행 일정 시작 날일때 여행 시작 버튼*/}
         {isToday && !isTraveling ? (
           <div className="dday-alarm" style={{ marginBottom: '3vh' }}>
-            <h4 className="dday-alarm-text">오늘은 제주 여행 시작날입니다. 기록을 시작해보세요.</h4>
+            <h4 className="dday-alarm-text">
+              오늘은 제주 여행 시작날입니다.<p></p> 기록을 시작해보세요.
+            </h4>
             <button
               className="dday-alarm-button"
               onClick={() => {
