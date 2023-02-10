@@ -90,7 +90,6 @@
 }
 
 .dday-alarm-button2 {
-
   color: white;
   border: none;
   width: 100px;
@@ -98,10 +97,7 @@
   background-color: rgb(46, 95, 243);
   margin: 0px;
   padding: 0px;
-
 }
-
-
 
 .plan-append {
   /* background-color: rgb(255, 243, 152); */
@@ -181,4 +177,52 @@
     margin-right: 0%;
     width: 100%;
   }
-} 
+}
+.food-item {
+  display: flex;
+  /* margin-block: 3vh; */
+  margin-inline: 3vw;
+  border-bottom: solid 0.3px;
+  padding-block: 1vh;
+  width: 95vw;
+  height: 20vh;
+}
+
+.food-info {
+  width: 70%;
+  margin-right: 5vw;
+  margin-bottom: 0.5vh;
+  padding-left: 0.3vw;
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+}
+.food-info-outline {
+  height: 57%;
+  display: inline-block;
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+}
+.food-info-outline > p {
+  height: 100%;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* .outline-ptag {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} */
+
+.food-img {
+  width: 30%;
+  height: 100%;
+}
+.food-catagory {
+  /* height: 30%; */
+}
+
+.food-src {
+  width: 100%;
+  height: 100%;
+}

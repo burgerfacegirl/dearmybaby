@@ -10,7 +10,7 @@ const RecommendFoodList = ({ foodData }) => {
 
   return (
     <div className="recommandList">
-      <button
+      <a
         onClick={() =>
           // console.log(fooditem)
           navigate(`./food-detail?food-id=${foodData.id}`)
@@ -37,7 +37,7 @@ const RecommendFoodList = ({ foodData }) => {
         {/* 디테일에 보여줄 데이터 필요하면, 새로운 컴포넌트 만들거임 */}
 
         {/* reccomandFood list */}
-      </button>
+      </a>
     </div>
   );
 };
