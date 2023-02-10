@@ -70,14 +70,14 @@ export default function HeadBar() {
           >
             <ArrowBackIcon style={{ color: 'white' }} />
           </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" sx={{ flexGrow: 1, fontSize: '14px' }}>
             <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex' }}>
-              <img
+              {/* <img
                 src="/assets/logo.png"
                 style={{ height: '30px', width: '30px', marginRight: '10px' }}
                 alt="logo"
-              ></img>
-              DearMyBaby
+              ></img> */}
+              Dear my baby
             </Link>
           </Typography>
           <IconButton

@@ -87,10 +87,10 @@ li {
 }
 .img-padding {
   float: left;
-  padding: 10px;
+  padding: 5px;
 }
 .img-padding2 {
-  border-radius: 15%;
+  border-radius: 10px;
 }
 
 .back-color {

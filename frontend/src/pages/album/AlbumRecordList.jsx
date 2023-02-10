@@ -38,8 +38,8 @@ export default function AlbumRecord() {
     <>
       {/* 여행 기록 제목  */}
       <Box className="record-name-box" p={2}>
-        <Typography className="record-name" variant="h5" style={{ fontSize: '40px' }}>
-          제주도 여행
+        <Typography className="record-name" variant="h5" style={{ fontSize: '30px' }}>
+          <strong>제주도 여행</strong>
         </Typography>
 
         <Box className="date-map-link" sx={{ display: 'flex', alignContent: 'center' }}>
@@ -54,7 +54,9 @@ export default function AlbumRecord() {
 
       <div className="record-list-box">
         <div className="record-list-text">
-          <p>여행을 추억해보세요</p>
+          <p>
+            <strong>여행을 추억해보세요</strong>
+          </p>
         </div>
         {records.map((record) => (
           <AlbumRecordItem key={record.recordId} record={record}></AlbumRecordItem>

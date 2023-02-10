@@ -33,13 +33,16 @@ const plans = [
 
 export default function AlbumList() {
   return (
-    <body className='album-list-div'>
+    <body className="album-list-div">
       <Box p={2}>
-        <Typography className='travel-record' variant="h4">My 여행 Record</Typography>
+        <Typography className="travel-record" variant="h4">
+          기록 앨범
+        </Typography>
       </Box>
-      <List className='record-list'>
+      <List className="record-list">
         {plans.map((plan) => (
-          <ListItem className='record-detail'
+          <ListItem
+            className="record-detail"
             key={plan.planId}
             secondaryAction={
               <IconButton component={Link} to="map" edge="end" aria-label="to-map">

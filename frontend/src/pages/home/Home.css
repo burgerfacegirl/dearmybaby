@@ -92,6 +92,7 @@
   box-shadow: 3px 3px 3px rgb(232, 236, 248);
   padding: 5px 10px;
   width: 150px;
+  font-size: 13px;
 }
 
 .dday-alarm-button2 {
@@ -126,8 +127,9 @@
 }
 
 .recommend {
-  padding: 20px;
+  padding: 30px;
   background-color: rgba(255, 255, 255, 0.922);
+  font-size: 13px;
 }
 
 .main-animation {

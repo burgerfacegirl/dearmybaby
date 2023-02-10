@@ -81,7 +81,7 @@ export default function Home() {
       >
         <div className="main-animation">
           <h3 style={{ fontWeight: '20', fontSize: '0.8rem', color: 'white' }}>dear my baby</h3>
-          <h3 style={{ fontWeight: '100', color: 'white' }}>
+          <h3 style={{ fontWeight: '100', color: 'white', fontSize: '16px', marginBottom: '15px' }}>
             당신의 아이에게 <br></br>따뜻한 추억을 선물하세요
           </h3>
         </div>
@@ -186,7 +186,7 @@ export default function Home() {
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'content-box' }}>
               <button
-                style={{ height: '30px', width: '130px', margin: '10px', marginRight: '10px', fontSize: '15px' }}
+                style={{ height: '30px', width: '130px', margin: '10px', marginRight: '10px', fontSize: '13px' }}
                 className="dday-alarm-button2"
                 onClick={() => {
                   navigate(`/user/make-group`);
@@ -196,7 +196,7 @@ export default function Home() {
               </button>
 
               <button
-                style={{ height: '30px', width: '130px', margin: '10px', marginLeft: '5px', fontSize: '15px' }}
+                style={{ height: '30px', width: '130px', margin: '10px', marginLeft: '5px', fontSize: '13px' }}
                 className="dday-alarm-button2"
                 onClick={() => {
                   //
@@ -229,7 +229,7 @@ export default function Home() {
         </div>
       ) : null}
       <div className="recommend">
-        <h3>아이와 겨울에 가기 좋은 여행지</h3>
+        <h3>겨울철 아이와 함께 가볼만한 여행지</h3>
         <Weather />
       </div>
       <div className="recommend">
