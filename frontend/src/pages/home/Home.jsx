@@ -14,6 +14,7 @@ import Baby2 from './Baby2';
 import Baby3 from './Baby3';
 import Man from './Man';
 import Woman from './Woman';
+import { width } from '@mui/system';
 // 접속한 유저 그룹의 plans 다 가져와야함
 const dummyUser = {
   userId: 'ssafy',
@@ -148,14 +149,20 @@ export default function Home() {
                   backgroundColor: 'rgba(229, 229, 229, 1)',
                   color: 'orange',
                   border: 'none',
-                  height: '50px',
-                  width: '50px',
+                  height: '30px',
+                  width: '30px',
+                  margin: '10px',
                   borderRadius: '50%',
+                  background: '#FFFFFF',
+                  border: '0.4px solid #EEEEEE',
+                  boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.25)',
                   fontSize: '2rem',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginRight: '1%',
+                  marginRight: '10px',
+                  marginLeft: '30px',
+                  marginBottom: '15px',
                 }}
               >
                 +
@@ -165,7 +172,7 @@ export default function Home() {
           </div>
         ) : (
           <div className="plan-append">
-            <h3 className="plan-append-text">username님 가족과 함께 해보세요!</h3>
+            <h4 className="plan-append-text">username님 가족과 함께 해보세요!</h4>
 
             <div className="plus-plan">
               <ul
@@ -177,33 +184,32 @@ export default function Home() {
                 {view && <Dropdown setSelectFamily={setSelectFamily} />}
               </ul>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', boxSizing: 'content-box' }}>
-              <ul>
-                <button
-                  className="dday-alarm-button2"
-                  onClick={() => {
-                    navigate(`/user/make-group`);
-                  }}
-                >
-                  가족 그룹 만들기
-                </button>
-              </ul>
-              <ul>
-                <button
-                  className="dday-alarm-button2"
-                  onClick={() => {
-                    //
-                    navigate(`/record`);
-                  }}
-                >
-                  가족 그룹 들어가기
-                </button>
-              </ul>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'content-box' }}>
+              <button
+                style={{ height: '30px', width: '130px', margin: '10px', marginRight: '10px', fontSize: '15px' }}
+                className="dday-alarm-button2"
+                onClick={() => {
+                  navigate(`/user/make-group`);
+                }}
+              >
+                가족 그룹 만들기
+              </button>
+
+              <button
+                style={{ height: '30px', width: '130px', margin: '10px', marginLeft: '5px', fontSize: '15px' }}
+                className="dday-alarm-button2"
+                onClick={() => {
+                  //
+                  navigate(`/record`);
+                }}
+              >
+                가족 그룹 들어가기
+              </button>
             </div>
           </div>
         )}
       </div>
-      <hr />
+      {/* <hr /> */}
       {selectFamily ? (
         <div className="recommend">
           <h3>babyname에게 추천하는 지역별 여행지</h3>
