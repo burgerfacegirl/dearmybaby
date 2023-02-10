@@ -1,5 +1,6 @@
 package com.ssafy.dmb.domain.plan;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.ssafy.dmb.domain.user.Family;
 import lombok.*;
 
@@ -35,6 +36,7 @@ public class Plan {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "family_id")
+    @JsonBackReference
     private Family family;
 
 

@@ -1,7 +1,7 @@
 package com.ssafy.dmb.dto.user;
 
-import com.ssafy.dmb.domain.plan.Plan;
 import com.ssafy.dmb.domain.user.Member;
+import com.ssafy.dmb.dto.Plan.PlanDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,13 +25,13 @@ public class MemberDetailResponseDto {
 
     private String memberImg;
 
-    private Plan closetPlan;
+    private PlanDto.PlanResponse closetPlan;
 
-    private Plan currentPlan;
+    private PlanDto.PlanResponse currentPlan;
 
     private List<Long> familyIdList;
 
-    public MemberDetailResponseDto(Member member, Plan closetPlan, Plan currentPlan,List<Long> familyIdList){
+    public MemberDetailResponseDto(Member member, PlanDto.PlanResponse closetPlan, PlanDto.PlanResponse currentPlan,List<Long> familyIdList){
         this.memberNo = member.getNo();
         this.memberId = member.getMemberId();
         this.memberName = member.getMemberName();

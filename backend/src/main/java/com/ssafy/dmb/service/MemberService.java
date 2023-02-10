@@ -4,6 +4,7 @@ import com.ssafy.dmb.domain.plan.Plan;
 import com.ssafy.dmb.domain.user.Family;
 import com.ssafy.dmb.domain.user.FamilyUser;
 import com.ssafy.dmb.domain.user.Member;
+import com.ssafy.dmb.dto.Plan.PlanDto;
 import com.ssafy.dmb.dto.login.TokenInfo;
 import com.ssafy.dmb.dto.user.FamilyDto;
 import com.ssafy.dmb.dto.user.MemberDetailResponseDto;
@@ -23,7 +24,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,17 +50,42 @@ public class MemberService {
 
         Long memberNo = memberDetail.getNo();
 
-        // 이거 수정해야함 ------------
-        Plan currentPlan = planRepository.findCurrentPlanByPlanState();
-        //--------------------------
-        Plan closetPlan = planRepository.findCurrentPlanByPlanState();
         List<FamilyUser> familyUserList = familyUserRepository.findByMemberNo(memberNo);
+
+        int dday = -999;
+        Long closetPlanId = -1L;
+
+        // user가 가입했던 FamilyId들을 돌면서
+        // Family 마다의 여행 List들을 조회하고
+        // 각각의 Plan List를 돌면서
+        // 아직 시작하지 않은 plan들 중에 startDate와 현재 날짜를 비교하며
+        // 최솟값을 갱신하고 갱신될때마다 closetPlanId를 갱신한다.
+        for(FamilyUser fu: familyUserList) {
+            Long familyId = fu.getFamily().getId();
+            List<Plan> planList = planRepository.findAllByFamily(familyId);
+            for(Plan p : planList) {
+                if(p.getPlanState()==0 && dday < Period.between(p.getStartDate(),LocalDate.now()).getDays()) {
+                    dday = Period.between(p.getStartDate(), LocalDate.now()).getDays();
+                    closetPlanId = p.getId();
+                }
+            }
+        }
+
+        Plan closetPlan = null;
+        if(closetPlanId!=-1) {
+            closetPlan = planRepository.findById(closetPlanId).get();
+        }
+        PlanDto.PlanResponse closetPlanResponse = new PlanDto.PlanResponse(closetPlan);
+        //--------------------------
+
+        Plan currentPlan = planRepository.findCurrentPlanByPlanState();
+        PlanDto.PlanResponse currentPlanResponse = new PlanDto.PlanResponse(currentPlan);
 
         List<Long> familyIdList = new ArrayList<>();
         for (FamilyUser fu : familyUserList){
             familyIdList.add(fu.getFamily().getId());
         }
-        MemberDetailResponseDto memberDetailResponseDto = new MemberDetailResponseDto(memberDetail,closetPlan,currentPlan,familyIdList);
+        MemberDetailResponseDto memberDetailResponseDto = new MemberDetailResponseDto(memberDetail,closetPlanResponse,currentPlanResponse,familyIdList);
 
         return memberDetailResponseDto;
     }
