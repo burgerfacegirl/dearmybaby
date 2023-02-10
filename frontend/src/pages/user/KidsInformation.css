@@ -1,7 +1,8 @@
 .question {
+  position: relative;
   /* box-sizing: content-box; */
   /* border-radius: 10px; */
-  height: 100vh;
+  height: 95vh;
   width: 100%;
   /* margin-block: 17vh; */
   text-align: center;
