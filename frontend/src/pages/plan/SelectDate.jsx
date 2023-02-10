@@ -4,6 +4,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import SelectPlace from './SelectPlace';
+import { apiGetMemberFamilys } from '@/commons/api/member';
 
 const SelectDate = () => {
   const navigate = useNavigate();
@@ -25,39 +26,56 @@ const SelectDate = () => {
   };
 
   function saveTravelDates(e) {
-    e.preventDefault();
     localStorage.setItem('travelDates', JSON.stringify(state));
   }
 
-  // function checkTravelDates(e) {
-  //   e.preventDefault();
-  //   if (travelDates != null && isSameDate(new Date(), new Date(travelDates[0].startDate))) {
-  //     console.log('오늘은 여행날');
-  //   }
-  // }
+  const getGroupData = () => {
+    apiGetMemberFamilys(1).then(({ data }) => {
+      console.log(data);
+      return data;
+    });
+  };
 
   return (
     <div
       className="plan-frame"
-      style={{ padding: '3vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      style={{ padding: '2vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
-      <h2>여행하실 날짜를 선택해주세요</h2>
-      <DateRange
-        editableDateInputs={true}
-        onChange={(item) => setState([item.selection])}
-        moveRangeOnFirstSelection={false}
-        ranges={state}
-      />
-      <form onSubmit={saveTravelDates}>
+      <div className="planning-div" style={{ backgroundColor: 'pink' }}>
+        <h2>함께 여행할 그룹</h2>
+        <button onClick={getGroupData} style={{ marginBottom: '10px' }}>
+          그룹 데이터 띄우기
+        </button>
+      </div>
+
+      <div
+        className="planning-div"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          padding: '5%',
+          boxShadow: '2px 2px 15px rgba(217, 217, 217, 1)',
+          borderRadius: '5px',
+        }}
+      >
+        <h2 style={{ marginBottom: '5%' }}>여행하실 날짜를 선택해주세요</h2>
+        <DateRange
+          editableDateInputs={true}
+          onChange={(item) => setState([item.selection])}
+          moveRangeOnFirstSelection={false}
+          ranges={state}
+        />
         <button
           onClick={() => {
             navigate('/plan/find-city');
+            saveTravelDates();
             // 날짜 저장
           }}
         >
           날짜 저장하기
         </button>
-      </form>
+      </div>
       {/* <form onSubmit={checkTravelDates}>
         <button>날짜 체크하기</button>
       </form> */}
