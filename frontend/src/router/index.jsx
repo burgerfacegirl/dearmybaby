@@ -10,11 +10,13 @@ import Album from '@/pages/album';
 import Recommend from '@/pages/home/Recommend';
 import CheckList from '@/pages/checklist/CheckList';
 
+import KidsBaseInfo from '@/pages/user/KidsBaseInfo';
 import KidsInformation from '@/pages/user/KidsInformation';
 import FamilyForm from '@/pages/user/FamilyForm';
 import Login from '@/pages/user/Login';
 import Signup from '@/pages/user/SignUp';
 import RecommendItem from '@/pages/home/RecommendItem';
+import Kids from '@/pages/user/Kids';
 
 // recommend lazily loaded components
 const RecommendFoodDetail = lazy(() => import('@/pages/home/RecommendFoodDetail'));
@@ -58,8 +60,21 @@ const router = createBrowserRouter([
           { path: 'sign-up', element: <Signup></Signup> },
         ],
       },
-      { path: 'kids', element: <KidsInformation></KidsInformation> },
       { path: 'checklist', element: <CheckList></CheckList> },
+      {
+        path: 'kids',
+        element: <Kids></Kids>,
+        children: [
+          {
+            index: true,
+            element: <KidsBaseInfo></KidsBaseInfo>,
+          },
+          {
+            path: 'kids-favor',
+            element: <KidsInformation></KidsInformation>,
+          },
+        ],
+      },
       {
         path: 'recommend',
         element: <Recommend></Recommend>,
