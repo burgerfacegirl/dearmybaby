@@ -63,6 +63,7 @@ public class PlanService {
                 .startDate(request.getStartDate())
                 .endDate(request.getEndDate())
                 .family(family)
+                .planState(0)
                 .build();
 
         int period = plan.getPlanPeriod();

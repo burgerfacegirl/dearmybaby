@@ -31,6 +31,7 @@ public class PlanDto {
         private LocalDate startDate;
         private LocalDate endDate;
         private int planPeriod;
+        private int planState;
         private Long familyId;
 
         private List<DayDto> days;
@@ -39,6 +40,7 @@ public class PlanDto {
             this.planId = plan.getId();
             this.planName = plan.getPlanName();
             this.planDestination = plan.getPlanDestination();
+            this.planState = plan.getPlanState();
             this.startDate = plan.getStartDate();
             this.endDate = plan.getEndDate();
             this.planPeriod = plan.getPlanPeriod();
