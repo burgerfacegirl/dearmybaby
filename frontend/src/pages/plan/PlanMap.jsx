@@ -1,17 +1,72 @@
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import PlaceBasket from './PlaceBasket';
+import { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import zIndex from '@mui/material/styles/zIndex';
+import { Bookmark } from '@mui/icons-material';
 
 const kakao = window.kakao;
 
 export default function PlanMap() {
+
+  // 첫 검색어 중심 좌표 데이터
+  const centerPosition = [
+    {
+      name: '인천',
+      lat: 37.46851971059556,
+      lng: 126.5603574796912
+    },
+    {
+      name: '강릉',
+      lat: 37.56682420267543,
+      lng: 126.978652258823
+    },
+    {
+      name: '가평',
+      lat: 37.794925860731155,
+      lng: 127.43003430442482
+    },
+    {
+      name: '경주',
+      lat: 35.84406257358352,
+      lng: 129.31227082127992
+    },
+    {
+      name: '부산',
+      lat: 35.16452868872296,
+      lng: 129.12659300510325
+    },
+    {
+      name: '여수',
+      lat: 37.794925860731155,
+      lng: 127.43003430442482
+    },
+    {
+      name: '제주',
+      lat: 37.794925860731155,
+      lng: 127.43003430442482
+    },
+    {
+      name: '전주',
+      lat: 37.794925860731155,
+      lng: 127.43003430442482
+    },
+  ]
+
+  const location = useLocation()
+  const propWord = location.state?.keyword
+  // console.log('proped from SelectPlace:', propWord)
+  const initKeyword = propWord + ' 여행'
+
+  const keyWordRef = useRef()
+
   const [info, setInfo] = useState();
   const [markers, setMarkers] = useState([]);
   const [map, setMap] = useState();
-  const [keyWord, setKeyWord] = useState('');
+  const [keyWord, setKeyWord] = useState(initKeyword);
   const [isOpen, setIsOpen] = useState(false);
   const [placeBasket, setPlaceBasket] = useState([]);
+  const [center, setCenter] = useState()
 
   // 검색어 상태 변화
   const onChange = (e) => {
@@ -20,17 +75,20 @@ export default function PlanMap() {
 
   // 검색 키워드
   const onClick = () => {
-    let searchWord = keyWord;
+    console.log(keyWordRef.current.value)
+    setKeyWord(keyWordRef.current.value)
     // console.log({ info });
     // console.log(searchWord);
   };
 
+
+  // 검색할 때 마다 실행
   useEffect(() => {
     if (!map) return;
     const ps = new kakao.maps.services.Places();
     ps.keywordSearch(keyWord, (data, status, _pagination) => {
       if (status === kakao.maps.services.Status.OK) {
-        // console.log('data', data);
+        console.log('data', data);
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
         const bounds = new kakao.maps.LatLngBounds();
@@ -51,6 +109,8 @@ export default function PlanMap() {
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
         }
         setMarkers(markers);
+        // 지도 중심 좌표 찾기
+        setCenter(map.getCenter())
 
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
         map.setBounds(bounds);
@@ -75,12 +135,13 @@ export default function PlanMap() {
   return (
     <div>
       <div style={{ position: 'absolute', left: '0vw', top: '9vh', backgroundColor: 'transparent', zIndex: '2' }}>
-        <input value={keyWord} onChange={onChange} type="text" placeholder="장소 검색 하세요" />
+        <input ref={keyWordRef} value={keyWord} onChange={onChange} onKeyPress={onClick} type="text" placeholder="장소 검색 하세요" />
         <button onClick={onClick}>검색</button>
         <button>
           <Link to="../place-cart" style={{ textDecoration: 'none', color: 'white' }}>
             장소바구니 보러가기
           </Link>
+          <button onClick={() => { alert(center) }}>console log</button>
         </button>
       </div>
 
@@ -120,7 +181,6 @@ export default function PlanMap() {
                     <div className="title">
                       {info.content}
                       <div>
-                        {' '}
                         <button className="close" onClick={() => setIsOpen(false)} title="닫기">
                           X
                         </button>

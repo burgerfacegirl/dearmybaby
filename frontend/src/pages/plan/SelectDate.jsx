@@ -14,6 +14,7 @@ const SelectDate = () => {
       startDate: new Date(),
       endDate: new Date(),
       key: 'selection',
+      destination: '',
     },
   ]);
 
@@ -44,7 +45,7 @@ const SelectDate = () => {
       style={{ padding: '3vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
       <div className="planning-div" style={{ backgroundColor: 'pink' }}>
-        <h2>함께 여행할 그룹</h2>
+        {/* <h2>함께 여행할 그룹</h2> */}
         <button onClick={getGroupData} style={{ marginBottom: '10px' }}>
           그룹 데이터 띄우기
         </button>
@@ -81,8 +82,8 @@ const SelectDate = () => {
       {/* <form onSubmit={checkTravelDates}>
         <button>날짜 체크하기</button>
       </form> */}
-      <SelectPlace />
-    </div>
+      <SelectPlace planDate={state} />
+    </div >
   );
 };
 export default SelectDate;

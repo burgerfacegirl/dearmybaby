@@ -8,23 +8,58 @@ import RecommendFoodDetail from './RecommendFoodDetail';
 import RecommendFoodList from './RecommendFoodList';
 import RecommendPlaceList from './RecommendPlaceList';
 import { useLocation } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
+import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
+import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight';
+import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 const RecommendItem = () => {
+
+  const [alignment, setAlignment] = useState('left');
+
+  const handleAlignment = (event, newAlignment) => {
+    setAlignment(newAlignment);
+  };
+
   const [food, place] = useOutletContext();
   // console.log(food, place);
   // 음식 누르면 음식 show 넎고, 장소 클릭 하면 장소에 show, 음식에 noshow
   const [onOff, setOnOff] = useState(false);
   // console.log(onOff);
 
-  const location = useLocation();
-  console.log('????', location);
-  const searchParams = new URLSearchParams(location.search);
-  console.log('????????????', searchParams);
+  // const location = useLocation();
+  // console.log('????', location);
+  // const searchParams = new URLSearchParams(location.search);
+  // console.log('????????????', searchParams);
 
   return (
     <div>
-      <button onClick={() => setOnOff(!onOff)}>음식</button>
-      <button onClick={() => setOnOff(!onOff)}>장소</button>
+      <ToggleButtonGroup
+        value={alignment}
+        exclusive
+        onChange={handleAlignment}
+        aria-label="text alignment"
+      >
+        <ToggleButton value="left" aria-label="left aligned">
+          <FormatAlignLeftIcon />
+        </ToggleButton>
+        <ToggleButton value="center" aria-label="centered">
+          <FormatAlignCenterIcon />
+        </ToggleButton>
+        <ToggleButton value="right" aria-label="right aligned">
+          <FormatAlignRightIcon />
+        </ToggleButton>
+        <ToggleButton value="justify" aria-label="justified" disabled>
+          <FormatAlignJustifyIcon />
+        </ToggleButton>
+      </ToggleButtonGroup>
+
+      <a onClick={() => setOnOff(!onOff)}>음식</a>
+      <a onClick={() => setOnOff(!onOff)}>장소</a>
 
       <div className="show-food-list" style={onOff ? { display: 'block' } : { display: 'none' }}>
         {food.map((item) => (

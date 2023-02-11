@@ -3,7 +3,8 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import path from '@/config/path';
 
 import './Home.css';
 import Dropdown from '@/commons/components/Dropdown';
@@ -121,10 +122,10 @@ export default function Home() {
 
           {/* 오늘이 여행 일정 시작 날일때 여행 시작 버튼*/}
           {member.closestPlan != null &&
-          today.getFullYear() === member.closestPlan.planDate.getFullYear() &&
-          today.getMonth() === member.closestPlan.planDate.getMonth() &&
-          today.getDate() === member.closestPlan.planDate.getDate() &&
-          member.currentPlan == null ? (
+            today.getFullYear() === member.closestPlan.planDate.getFullYear() &&
+            today.getMonth() === member.closestPlan.planDate.getMonth() &&
+            today.getDate() === member.closestPlan.planDate.getDate() &&
+            member.currentPlan == null ? (
             <div className="dday-alarm" style={{ marginBottom: '3vh' }}>
               <h4 className="dday-alarm-text">
                 오늘은 제주 여행 시작날입니다.<p></p> 기록을 시작해보세요.
@@ -227,44 +228,63 @@ export default function Home() {
       {selectFamily ? (
         <div className="recommend">
           <h3>babyname에게 추천하는 지역별 여행지</h3>
-          <Place />
+          <Link to={path.recommend}>
+            <Place />
+          </Link>
+
         </div>
       ) : null}
       {selectFamily ? (
         <div className="recommend">
           <h3>babyname에게 추천하는 지역별 축제</h3>
-          <Place />
+          <Link to={path.recommend}>
+            <Place />
+          </Link>
         </div>
       ) : null}
       {selectFamily ? (
         <div className="recommend">
           <h3>babyname에게 추천하는 지역별 식당</h3>
-          <Place />
+          <Link to={path.recommend}>
+            <Place />
+          </Link>
         </div>
       ) : null}
       <div className="recommend">
         <h3>겨울철 아이와 함께 가볼만한 여행지</h3>
-        <Weather />
+        <Link to={path.recommend}>
+          <Weather />
+        </Link>
       </div>
       <div className="recommend">
         <h3>유아기 아이들을 위한 추천 여행지</h3>
-        <Baby />
+        <Link to={path.recommend}>
+          <Baby />
+        </Link>
       </div>
       <div className="recommend">
         <h3>유년기 아이들을 위한 추천 여행지</h3>
-        <Baby2 />
+        <Link to={path.recommend}>
+          <Baby2 />
+        </Link>
       </div>
       <div className="recommend">
         <h3>어린이들을 위한 추천 여행지</h3>
-        <Baby3 />
+        <Link to={path.recommend}>
+          <Baby3 />
+        </Link>
       </div>
       <div className="recommend">
         <h3>남자 아이들을 위한 추천 여행지</h3>
-        <Man />
+        <Link to={path.recommend}>
+          <Man />
+        </Link>
       </div>
       <div className="recommend">
         <h3>여자 아이들을 위한 추천 여행지</h3>
-        <Woman />
+        <Link to={path.recommend}>
+          <Woman />
+        </Link>
       </div>
     </div>
   );
