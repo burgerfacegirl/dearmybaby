@@ -2,63 +2,62 @@ import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import PlaceBasket from './PlaceBasket';
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import zIndex from '@mui/material/styles/zIndex';
-import { Bookmark } from '@mui/icons-material';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const kakao = window.kakao;
 
 export default function PlanMap() {
-
   // 첫 검색어 중심 좌표 데이터
   const centerPosition = [
     {
       name: '인천',
       lat: 37.46851971059556,
-      lng: 126.5603574796912
+      lng: 126.5603574796912,
     },
     {
       name: '강릉',
       lat: 37.56682420267543,
-      lng: 126.978652258823
+      lng: 126.978652258823,
     },
     {
       name: '가평',
       lat: 37.794925860731155,
-      lng: 127.43003430442482
+      lng: 127.43003430442482,
     },
     {
       name: '경주',
       lat: 35.84406257358352,
-      lng: 129.31227082127992
+      lng: 129.31227082127992,
     },
     {
       name: '부산',
       lat: 35.16452868872296,
-      lng: 129.12659300510325
+      lng: 129.12659300510325,
     },
     {
       name: '여수',
       lat: 37.794925860731155,
-      lng: 127.43003430442482
+      lng: 127.43003430442482,
     },
     {
       name: '제주',
       lat: 37.794925860731155,
-      lng: 127.43003430442482
+      lng: 127.43003430442482,
     },
     {
       name: '전주',
       lat: 37.794925860731155,
-      lng: 127.43003430442482
+      lng: 127.43003430442482,
     },
-  ]
+  ];
 
-  const location = useLocation()
-  const propWord = location.state?.keyword
+  const location = useLocation();
+  const propWord = location.state?.keyword;
   // console.log('proped from SelectPlace:', propWord)
-  const initKeyword = propWord + ' 여행'
+  const initKeyword = propWord + ' 여행';
 
-  const keyWordRef = useRef()
+  const keyWordRef = useRef();
 
   const [info, setInfo] = useState();
   const [markers, setMarkers] = useState([]);
@@ -66,7 +65,7 @@ export default function PlanMap() {
   const [keyWord, setKeyWord] = useState(initKeyword);
   const [isOpen, setIsOpen] = useState(false);
   const [placeBasket, setPlaceBasket] = useState([]);
-  const [center, setCenter] = useState()
+  const [center, setCenter] = useState();
 
   // 검색어 상태 변화
   const onChange = (e) => {
@@ -75,12 +74,11 @@ export default function PlanMap() {
 
   // 검색 키워드
   const onClick = () => {
-    console.log(keyWordRef.current.value)
-    setKeyWord(keyWordRef.current.value)
+    console.log(keyWordRef.current.value);
+    setKeyWord(keyWordRef.current.value);
     // console.log({ info });
     // console.log(searchWord);
   };
-
 
   // 검색할 때 마다 실행
   useEffect(() => {
@@ -105,12 +103,13 @@ export default function PlanMap() {
             placeURL: data[i].place_url,
             categoryCode: data[i].category_group_code,
             roadAddressName: data[i].road_address_name,
+            categoryGroupName: data[i].category_group_name,
           });
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
         }
         setMarkers(markers);
         // 지도 중심 좌표 찾기
-        setCenter(map.getCenter())
+        setCenter(map.getCenter());
 
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
         map.setBounds(bounds);
@@ -135,13 +134,26 @@ export default function PlanMap() {
   return (
     <div>
       <div style={{ position: 'absolute', left: '0vw', top: '9vh', backgroundColor: 'transparent', zIndex: '2' }}>
-        <input ref={keyWordRef} value={keyWord} onChange={onChange} onKeyPress={onClick} type="text" placeholder="장소 검색 하세요" />
+        <input
+          ref={keyWordRef}
+          value={keyWord}
+          onChange={onChange}
+          onKeyPress={onClick}
+          type="text"
+          placeholder="장소 검색 하세요"
+        />
         <button onClick={onClick}>검색</button>
         <button>
           <Link to="../place-cart" style={{ textDecoration: 'none', color: 'white' }}>
             장소바구니 보러가기
           </Link>
-          <button onClick={() => { alert(center) }}>console log</button>
+          <button
+            onClick={() => {
+              alert(center);
+            }}
+          >
+            console log
+          </button>
         </button>
       </div>
 
@@ -176,16 +188,37 @@ export default function PlanMap() {
                   lng: info.position.lng,
                 }}
               >
-                <div className="wrap" style={{ backgroundColor: 'white' }}>
+                <div
+                  className="wrap"
+                  style={{
+                    backgroundColor: 'white',
+                    padding: '5%',
+                    borderRadius: '5%',
+                    boxShadow: '1px 1px 5px rgba(0, 0, 0, 0.05)',
+                    whiteSpace: 'pre-wrap',
+                    width: '180px',
+                  }}
+                >
+                  <button
+                    className="close"
+                    onClick={() => setIsOpen(false)}
+                    title="닫기"
+                    style={{
+                      fontSize: '0.6rem',
+                      fontWeight: '900',
+                      padding: '1% 3%',
+                      position: 'absolute',
+                      top: '3%',
+                      right: '2%',
+                    }}
+                  >
+                    X
+                  </button>
                   <div className="info">
-                    <div className="title">
+                    <div className="title" style={{ fontWeight: '700', margin: '4% 1%' }}>
                       {info.content}
-                      <div>
-                        <button className="close" onClick={() => setIsOpen(false)} title="닫기">
-                          X
-                        </button>
-                      </div>
                     </div>
+                    <div style={{ fontSize: '0.8rem', color: 'rgba(0, 0, 0, 0.7)' }}>{info.categoryGroupName}</div>
                     <div className="body">
                       <div className="img">
                         {/* <img
@@ -196,18 +229,30 @@ export default function PlanMap() {
                         /> */}
                       </div>
                       <div className="desc">
-                        <div className="ellipsis">{info.roadAddressName}</div>
+                        <div className="ellipsis" style={{ fontSize: '0.9rem' }}>
+                          {info.roadAddressName}
+                        </div>
                         <div className="jibun ellipsis">{info.addressName}</div>
                         <div>
-                          <a href={info.placeURL} target="_blank" className="link" rel="noreferrer">
-                            디테일
+                          <a
+                            href={info.placeURL}
+                            target="_blank"
+                            className="link"
+                            rel="noreferrer"
+                            style={{ fontSize: '0.9rem' }}
+                          >
+                            상세정보
                           </a>
                           {placeBasket.includes(info) ? (
-                            <button onClick={{}}>삭제</button>
+                              <FavoriteIcon
+                                style={{ color: 'tomato', fontSize: '1.5rem', position: 'absolute', right: '5%' }}
+                                onClick={addToBookMark}
+                              ></FavoriteIcon>
                           ) : (
-                            <div>
-                              <button onClick={addToBookMark}>추가</button>
-                            </div>
+                            <FavoriteBorderIcon
+                              style={{ color: 'tomato', fontSize: '1.5rem', position: 'absolute', right: '5%' }}
+                              onClick={addToBookMark}
+                            ></FavoriteBorderIcon>
                           )}
                         </div>
                       </div>

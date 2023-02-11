@@ -8,7 +8,7 @@ import { apiGetMemberFamilyList } from '@/commons/api/member';
 
 const SelectDate = () => {
   const navigate = useNavigate();
-  const [memberFamily, setmemberFamily] = useState('이 없습니다');
+  // const [memberFamily, setmemberFamily] = useState('이 없습니다');
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -27,62 +27,49 @@ const SelectDate = () => {
     );
   };
 
-  function saveTravelDates(e) {
-    localStorage.setItem('travelDates', JSON.stringify(state));
-  }
-
-  const getGroupData = () => {
-    apiGetMemberFamilyList(1).then(({ data }) => {
-      console.log(data);
-      setmemberFamily(data[0].familyName);
-      return data;
-    });
-  };
+  // const getGroupData = () => {
+  //   apiGetMemberFamilyList(1).then(({ data }) => {
+  //     console.log(data);
+  //     setmemberFamily(data[0].familyName);
+  //     return data;
+  //   });
+  // };
 
   return (
     <div
       className="plan-frame"
-      style={{ padding: '3vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
-      <div className="planning-div" style={{ backgroundColor: 'pink' }}>
-        {/* <h2>함께 여행할 그룹</h2> */}
+      {/* <div className="planning-div" style={{ backgroundColor: 'pink' }}>
+         <h2>함께 여행할 그룹</h2> 
         <button onClick={getGroupData} style={{ marginBottom: '10px' }}>
           그룹 데이터 띄우기
         </button>
         {memberFamily}
-      </div>
+      </div> */}
 
+      
       <div
-        className="planning-div"
         style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          padding: '5%',
-          boxShadow: '2px 2px 15px rgba(217, 217, 217, 1)',
-          borderRadius: '5px',
         }}
       >
-        <h2 style={{ marginBottom: '5%' }}>여행하실 날짜를 선택해주세요</h2>
+        <h3 style={{ margin: '5%' }}>여행 일정 등록</h3>
         <DateRange
           editableDateInputs={true}
           onChange={(item) => setState([item.selection])}
           moveRangeOnFirstSelection={false}
           ranges={state}
         />
-        <button
-          onClick={() => {
-            navigate('/plan/find-city');
-            saveTravelDates();
-          }}
-        >
-          날짜 저장하기
-        </button>
+        
+      <SelectPlace planDate={state}/>
+
       </div>
       {/* <form onSubmit={checkTravelDates}>
         <button>날짜 체크하기</button>
       </form> */}
-      <SelectPlace planDate={state} />
     </div >
   );
 };

@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import path from '@/config/path';
 import { useEffect, useState } from 'react';
 // import './SelectPlace.css';
 
 const SelectPlace = (props) => {
+  const navigate = useNavigate();
   const tripDate = props.planDate
   const [destination, setDestination] = useState('')
   const [trip, setTrip] = useState([...tripDate])
@@ -14,11 +15,13 @@ const SelectPlace = (props) => {
 
   console.log(destination)
 
-
+  const createPlan = () => {
+    
+  }
 
   return (
     <div className="plan-frame" style={{ padding: '3vh', textAlign: 'center' }}>
-      <h3>여행하실 지역을 선택해주세요</h3>
+      <h3>여행 지역 선택</h3>
       <table>
         <tr>
           <td>
@@ -67,7 +70,14 @@ const SelectPlace = (props) => {
           </td>
         </tr>
       </table>
-
+      <button
+          onClick={() => {
+            navigate('/plan/find-city');
+            createPlan();
+          }}
+        >
+          선택 완료
+        </button>
     </div>
   );
 };

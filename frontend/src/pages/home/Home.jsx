@@ -15,10 +15,9 @@ import Baby2 from './Baby2';
 import Baby3 from './Baby3';
 import Man from './Man';
 import Woman from './Woman';
-
 import { useMember, useMemberReload, useMemberAuth } from '@/commons/MemberContext';
-import { apiUpdateMemberCurrentPlanId } from '@/commons/api/member';
-
+import { apiGetMember, apiUpdateMemberCurrentPlanId } from '@/commons/api/member';
+import FamilyForm from '../user/FamilyForm';
 // 접속한 유저 그룹의 plans 다 가져와야함
 const dummyUser = {
   userId: 'ssafy',
@@ -39,11 +38,11 @@ export default function Home() {
   const member = useMember();
   const memberReload = useMemberReload();
   const auth = useMemberAuth();
-
+  
   // 최초에 한번 회원정보를 최신화한다
   useEffect(() => memberReload, []);
-
   const [selectFamily, setSelectFamily] = useState(null);
+  // const [makeFamily, setMakeFamily] = useState(null);
   const [view, setView] = useState(false);
   const navigate = useNavigate();
 
@@ -57,29 +56,7 @@ export default function Home() {
 
   return (
     <div className="main-div">
-      {/* //   <button
-    //     onClick={() => {
-    //       apiCreateDay();
-    //     }}
-    //   >
-    //     생성
-    //   </button>
-    //   <button
-    //     onClick={() => {
-    //       apiGetRecordList(6, 13).then(({ data }) => setRecords(data));
-    //     }}
-    //   >
-    //     기록 조회
-    //   </button> */}
-
-      {/* {records ? console.log(records) : null}
-      <button
-        onClick={() => {
-          apiCreateDay(4);
-        }}
-      >
-        날짜 생성
-      </button> */}
+      
       <div
         style={{
           display: 'flex',
@@ -141,7 +118,7 @@ export default function Home() {
                 여행 시작
               </button>
             </div>
-          ) : null}
+          ) : null} 
           {selectFamily ? (
             <div className="plan-append">
               <h3 className="plan-append-text">babyname과 여행할 지역을 고르셨나요?</h3>
@@ -192,8 +169,8 @@ export default function Home() {
                     setView(!view);
                   }}
                 >
-                  가족 선택하기 {view ? ' ⌃' : ' ⌄'}
-                  {view && <Dropdown setSelectFamily={setSelectFamily} />}
+                  가족 선택하기 {view ? '▲' : '▼'}
+                  {view && <Dropdown setSelectFamily={setSelectFamily}/>}
                 </ul>
               </div>
               <div
@@ -203,7 +180,8 @@ export default function Home() {
                   style={{ height: '30px', width: '130px', margin: '10px', marginRight: '10px', fontSize: '13px' }}
                   className="dday-alarm-button2"
                   onClick={() => {
-                    navigate(`/user/make-group`);
+                    navigate('user/make-group')
+                    // setMakeFamily(!makeFamily);
                   }}
                 >
                   가족 그룹 만들기
@@ -213,7 +191,6 @@ export default function Home() {
                   style={{ height: '30px', width: '130px', margin: '10px', marginLeft: '5px', fontSize: '13px' }}
                   className="dday-alarm-button2"
                   onClick={() => {
-                    //
                     navigate(`/record`);
                   }}
                 >
@@ -224,7 +201,11 @@ export default function Home() {
           )}
         </div>
       )}
-      {/* <hr /> */}
+
+
+      {/* {member != null && (
+        makeFamily ? <div className='user-plan' style={{padding:'3vh', borderRadius: '0'}}><div className='plan-append'><FamilyForm/></div></div> : null
+      )} */}
       {selectFamily ? (
         <div className="recommend">
           <h3>babyname에게 추천하는 지역별 여행지</h3>
