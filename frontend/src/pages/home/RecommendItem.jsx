@@ -8,12 +8,10 @@ import RecommendFoodDetail from './RecommendFoodDetail';
 import RecommendFoodList from './RecommendFoodList';
 import RecommendPlaceList from './RecommendPlaceList';
 import { useLocation } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
-import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
-import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
-import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight';
-import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
+
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
@@ -38,28 +36,26 @@ const RecommendItem = () => {
 
   return (
     <div>
-      <ToggleButtonGroup
-        value={alignment}
-        exclusive
-        onChange={handleAlignment}
-        aria-label="text alignment"
-      >
-        <ToggleButton value="left" aria-label="left aligned">
-          <FormatAlignLeftIcon />
-        </ToggleButton>
-        <ToggleButton value="center" aria-label="centered">
-          <FormatAlignCenterIcon />
-        </ToggleButton>
-        <ToggleButton value="right" aria-label="right aligned">
-          <FormatAlignRightIcon />
-        </ToggleButton>
-        <ToggleButton value="justify" aria-label="justified" disabled>
-          <FormatAlignJustifyIcon />
-        </ToggleButton>
-      </ToggleButtonGroup>
+      <div className='recommend__bar'>
 
-      <a onClick={() => setOnOff(!onOff)}>음식</a>
-      <a onClick={() => setOnOff(!onOff)}>장소</a>
+        <ToggleButtonGroup
+          value={alignment}
+          exclusive
+          onChange={handleAlignment}
+          aria-label="text alignment"
+        >
+          <a onClick={() => setOnOff(true)}>
+            <ToggleButton value="left" aria-label="left aligned" style={{ width: '200px', borderBottom: 'none' }}>
+              음식
+            </ToggleButton>
+          </a>
+          <a onClick={() => setOnOff(false)}>
+            <ToggleButton value="center" aria-label="centered" style={{ width: '200px', borderBottom: 'none' }}>
+              장소
+            </ToggleButton>
+          </a>
+        </ToggleButtonGroup>
+      </div>
 
       <div className="show-food-list" style={onOff ? { display: 'block' } : { display: 'none' }}>
         {food.map((item) => (
@@ -72,7 +68,7 @@ const RecommendItem = () => {
           <RecommendPlaceList key={item.address} data={item}></RecommendPlaceList>
         ))}
       </div>
-    </div>
+    </div >
   );
 };
 

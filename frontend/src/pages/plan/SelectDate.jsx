@@ -41,14 +41,14 @@ const SelectDate = () => {
       style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
       {/* <div className="planning-div" style={{ backgroundColor: 'pink' }}>
-         <h2>함께 여행할 그룹</h2> 
+         <h2>함께 여행할 그룹</h2>
         <button onClick={getGroupData} style={{ marginBottom: '10px' }}>
           그룹 데이터 띄우기
         </button>
         {memberFamily}
       </div> */}
 
-      
+
       <div
         style={{
           display: 'flex',
@@ -63,9 +63,18 @@ const SelectDate = () => {
           moveRangeOnFirstSelection={false}
           ranges={state}
         />
-        
-      <SelectPlace planDate={state}/>
 
+        <SelectPlace planDate={state} />
+
+        <button
+          onClick={() => {
+            // navigate('/plan/find-city');
+            saveTravelDates();
+            alert('저장 되었습니다.')
+          }}
+        >
+          날짜 저장하기
+        </button>
       </div>
       {/* <form onSubmit={checkTravelDates}>
         <button>날짜 체크하기</button>

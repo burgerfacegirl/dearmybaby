@@ -2,6 +2,11 @@ import { apiCreatePlan } from '@/commons/api/plan';
 import { useState, useEffect, Fragment } from 'react';
 import { Map as KakaoMap, MapMarker, CustomOverlayMap, Polyline } from 'react-kakao-maps-sdk';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+// import { faLocationDot } from '@fortawesome/free-regular-svg-icons';
+// import { faLocationDot } from '@fortawesome/free-light-svg-icons';
+
 // color pallete
 const colorPallete = ['red', 'blue', 'green', 'yellow', 'yellowgreen', 'pink'];
 
@@ -34,7 +39,7 @@ const dummyCart = [
     placeURL: 'https://place.map.kakao.com/17884744',
     categoryCode: '카페',
     roadAddressName: '로',
-    color: 'black',
+    color: '',
     day: 0,
   },
   {
@@ -47,7 +52,7 @@ const dummyCart = [
     placeURL: 'https://place.map.kakao.com/17884744',
     categoryCode: '카페',
     roadAddressName: '로',
-    color: 'black',
+    color: '',
     day: 0,
   },
   {
@@ -60,7 +65,7 @@ const dummyCart = [
     placeURL: 'https://place.map.kakao.com/17884744',
     categoryCode: '카페',
     roadAddressName: '로',
-    color: 'black',
+    color: '',
     day: 0,
   },
   {
@@ -73,7 +78,7 @@ const dummyCart = [
     placeURL: 'https://place.map.kakao.com/17884744',
     categoryCode: '카페',
     roadAddressName: '로',
-    color: 'black',
+    color: '',
     day: 0,
   },
   {
@@ -86,7 +91,7 @@ const dummyCart = [
     placeURL: 'https://place.map.kakao.com/17884744',
     categoryCode: '카페',
     roadAddressName: '로',
-    color: 'black',
+    color: '',
     day: 0,
   },
   {
@@ -99,7 +104,7 @@ const dummyCart = [
     placeURL: 'https://place.map.kakao.com/17884744',
     categoryCode: '카페',
     roadAddressName: '로',
-    color: 'black',
+    color: '',
     day: 0,
   },
 ];
@@ -133,6 +138,32 @@ const PlaceCart = () => {
       </button>
     ));
   };
+
+
+  //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // 마커를 클릭 했을 때 실행 되는 함수
   function handleMarkerClick(content) {
@@ -259,8 +290,8 @@ const PlaceCart = () => {
             <CustomOverlayMap position={place.position}>
               <div
                 onClick={() => handleMarkerClick(place.content)}
-                style={{ width: '32px', height: '32px', backgroundColor: place.color }}
-              ></div>
+                style={{ width: '32px', height: '32px' }}
+              > <FontAwesomeIcon icon={faLocationDot} size="2x" color={place.color} /></div>
             </CustomOverlayMap>
           </Fragment>
         ))}

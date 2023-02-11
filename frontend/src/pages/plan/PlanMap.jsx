@@ -54,6 +54,8 @@ export default function PlanMap() {
 
   const location = useLocation();
   const propWord = location.state?.keyword;
+  const propLat = location.state?.lat;
+  const propLng = location.state?.lng;
   // console.log('proped from SelectPlace:', propWord)
   const initKeyword = propWord + ' 여행';
 
@@ -62,7 +64,14 @@ export default function PlanMap() {
   const [info, setInfo] = useState();
   const [markers, setMarkers] = useState([]);
   const [map, setMap] = useState();
+
+
   const [keyWord, setKeyWord] = useState(initKeyword);
+  const [initLat, setInitLat] = useState(propLat)   // 최초 위도
+  const [initLng, setInitLng] = useState(propLng)   // 최초 경도
+
+
+
   const [isOpen, setIsOpen] = useState(false);
   const [placeBasket, setPlaceBasket] = useState([]);
   const [center, setCenter] = useState();
@@ -80,13 +89,50 @@ export default function PlanMap() {
     // console.log(searchWord);
   };
 
+  // 랜더링 되고 최초로 한번만 실행하는 useEffect 함수
+  useEffect(() => {
+    console.log('just checking');
+    const ps = new kakao.maps.services.Places();
+    ps.keywordSearch(keyWord, (data, status, _pagination) => {
+      if (status === kakao.maps.services.Status.OK) {
+        // console.log('data', data);
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+        // LatLngBounds 객체에 좌표를 추가합니다
+        const bounds = new kakao.maps.LatLngBounds();
+        let markers = [];
+
+        for (var i = 0; i < data.length; i++) {
+          markers.push({
+            position: {
+              lat: data[i].y,
+              lng: data[i].x,
+            },
+            content: data[i].place_name,
+            adressName: data[i].address_name,
+            placeURL: data[i].place_url,
+            categoryCode: data[i].category_group_code,
+            roadAddressName: data[i].road_address_name,
+          });
+          bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        }
+        setMarkers(markers);
+        // 지도 중심 좌표 찾기
+        // setCenter(map.getCenter())
+
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+        // map.setBounds(bounds);
+      }
+    });
+
+  }, [])
+
   // 검색할 때 마다 실행
   useEffect(() => {
     if (!map) return;
     const ps = new kakao.maps.services.Places();
     ps.keywordSearch(keyWord, (data, status, _pagination) => {
       if (status === kakao.maps.services.Status.OK) {
-        console.log('data', data);
+        // console.log('data', data);
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
         const bounds = new kakao.maps.LatLngBounds();
@@ -159,14 +205,14 @@ export default function PlanMap() {
 
       <Map // 로드뷰를 표시할 Container
         center={{
-          lat: 37.566826,
-          lng: 126.9786567,
+          lat: initLat,
+          lng: initLng,
         }}
         style={{
           width: '100%',
           height: '100vh',
         }}
-        level={3}
+        level={10}
         onCreate={setMap}
       >
         {markers.map((marker) => (
@@ -244,10 +290,10 @@ export default function PlanMap() {
                             상세정보
                           </a>
                           {placeBasket.includes(info) ? (
-                              <FavoriteIcon
-                                style={{ color: 'tomato', fontSize: '1.5rem', position: 'absolute', right: '5%' }}
-                                onClick={addToBookMark}
-                              ></FavoriteIcon>
+                            <FavoriteIcon
+                              style={{ color: 'tomato', fontSize: '1.5rem', position: 'absolute', right: '5%' }}
+                              onClick={addToBookMark}
+                            ></FavoriteIcon>
                           ) : (
                             <FavoriteBorderIcon
                               style={{ color: 'tomato', fontSize: '1.5rem', position: 'absolute', right: '5%' }}

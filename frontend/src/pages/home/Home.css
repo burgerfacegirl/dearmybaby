@@ -197,6 +197,11 @@
   }
 }
 
+.recommend__bar {
+  display: flex;
+  justify-content: center;
+}
+
 .reco-item {
   display: flex;
   /* margin-block: 3vh; */

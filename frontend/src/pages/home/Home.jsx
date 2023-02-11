@@ -63,7 +63,7 @@ export default function Home() {
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '6%',
-          // backgroundColor: 'rgba(47, 54, 129, 0.597)',
+          backgroundColor: 'rgba(47, 54, 129, 0.597)',
           height: '220px',
         }}
       >

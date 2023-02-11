@@ -34,3 +34,19 @@
   height: 20%;
   overflow: scroll;
 }
+
+.plan__cityframe {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  margin: 3%;
+  box-shadow: 2px 2px 15px rgba(217, 217, 217, 1);
+  border-radius: 5px;
+}
+
+.city__table {
+  width: 90%;
+  margin: 5%;
+  padding: 5%;
+
+}
