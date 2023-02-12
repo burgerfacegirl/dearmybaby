@@ -57,7 +57,7 @@ export default function PlanMap() {
   const propLat = location.state?.lat;
   const propLng = location.state?.lng;
   // console.log('proped from SelectPlace:', propWord)
-  const initKeyword = propWord + ' 여행';
+  const initKeyword = propWord;
 
   const keyWordRef = useRef();
 
@@ -65,7 +65,7 @@ export default function PlanMap() {
   const [markers, setMarkers] = useState([]);
   const [map, setMap] = useState();
 
-
+  // 지역선택 안했을 경우 ..?
   const [keyWord, setKeyWord] = useState(initKeyword);
   const [initLat, setInitLat] = useState(propLat)   // 최초 위도
   const [initLng, setInitLng] = useState(propLng)   // 최초 경도

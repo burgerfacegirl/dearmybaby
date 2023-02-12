@@ -66,8 +66,9 @@ const SelectDate = () => {
         <button
           onClick={() => {
             // navigate('/plan/find-city');
-            saveTravelDates();
-            alert('저장 되었습니다.')
+            setState([...state]);
+            console.log(state);
+            alert('저장 되었습니다.', state)
           }}
         >
           날짜 저장하기

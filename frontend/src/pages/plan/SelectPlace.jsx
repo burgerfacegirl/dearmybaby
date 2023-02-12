@@ -36,61 +36,78 @@ const SelectPlace = (props) => {
           <td>
             <button
               onClick={(e) => setPlanInfo(e.target.innerHTML, { keyword: '가평', lat: 37.794925, lng: 127.43003 })}
-              style={{ textDecoration: 'none' }}>
+              style={{ backgroundColor: 'white', color: 'black' }}>
               가평 양평
             </button>
           </td>
-          <td
-
-            onClick={(e) => setDestination(e.target.innerHTML)}
-            state={{ keyword: '강릉', lat: 37.82170338925371, lng: 128.81883505712997 }} style={{ textDecoration: 'none' }}>
-            강릉 속초
+          <td>
+            <button
+              onClick={(e) => setPlanInfo(e.target.innerHTML, { keyword: '강릉', lat: 37.82170338925371, lng: 128.81883505712997 })}
+              style={{ backgroundColor: 'white', color: 'black' }}>
+              강릉 속초
+            </button>
           </td>
         </tr>
         <tr>
-          <td
-            onClick={(e) => setDestination(e.target.innerHTML)}
-            state={{ keyword: '경주', lat: 35.84406257, lng: 129.3122708 }} style={{ textDecoration: 'none' }}>
-            경주
+          <td>
+            <button
+              onClick={(e) => setPlanInfo(e.target.innerHTML, { keyword: '경주', lat: 35.84406257, lng: 129.3122708 })}
+              style={{ backgroundColor: 'white', color: 'black' }}>
+              경주
+            </button>
           </td>
-          <td
-            onClick={(e) => setDestination(e.target.innerHTML)}
-            state={{ keyword: '부산', lat: 35.16452868, lng: 129.1265930 }} style={{ textDecoration: 'none' }}>
-            부산
-          </td>
-        </tr><tr>
-          <td
-            onClick={(e) => setDestination(e.target.innerHTML)}
-            state={{ keyword: '여수', lat: 37.566689049201976, lng: 126.9786296593204 }} style={{ textDecoration: 'none' }}>
-            여수
-          </td>
-          <td
-            onClick={(e) => setDestination(e.target.innerHTML)}
-            state={{ keyword: '인천', lat: 37.49330981561231, lng: 126.6857071575943 }} style={{ textDecoration: 'none' }}>
-            인천
+          <td>
+            <button
+              onClick={(e) => setPlanInfo(e.target.innerHTML, { keyword: '부산', lat: 35.16452868, lng: 129.1265930 })}
+              style={{ backgroundColor: 'white', color: 'black' }}>
+              부산
+            </button>
           </td>
         </tr><tr>
-          <td
-            onClick={(e) => setDestination(e.target.innerHTML)}
-            state={{ keyword: '전주', lat: 35.83400122960501, lng: 127.11543703651175 }} style={{ textDecoration: 'none' }}>
-            전주
+          <td>
+            <button
+              onClick={(e) => setPlanInfo(e.target.innerHTML, { keyword: '여수', lat: 37.566689049201976, lng: 126.9786296593204 })}
+              style={{ backgroundColor: 'white', color: 'black' }}>
+              여수
+            </button>
           </td>
-          <td
-            onClick={(e) => setDestination(e.target.innerHTML)}
-            state={{ keyword: '제주', lat: 33.35648516254793, lng: 126.46454584465897 }} style={{ textDecoration: 'none' }}>
-            제주
+          <td>
+            <button
+              onClick={(e) => setPlanInfo(e.target.innerHTML, { keyword: '인천', lat: 37.49330981561231, lng: 126.6857071575943 })}
+              style={{ backgroundColor: 'white', color: 'black' }}>
+              인천
+            </button>
+          </td>
+        </tr><tr>
+          <td>
+            <button
+              onClick={(e) => setPlanInfo(e.target.innerHTML, { keyword: '전주', lat: 35.83400122960501, lng: 127.11543703651175 })}
+              style={{ backgroundColor: 'white', color: 'black' }}>
+              전주
+            </button>
+          </td>
+          <td>
+            <button
+              onClick={(e) => setPlanInfo(e.target.innerHTML, { keyword: '제주', lat: 33.35648516254793, lng: 126.46454584465897 })}
+              style={{ backgroundColor: 'white', color: 'black' }}>
+              제주
+            </button>
           </td>
         </tr>
       </table>
-      <button>
+      <button style={{ backgroundColor: 'white', color: 'black', textDecoration: 'none' }}>
         <Link
           to={path.planFindCity}
           onClick={() => {
-            console.log('???????????', initLoc);
+            // prop 받은 날짜 정보, destination 저장하는 함수
+            setTrip(
+              [...tripDate, trip[0].destination = destination]
+            )
+            console.log(trip)
             navigate('/plan/find-city');
-            createPlan(); //family-id, plan-id,
           }}
           state={{ keyword: initLoc.keyword, lat: initLoc.lat, lng: initLoc.lng }}
+          style={{ textDecoration: 'none' }}
         >
           계획 생성
         </Link>
