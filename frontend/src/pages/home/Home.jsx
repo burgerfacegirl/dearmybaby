@@ -16,9 +16,8 @@ import Baby3 from './Baby3';
 import Man from './Man';
 import Woman from './Woman';
 import { useMember, useMemberReload, useMemberAuth } from '@/commons/MemberContext';
-import { apiGetMember, apiUpdateMemberCurrentPlanId } from '@/commons/api/member';
-import FamilyForm from '../user/FamilyForm';
-import { apiCreateBaby, apiGetBaby, apiGetBabyList } from '@/commons/api/baby';
+import { apiUpdateMemberCurrentPlanId } from '@/commons/api/member';
+import { apiGetBabyList } from '@/commons/api/baby';
 
 // 접속한 유저 그룹의 plans 다 가져와야함
 const dummyUser = {
@@ -40,23 +39,24 @@ export default function Home() {
   const member = useMember();
   const memberReload = useMemberReload();
   const auth = useMemberAuth();
-  const [selectFamily, setSelectFamily] = useState(null);
+  const [familyId, setFamilyId] = useState(null);
   const [familyName, setFamilyName] = useState(null);
-  const [babyName, setBabyName] = useState('호호');
+  const [babyName, setBabyName] = useState('');
   // 최초에 한번 회원정보를 최신화한다
   useEffect(() => memberReload, []);
   useEffect(() => {
     if (window.localStorage.getItem('familyId')) {
-      // setSelectFamily(window.localStorage.getItem('familyId'));
-      setFamilyName(window.localStorage.getItem('familyName'))
-
+      setFamilyId(window.localStorage.getItem('familyId'));
+      setFamilyName(window.localStorage.getItem('familyName'));
+      apiGetBabyList(familyId).then((res) => {
+        setBabyName(res.data[0].babyName);
+      })
     }
-    console.log(familyName);
   }, [familyName]);
   const [view, setView] = useState(false);
   const navigate = useNavigate();
-  // 오늘 날짜가 계획 시작 날짜와 같은지 체크 (여행 시작 중이 아니면)
 
+  // 오늘 날짜가 계획 시작 날짜와 같은지 체크 (여행 시작 중이 아니면)
   const today = new Date();
   // const isToday =
   // member.closestPlan != null &&
@@ -66,8 +66,6 @@ export default function Home() {
 
   return (
     <div className="main-div">
-      <button onClick={() => { alert(familyName) }}></button>
-      <button onClick={() => { alert(selectFamily) }}></button>
       <div
         style={{
           display: 'flex',
@@ -107,23 +105,25 @@ export default function Home() {
               </button>
             </div>
           ) : null}
-          <h4 className="plan-append-text">{member.memberName}님 {'      '}
-            <span
-              onClick={() => {
-                setView(!view);
-              }}
-            >
-              {familyName} {view ? '▲' : '▼'}
-              {view && <Dropdown setSelectFamily={setSelectFamily} setFamilyName={setFamilyName} setBabyName={setBabyName} />}
-            </span>
-            과 함께 해보세요!</h4>
+          <>
+          <h4 className="plan-append-text"><h2 style={{display
+          : 'inline'}}>{member.memberName}</h2>님
+            <ul style={{display: 'inline', padding: '0', marginLeft: '2%'}}
+                onClick={() => {
+                  setView(!view);
+                }}
+              >
+                {familyName}{view ? '▲' : '▼'}
+                {view && <Dropdown setFamilyId={setFamilyId} setBabyName={setBabyName} setFamilyName={setFamilyName}/>}
+              </ul>과(와) 함께 해보세요!</h4>
+            </>
 
           {/* 오늘이 여행 일정 시작 날일때 여행 시작 버튼*/}
           {member.closestPlan != null &&
-            today.getFullYear() === member.closestPlan.planDate.getFullYear() &&
-            today.getMonth() === member.closestPlan.planDate.getMonth() &&
-            today.getDate() === member.closestPlan.planDate.getDate() &&
-            member.currentPlan == null ? (
+          today.getFullYear() === member.closestPlan.planDate.getFullYear() &&
+          today.getMonth() === member.closestPlan.planDate.getMonth() &&
+          today.getDate() === member.closestPlan.planDate.getDate() &&
+          member.currentPlan == null ? (
             <div className="dday-alarm" style={{ marginBottom: '3vh' }}>
               <h4 className="dday-alarm-text">
                 오늘은 제주 여행 시작날입니다.<p></p> 기록을 시작해보세요.
@@ -140,7 +140,6 @@ export default function Home() {
               </button>
             </div>
           ) : null}
-
           <div className="plan-append">
             <h3 className="plan-append-text">{babyName}과 여행할 지역을 고르셨나요?</h3>
             <div
@@ -182,7 +181,7 @@ export default function Home() {
         </div>
       )}
 
-      {selectFamily ? (
+      {familyId ? (
         <div className="recommend">
           <h3>{babyName}에게 추천하는 지역별 여행지</h3>
           <Link to={path.recommend}>
@@ -190,7 +189,7 @@ export default function Home() {
           </Link>
         </div>
       ) : null}
-      {selectFamily ? (
+      {familyId ? (
         <div className="recommend">
           <h3>{babyName}에게 추천하는 지역별 축제</h3>
           <Link to={path.recommend}>
@@ -198,7 +197,7 @@ export default function Home() {
           </Link>
         </div>
       ) : null}
-      {selectFamily ? (
+      {familyId ? (
         <div className="recommend">
           <h3>{babyName}에게 추천하는 지역별 식당</h3>
           <Link to={path.recommend}>
