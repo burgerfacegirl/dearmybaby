@@ -50,3 +50,15 @@
   padding: 5%;
 
 }
+
+.modalInfo {
+  width: 100px;
+  height: 75px;
+}
+
+.modal__body {}
+
+.modal__button {
+  display: flex;
+  flex-wrap: nowrap;
+}

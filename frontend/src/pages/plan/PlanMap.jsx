@@ -9,48 +9,7 @@ const kakao = window.kakao;
 
 export default function PlanMap() {
   // 첫 검색어 중심 좌표 데이터
-  const centerPosition = [
-    {
-      name: '인천',
-      lat: 37.46851971059556,
-      lng: 126.5603574796912,
-    },
-    {
-      name: '강릉',
-      lat: 37.56682420267543,
-      lng: 126.978652258823,
-    },
-    {
-      name: '가평',
-      lat: 37.794925860731155,
-      lng: 127.43003430442482,
-    },
-    {
-      name: '경주',
-      lat: 35.84406257358352,
-      lng: 129.31227082127992,
-    },
-    {
-      name: '부산',
-      lat: 35.16452868872296,
-      lng: 129.12659300510325,
-    },
-    {
-      name: '여수',
-      lat: 37.794925860731155,
-      lng: 127.43003430442482,
-    },
-    {
-      name: '제주',
-      lat: 37.794925860731155,
-      lng: 127.43003430442482,
-    },
-    {
-      name: '전주',
-      lat: 37.794925860731155,
-      lng: 127.43003430442482,
-    },
-  ];
+
 
   const location = useLocation();
   const propWord = location.state?.keyword;
@@ -132,7 +91,7 @@ export default function PlanMap() {
     const ps = new kakao.maps.services.Places();
     ps.keywordSearch(keyWord, (data, status, _pagination) => {
       if (status === kakao.maps.services.Status.OK) {
-        // console.log('data', data);
+        console.log('data', data);
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
         const bounds = new kakao.maps.LatLngBounds();
