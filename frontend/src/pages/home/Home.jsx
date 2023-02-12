@@ -37,7 +37,6 @@ const dummyUser = {
 };
 
 export default function Home() {
-  console.log('gg')
   const member = useMember();
   const memberReload = useMemberReload();
   const auth = useMemberAuth();
@@ -50,7 +49,7 @@ export default function Home() {
     if (window.localStorage.getItem('familyId')) {
       // setSelectFamily(window.localStorage.getItem('familyId'));
       setFamilyName(window.localStorage.getItem('familyName'))
-      
+
     }
     console.log(familyName);
   }, [familyName]);
@@ -67,8 +66,8 @@ export default function Home() {
 
   return (
     <div className="main-div">
-      <button onClick={()=>{ alert(familyName)}}></button>
-      <button onClick={()=>{ alert(selectFamily)}}></button>
+      <button onClick={() => { alert(familyName) }}></button>
+      <button onClick={() => { alert(selectFamily) }}></button>
       <div
         style={{
           display: 'flex',
@@ -108,21 +107,23 @@ export default function Home() {
               </button>
             </div>
           ) : null}
-          <h4 className="plan-append-text">{member.memberName}님<ul
-                onClick={() => {
-                  setView(!view);
-                }}
-              >
-                {familyName} {view ? '▲' : '▼'}
-                {view && <Dropdown setSelectFamily={setSelectFamily} setSelectBaby={setBabyName} />}
-              </ul>과 함께 해보세요!</h4>
+          <h4 className="plan-append-text">{member.memberName}님 {'      '}
+            <span
+              onClick={() => {
+                setView(!view);
+              }}
+            >
+              {familyName} {view ? '▲' : '▼'}
+              {view && <Dropdown setSelectFamily={setSelectFamily} setFamilyName={setFamilyName} setBabyName={setBabyName} />}
+            </span>
+            과 함께 해보세요!</h4>
 
           {/* 오늘이 여행 일정 시작 날일때 여행 시작 버튼*/}
           {member.closestPlan != null &&
-          today.getFullYear() === member.closestPlan.planDate.getFullYear() &&
-          today.getMonth() === member.closestPlan.planDate.getMonth() &&
-          today.getDate() === member.closestPlan.planDate.getDate() &&
-          member.currentPlan == null ? (
+            today.getFullYear() === member.closestPlan.planDate.getFullYear() &&
+            today.getMonth() === member.closestPlan.planDate.getMonth() &&
+            today.getDate() === member.closestPlan.planDate.getDate() &&
+            member.currentPlan == null ? (
             <div className="dday-alarm" style={{ marginBottom: '3vh' }}>
               <h4 className="dday-alarm-text">
                 오늘은 제주 여행 시작날입니다.<p></p> 기록을 시작해보세요.
@@ -139,42 +140,7 @@ export default function Home() {
               </button>
             </div>
           ) : null}
-          <div className="plan-append">
-            <h4 className="plan-append-text">{member.memberName}님 가족과 함께 해보세요!</h4>
 
-            <div className="plus-plan">
-              <ul
-                onClick={() => {
-                  setView(!view);
-                }}
-              >
-                가족 선택하기 {view ? '▲' : '▼'}
-                {view && <Dropdown setSelectFamily={setSelectFamily} setSelectBaby={setBabyName} />}
-              </ul>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'content-box' }}>
-              <button
-                style={{ height: '30px', width: '130px', margin: '10px', marginRight: '10px', fontSize: '13px' }}
-                className="dday-alarm-button2"
-                onClick={() => {
-                  navigate('user/make-group');
-                  // setMakeFamily(!makeFamily);
-                }}
-              >
-                가족 그룹 만들기
-              </button>
-
-              <button
-                style={{ height: '30px', width: '130px', margin: '10px', marginLeft: '5px', fontSize: '13px' }}
-                className="dday-alarm-button2"
-                onClick={() => {
-                  navigate(`/record`);
-                }}
-              >
-                가족 그룹 들어가기
-              </button>
-            </div>
-          </div>
           <div className="plan-append">
             <h3 className="plan-append-text">{babyName}과 여행할 지역을 고르셨나요?</h3>
             <div

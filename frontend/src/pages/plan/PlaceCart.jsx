@@ -114,12 +114,15 @@ const PlaceCart = () => {
   const [days, setDays] = useState([[], [], []]);
   const [targetDayIndex, setTargetDayIndex] = useState(0);
   const [place2dayIndex] = useState(new Map());
+  // 마커 클릭시 모달 띄우는 스위치
+  const [open, isOpen] = useState(false)
 
   let currentDay = 0;
   // 날짜를 선택 할때 마다 다른 폴리라인을 만들어야함.
   function makeHandleDay(dayIndex) {
     return () => {
       setTargetDayIndex(dayIndex);
+      console.log('targetDayIndex', targetDayIndex);
     };
   }
 
@@ -139,25 +142,30 @@ const PlaceCart = () => {
     ));
   };
 
+  // 장소 바구니 로직
+  // 마커를 클릭 했을 때
+  //    1. 모달 창 띄우기
+  //    2. 모달 창에 장소 정보 띄우기 (request.get)
+  //    3. 모달 하단에 날짜 선택하기 + 숙소로 등록하기.
+  //        ㄴ 클릭시 날짜에 해당하는 색을 가진 마커가 생성이 됨.
+  //            생성되면서 날짜별 경로에 해당장소 추가. (reques.post( day$))
+  //            숙소 등록은 하나에만.
+  // day가 적힌 버튼 클릭 했을때
+  //    1. request.get(day)에 해당하는 장소 정보 불러오기
+  //    2. 장소들 맵에 띄워주면서 경로 보여주기
+  // 경로 완료-> 홈화면으로
 
+  // 고려사항
+  // 1. 경로가 미완성일떄
+  //    장소바구니 페이지에 들어왔을때 장소바구니 좌표 전체 + 현재까지 완성된 경로 다 보여주기?
+  //    day 선택하면 그날짜  경로만 on, 나머지 day off , 장소바구니 보여주기.
   //
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  // => 현재까지 완성된 경로 보여주면서 장소바구니 목록 보여주는거 빡셀거 같으면
+  //    최초 랜더링 되었을때는 장소바구니 목록만 보여주기, 날짜 선택 했을때 경로 보여주기.
+  //
+  // 2. 경로 수정하는 방법
+  //    두번 클릭 했을때 경로에서 빠져야함.
+  //
 
 
 
@@ -167,59 +175,110 @@ const PlaceCart = () => {
 
   // 마커를 클릭 했을 때 실행 되는 함수
   function handleMarkerClick(content) {
-    // 장소 바구니 돌면서 이름이 같은 장소 색 바꾸기
-    for (let i = 0; i < places.length; i++) {
-      if (places[i].content == content) {
-        // 만일 이미 특정 날짜에 추가되어 있다면 거기서 삭제해준다
-        const prevDayIndex = place2dayIndex.get(content);
-        if (prevDayIndex != null) {
-          const day = days[prevDayIndex];
-          for (let k = 0; k < day.length; k++) {
-            if (day[k].content == content) {
-              day.splice(k);
-              break;
-            }
-          }
-        }
+    isOpen(true)
 
-        // 장소를 타겟 날짜에 해당하는 색으로 칠한다
-        places[i].color = colorPallete[targetDayIndex];
+    console.log(open);
+    return dummyCart.map((cart) => {
 
-        // 장소를 날짜에 추가한다
-        days[targetDayIndex].push(places[i]);
-        setDays([...days]);
-        place2dayIndex.set(content, targetDayIndex);
+      if (cart.content == content) {
+        <div>
 
-        break;
+          <CustomOverlayMap
+            key={cart.position.lat}
+            position={{
+              lat: cart.position.lat,
+              lng: cart.position.lng,
+            }}
+          >
+            <div
+              className="wrap"
+              style={{
+                backgroundColor: 'white',
+                padding: '5%',
+                borderRadius: '5%',
+                boxShadow: '1px 1px 5px rgba(0, 0, 0, 0.05)',
+                whiteSpace: 'pre-wrap',
+                width: '180px',
+              }}
+            >
+              <button
+                className="close"
+                onClick={() => isOpen(false)}
+                title="닫기"
+                style={{
+                  fontSize: '0.6rem',
+                  fontWeight: '900',
+                  padding: '1% 3%',
+                  position: 'absolute',
+                  top: '3%',
+                  right: '2%',
+                }}
+              >
+                X
+              </button>
+              <div className="cart">
+                <div className="title" style={{ fontWeight: '700', margin: '4% 1%' }}>
+                  {cart.content}
+                </div>
+                <div style={{ fontSize: '0.8rem', color: 'rgba(0, 0, 0, 0.7)' }}>{cart.categoryGroupName}</div>
+                <div className="body">
+                  <div className="img">
+                    {/* <img
+                          src="//t1.daumcdn.net/thumb/C84x76/?fname=http://t1.daumcdn.net/cfile/2170353A51B82DE005"
+                          width="73"
+                          height="70"
+                          alt="카카오 스페이스닷원"
+                        /> */}
+                  </div>
+                  <div className="desc">
+                    <div className="ellipsis" style={{ fontSize: '0.9rem' }}>
+                      {cart.roadAddressName}
+                    </div>
+                    {/* <div className="jibun ellipsis">{cart.addressName}</div> */}
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </CustomOverlayMap>
+        </div>
       }
-    }
-    // places.map((place) => {
-    //   if (place.content == content) {
-    //     place.color = colorPallete[targetDayIndex];
-    //     setPlaces([...places]);
-    //     const spot = { lat: place.position.lat, lng: place.position.lng };
-    //     // console.log(place.position);
-    //     // console.log(points);
-    //     //
-    //     if (points.length === 0) {
-    //       points.push(spot);
-    //     } else {
-    //       points.forEach((point) => {
-    //         console.log(point.lat === spot.lat && point.lng === spot.lng);
-    //         if (point.lat === spot.lat && point.lng === spot.lng) {
-    //           console.log('point', point);
-    //         } else {
-    //           points.push(point);
-    //         }
-    //       });
-    //     }
-    //   }
-    // });
-    // console.log('points', points);
-    // 선을 이으려면, 좌표를 points에 넣어 주어야함.
 
-    // 날짜 별로 다른 선들이 생겨야함.
-    // 선에 이어진 좌표를 다시 클릭하면 없어져야함.
+
+    })
+
+
+
+    // // 장소 바구니 돌면서 이름이 같은 장소 색 바꾸기
+    // for (let i = 0; i < places.length; i++) {
+    //   if (places[i].content == content) {
+    //     // 만일 이미 특정 날짜에 추가되어 있다면 거기서 삭제해준다
+    //     const prevDayIndex = place2dayIndex.get(content);
+    //     if (prevDayIndex != null) {
+    //       const day = days[prevDayIndex];
+    //       for (let k = 0; k < day.length; k++) {
+    //         if (day[k].content == content) {
+    //           day.splice(k);
+    //           break;
+    //         }
+    //       }
+    //     }
+
+    //     // 장소를 타겟 날짜에 해당하는 색으로 칠한다
+    //     places[i].color = colorPallete[targetDayIndex];
+
+    //     // 장소를 날짜에 추가한다
+    //     days[targetDayIndex].push(places[i]);
+    //     setDays([...days]);
+    //     place2dayIndex.set(content, targetDayIndex);
+
+    //     break;
+    //   }
+    // }
+
   }
 
   // 날짜에 해당하는 장소들 리스트 보여주기

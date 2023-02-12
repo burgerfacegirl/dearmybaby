@@ -63,9 +63,6 @@ const SelectDate = () => {
           moveRangeOnFirstSelection={false}
           ranges={state}
         />
-
-        <SelectPlace planDate={state} />
-
         <button
           onClick={() => {
             // navigate('/plan/find-city');
@@ -75,6 +72,10 @@ const SelectDate = () => {
         >
           날짜 저장하기
         </button>
+
+        <SelectPlace planDate={state} />
+
+
       </div>
       {/* <form onSubmit={checkTravelDates}>
         <button>날짜 체크하기</button>

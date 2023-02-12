@@ -1,10 +1,14 @@
+import { faM } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 import { apiGetBabyList } from '../api/baby';
 import { apiGetMemberFamilyList } from '../api/member';
 import { useMember, useMemberAuth, useMemberReload } from '../MemberContext';
 
 function Dropdown(props) {
-  const {setSelectFamily, setFamilyName} = props;
+  // props 함수
+  const { setSelectFamily, setFamilyName, setBabyName } = props;
+
+  // Dropdown component
   const [familyList, setFamilyList] = useState([]);
   const member = useMember();
   const memberReload = useMemberReload();
@@ -25,24 +29,25 @@ function Dropdown(props) {
     <div>
       {member
         ? member.familyIdList.map((family) => {
-            return (
-              <button
-                onClick={() => {
-                  setLocalStorageFamily(family.familyId, family.familyName);
-                  // props.setSelectFamily(family.familyId);
-                  setSelectFamily(family.familyId);
-                  setFamilyName(family.familyName);
-                  apiGetBabyList(family.familyId).then(() => {
-                    (res) => {
-                      props.setBabyName(res.data[0].babyName);
-                    };
-                  });
-                }}
-              >
-                {family.familyName}
-              </button>
-            );
-          })
+          return (
+            <button
+              onClick={() => {
+                setLocalStorageFamily(family.familyId, family.familyName);
+                // props.setSelectFamily(family.familyId);
+                console.log(family);
+                setSelectFamily(family.familyId);
+                setFamilyName(family.familyName);
+                apiGetBabyList(family.familyId).then(() => {
+                  (res) => {
+                    props.setBabyName(res.data[0].babyName);
+                  };
+                });
+              }}
+            >
+              {family.familyName}
+            </button>
+          );
+        })
         : null}
     </div>
   );
