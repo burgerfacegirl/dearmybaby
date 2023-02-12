@@ -2,7 +2,7 @@ import { apiCreatePlan } from '@/commons/api/plan';
 import { useState, useEffect, Fragment } from 'react';
 import { Map as KakaoMap, MapMarker, CustomOverlayMap, Polyline } from 'react-kakao-maps-sdk';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 // import { faLocationDot } from '@fortawesome/free-regular-svg-icons';
 // import { faLocationDot } from '@fortawesome/free-light-svg-icons';
@@ -115,7 +115,7 @@ const PlaceCart = () => {
   const [targetDayIndex, setTargetDayIndex] = useState(0);
   const [place2dayIndex] = useState(new Map());
   // 마커 클릭시 모달 띄우는 스위치
-  const [open, isOpen] = useState(false)
+  const [open, isOpen] = useState(false);
 
   let currentDay = 0;
   // 날짜를 선택 할때 마다 다른 폴리라인을 만들어야함.
@@ -167,22 +167,14 @@ const PlaceCart = () => {
   //    두번 클릭 했을때 경로에서 빠져야함.
   //
 
-
-
-
-
-
-
   // 마커를 클릭 했을 때 실행 되는 함수
   function handleMarkerClick(content) {
-    isOpen(true)
+    isOpen(true);
 
     console.log(open);
     return dummyCart.map((cart) => {
-
       if (cart.content == content) {
         <div>
-
           <CustomOverlayMap
             key={cart.position.lat}
             position={{
@@ -235,22 +227,14 @@ const PlaceCart = () => {
                       {cart.roadAddressName}
                     </div>
                     {/* <div className="jibun ellipsis">{cart.addressName}</div> */}
-
-
                   </div>
                 </div>
               </div>
             </div>
-
-
           </CustomOverlayMap>
-        </div>
+        </div>;
       }
-
-
-    })
-
-
+    });
 
     // // 장소 바구니 돌면서 이름이 같은 장소 색 바꾸기
     // for (let i = 0; i < places.length; i++) {
@@ -278,7 +262,6 @@ const PlaceCart = () => {
     //     break;
     //   }
     // }
-
   }
 
   // 날짜에 해당하는 장소들 리스트 보여주기
@@ -347,11 +330,13 @@ const PlaceCart = () => {
               position={cart.position}
             /> */}
             <CustomOverlayMap position={place.position}>
-              <div
-                onClick={() => handleMarkerClick(place.content)}
-                style={{ width: '32px', height: '32px' }}
-              > <FontAwesomeIcon icon={faLocationDot} size="2x" color={place.color} /></div>
+              <div onClick={() => isOpen(true)} style={{ width: '32px', height: '32px' }}>
+                {' '}
+                <FontAwesomeIcon icon={faLocationDot} size="2x" color={place.color} />
+              </div>
             </CustomOverlayMap>
+            {console.log(open)}
+            {open && <CustomOverlayMap position={{lat: dummyCart[0].position.lat, lng: dummyCart[0].position.lng}}><h1>하하</h1></CustomOverlayMap>}
           </Fragment>
         ))}
       </KakaoMap>
