@@ -18,6 +18,8 @@ import Woman from './Woman';
 import { useMember, useMemberReload, useMemberAuth } from '@/commons/MemberContext';
 import { apiGetMember, apiUpdateMemberCurrentPlanId } from '@/commons/api/member';
 import FamilyForm from '../user/FamilyForm';
+import { apiCreateBaby, apiGetBaby, apiGetBabyList } from '@/commons/api/baby';
+
 // 접속한 유저 그룹의 plans 다 가져와야함
 const dummyUser = {
   userId: 'ssafy',
@@ -35,18 +37,27 @@ const dummyUser = {
 };
 
 export default function Home() {
+  console.log('gg')
   const member = useMember();
   const memberReload = useMemberReload();
   const auth = useMemberAuth();
-  
+  const [selectFamily, setSelectFamily] = useState(null);
+  const [familyName, setFamilyName] = useState(null);
+  const [babyName, setBabyName] = useState('호호');
   // 최초에 한번 회원정보를 최신화한다
   useEffect(() => memberReload, []);
-  const [selectFamily, setSelectFamily] = useState(null);
-  // const [makeFamily, setMakeFamily] = useState(null);
+  useEffect(() => {
+    if (window.localStorage.getItem('familyId')) {
+      // setSelectFamily(window.localStorage.getItem('familyId'));
+      setFamilyName(window.localStorage.getItem('familyName'))
+      
+    }
+    console.log(familyName);
+  }, [familyName]);
   const [view, setView] = useState(false);
   const navigate = useNavigate();
-
   // 오늘 날짜가 계획 시작 날짜와 같은지 체크 (여행 시작 중이 아니면)
+
   const today = new Date();
   // const isToday =
   // member.closestPlan != null &&
@@ -56,7 +67,8 @@ export default function Home() {
 
   return (
     <div className="main-div">
-      
+      <button onClick={()=>{ alert(familyName)}}></button>
+      <button onClick={()=>{ alert(selectFamily)}}></button>
       <div
         style={{
           display: 'flex',
@@ -64,7 +76,7 @@ export default function Home() {
           justifyContent: 'space-between',
           padding: '6%',
           backgroundColor: 'rgba(47, 54, 129, 0.597)',
-          height: '220px',
+          height: '150px',
         }}
       >
         <div className="main-animation">
@@ -96,13 +108,21 @@ export default function Home() {
               </button>
             </div>
           ) : null}
+          <h4 className="plan-append-text">{member.memberName}님<ul
+                onClick={() => {
+                  setView(!view);
+                }}
+              >
+                {familyName} {view ? '▲' : '▼'}
+                {view && <Dropdown setSelectFamily={setSelectFamily} setSelectBaby={setBabyName} />}
+              </ul>과 함께 해보세요!</h4>
 
           {/* 오늘이 여행 일정 시작 날일때 여행 시작 버튼*/}
           {member.closestPlan != null &&
-            today.getFullYear() === member.closestPlan.planDate.getFullYear() &&
-            today.getMonth() === member.closestPlan.planDate.getMonth() &&
-            today.getDate() === member.closestPlan.planDate.getDate() &&
-            member.currentPlan == null ? (
+          today.getFullYear() === member.closestPlan.planDate.getFullYear() &&
+          today.getMonth() === member.closestPlan.planDate.getMonth() &&
+          today.getDate() === member.closestPlan.planDate.getDate() &&
+          member.currentPlan == null ? (
             <div className="dday-alarm" style={{ marginBottom: '3vh' }}>
               <h4 className="dday-alarm-text">
                 오늘은 제주 여행 시작날입니다.<p></p> 기록을 시작해보세요.
@@ -118,106 +138,87 @@ export default function Home() {
                 여행 시작
               </button>
             </div>
-          ) : null} 
-          {selectFamily ? (
-            <div className="plan-append">
-              <h3 className="plan-append-text">babyname과 여행할 지역을 고르셨나요?</h3>
+          ) : null}
+          <div className="plan-append">
+            <h4 className="plan-append-text">{member.memberName}님 가족과 함께 해보세요!</h4>
 
-              <div
-                className="plus-plan"
+            <div className="plus-plan">
+              <ul
+                onClick={() => {
+                  setView(!view);
+                }}
+              >
+                가족 선택하기 {view ? '▲' : '▼'}
+                {view && <Dropdown setSelectFamily={setSelectFamily} setSelectBaby={setBabyName} />}
+              </ul>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'content-box' }}>
+              <button
+                style={{ height: '30px', width: '130px', margin: '10px', marginRight: '10px', fontSize: '13px' }}
+                className="dday-alarm-button2"
+                onClick={() => {
+                  navigate('user/make-group');
+                  // setMakeFamily(!makeFamily);
+                }}
+              >
+                가족 그룹 만들기
+              </button>
+
+              <button
+                style={{ height: '30px', width: '130px', margin: '10px', marginLeft: '5px', fontSize: '13px' }}
+                className="dday-alarm-button2"
+                onClick={() => {
+                  navigate(`/record`);
+                }}
+              >
+                가족 그룹 들어가기
+              </button>
+            </div>
+          </div>
+          <div className="plan-append">
+            <h3 className="plan-append-text">{babyName}과 여행할 지역을 고르셨나요?</h3>
+            <div
+              className="plus-plan"
+              onClick={() => {
+                navigate('/plan');
+              }}
+              style={{ display: 'flex', alignItems: 'center', boxSizing: 'content-box' }}
+            >
+              <button
+                className="plan-append-text"
                 onClick={() => {
                   navigate('/plan');
                 }}
-                style={{ display: 'flex', alignItems: 'center', boxSizing: 'content-box' }}
+                style={{
+                  backgroundColor: 'rgba(229, 229, 229, 1)',
+                  color: 'orange',
+                  height: '30px',
+                  width: '30px',
+                  margin: '10px',
+                  borderRadius: '50%',
+                  background: '#FFFFFF',
+                  border: '0.4px solid #EEEEEE',
+                  boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.25)',
+                  fontSize: '2rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginRight: '10px',
+                  marginLeft: '30px',
+                  marginBottom: '15px',
+                }}
               >
-                <button
-                  className="plan-append-text"
-                  onClick={() => {
-                    navigate('/plan');
-                  }}
-                  style={{
-                    backgroundColor: 'rgba(229, 229, 229, 1)',
-                    color: 'orange',
-                    height: '30px',
-                    width: '30px',
-                    margin: '10px',
-                    borderRadius: '50%',
-                    background: '#FFFFFF',
-                    border: '0.4px solid #EEEEEE',
-                    boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.25)',
-                    fontSize: '2rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginRight: '10px',
-                    marginLeft: '30px',
-                    marginBottom: '15px',
-                  }}
-                >
-                  +
-                </button>
-                <h4>여행 계획 추가하기</h4>
-              </div>
+                +
+              </button>
+              <h4>여행 계획 추가하기</h4>
             </div>
-          ) : (
-            <div className="plan-append">
-              <h4 className="plan-append-text">{member.memberName}님 가족과 함께 해보세요!</h4>
-
-              <div className="plus-plan">
-                <ul
-                  onClick={() => {
-                    setView(!view);
-                  }}
-                >
-                  가족 선택하기 {view ? '▲' : '▼'}
-                  {view && <Dropdown setSelectFamily={setSelectFamily}/>}
-                </ul>
-              </div>
-              <div
-                style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'content-box' }}
-              >
-                <button
-                  style={{ height: '30px', width: '130px', margin: '10px', marginRight: '10px', fontSize: '13px' }}
-                  className="dday-alarm-button2"
-                  onClick={() => {
-                    navigate('user/make-group')
-                    // setMakeFamily(!makeFamily);
-                  }}
-                >
-                  가족 그룹 만들기
-                </button>
-
-                <button
-                  style={{ height: '30px', width: '130px', margin: '10px', marginLeft: '5px', fontSize: '13px' }}
-                  className="dday-alarm-button2"
-                  onClick={() => {
-                    navigate(`/record`);
-                  }}
-                >
-                  가족 그룹 들어가기
-                </button>
-              </div>
-            </div>
-          )}
+          </div>
         </div>
       )}
 
-
-      {/* {member != null && (
-        makeFamily ? <div className='user-plan' style={{padding:'3vh', borderRadius: '0'}}><div className='plan-append'><FamilyForm/></div></div> : null
-      )} */}
       {selectFamily ? (
         <div className="recommend">
-          <h3>babyname에게 추천하는 지역별 여행지</h3>
-          <Link to={path.recommend}>
-            <Place />
-          </Link>
-
-        </div>
-      ) : null}
-      {selectFamily ? (
-        <div className="recommend">
-          <h3>babyname에게 추천하는 지역별 축제</h3>
+          <h3>{babyName}에게 추천하는 지역별 여행지</h3>
           <Link to={path.recommend}>
             <Place />
           </Link>
@@ -225,7 +226,15 @@ export default function Home() {
       ) : null}
       {selectFamily ? (
         <div className="recommend">
-          <h3>babyname에게 추천하는 지역별 식당</h3>
+          <h3>{babyName}에게 추천하는 지역별 축제</h3>
+          <Link to={path.recommend}>
+            <Place />
+          </Link>
+        </div>
+      ) : null}
+      {selectFamily ? (
+        <div className="recommend">
+          <h3>{babyName}에게 추천하는 지역별 식당</h3>
           <Link to={path.recommend}>
             <Place />
           </Link>

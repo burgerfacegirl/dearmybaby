@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { useMember, useMemberReload, useMemberAuth } from '@/commons/MemberContext';
 import { apiGetMember, apiUpdateMemberCurrentPlanId, apiGetMemberFamilyList } from '@/commons/api/member';
 
-
 const FamilyForm = () => {
   const [familyName, setFamilyName] = useState('');
   const [userFamilyList, setUserFamilyList] = useState('');
@@ -26,14 +25,14 @@ const FamilyForm = () => {
   // 회원이 가진 그룹 조회
   // useEffect(async () => {
   //   await auth((token) => {apiGetMemberFamilyList(member.memberId, token).then((data) => setUserFamilyList(data))})})
-  
-    // const memberId = 'hoguangel';
-  const makeGroup=() => {
+
+  // const memberId = 'hoguangel';
+  const makeGroup = () => {
     if (member != null) {
-      async() => {
-        apiCreateFamily(member.memberId, familyName)
-      await memberReload();};
-  }};
+      apiCreateFamily(member.memberId, familyName);
+      memberReload();
+    }
+  };
 
   return (
     <div className="family-form" style={{ padding: '2vh' }}>
@@ -47,11 +46,8 @@ const FamilyForm = () => {
       { async () => {
         await auth((token) => {apiGetMemberFamilyList(member.memberId, token).then((data) => setUserFamilyList(data))})}}   
       { userFamilyList.familyName } */}
-
     </div>
   );
-
-  };
-
+};
 
 export default FamilyForm;
