@@ -26,6 +26,7 @@ const UserInfo = lazy(() => import('@/pages/user').then((module) => ({ default: 
 
 // Plan, lazily loaded components
 const FindCity = lazy(() => import('@/pages/plan').then((module) => ({ default: module.FindCity })));
+const PlanList = lazy(() => import('@/pages/plan').then((module) => ({ default: module.PlanList })));
 const PlaceCart = lazy(() => import('@/pages/plan').then((module) => ({ default: module.PlaceCart })));
 const SelectDate = lazy(() => import('@/pages/plan').then((module) => ({ default: module.SelectDate })));
 const SelectGroup = lazy(() => import('@/pages/plan').then((module) => ({ default: module.SelectGroup })));
@@ -98,6 +99,10 @@ const router = createBrowserRouter([
         path: 'plan',
         element: <Plan></Plan>,
         children: [
+          {
+            index: true,
+            element: <PlanList></PlanList>,
+          },
           {
             path: ':planId',
             children: [

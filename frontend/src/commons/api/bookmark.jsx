@@ -24,7 +24,7 @@ export async function apiGetBookmarkList(planId) {
     const response = await api.get(`/bookmark/${planId}`);
     return response;
   }
-  throw new Error('apiGetBabyList : familyId must be provided');
+  throw new Error('apiGetBookmarkList : planId must be provided');
 }
 
 // 북마크 삭제
