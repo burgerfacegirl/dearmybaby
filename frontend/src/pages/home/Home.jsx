@@ -40,7 +40,7 @@ export default function Home() {
   const memberReload = useMemberReload();
   const auth = useMemberAuth();
   const [familyId, setFamilyId] = useState(null);
-  const [familyName, setFamilyName] = useState(null);
+  const [familyName, setFamilyName] = useState('가족');
   const [babyName, setBabyName] = useState('');
   // 최초에 한번 회원정보를 최신화한다
   useEffect(() => {
@@ -146,6 +146,7 @@ export default function Home() {
               </button>
             </div>
           ) : null}
+
           <div className="plan-append">
             <h3 className="plan-append-text">{babyName}과 여행할 지역을 고르셨나요?</h3>
             <div
@@ -153,7 +154,6 @@ export default function Home() {
               onClick={() => {
                 navigate('/plan');
               }}
-              style={{ display: 'flex', alignItems: 'center', boxSizing: 'content-box' }}
             >
               <button
                 className="plan-append-text"
@@ -165,7 +165,6 @@ export default function Home() {
                   color: 'orange',
                   height: '30px',
                   width: '30px',
-                  margin: '10px',
                   borderRadius: '50%',
                   background: '#FFFFFF',
                   border: '0.4px solid #EEEEEE',
@@ -174,9 +173,7 @@ export default function Home() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginRight: '10px',
-                  marginLeft: '30px',
-                  marginBottom: '15px',
+                  marginRight: '3%',
                 }}
               >
                 +
@@ -186,6 +183,36 @@ export default function Home() {
           </div>
         </div>
       )}
+      <div
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.922)',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <div className="plan-append">
+          <button
+            style={{ height: '40px', width: '130px', margin: '10px', marginRight: '10px', fontSize: '13px' }}
+            className="dday-alarm-button2"
+            onClick={() => {
+              navigate('user/make-group');
+              // setMakeFamily(!makeFamily);
+            }}
+          >
+            가족 그룹 만들기
+          </button>
+
+          <button
+            style={{ height: '40px', width: '130px', margin: '10px', marginLeft: '5px', fontSize: '13px' }}
+            className="dday-alarm-button2"
+            onClick={() => {
+              navigate(`/record`);
+            }}
+          >
+            가족 그룹 들어가기
+          </button>
+        </div>
+      </div>
 
       {familyId ? (
         <div className="recommend">

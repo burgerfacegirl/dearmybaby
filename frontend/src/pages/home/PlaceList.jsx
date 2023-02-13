@@ -7,8 +7,8 @@ import 'slick-carousel/slick/slick-theme.css';
 const PlaceList = ({ places }) => {
   const settings = {
     swipe: true,
-    // centerMode: true,
-    // centerPadding: '10px',
+    centerMode: true,
+    centerPadding: '10px',
     infinite: true,
     speed: 500,
     slidesToShow: 2,

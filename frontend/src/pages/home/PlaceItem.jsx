@@ -8,7 +8,6 @@ import Typography from '@mui/joy/Typography';
 export default function PlaceItem({ place }) {
   return (
     <div className="placeItem">
-
       <Box component="ul" sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', p: 0, m: 0 }}>
         <Card component="li" sx={{ minWidth: 40, flexGrow: 1, height: '20vh' }}>
           <CardCover>
@@ -20,7 +19,7 @@ export default function PlaceItem({ place }) {
             />
           </CardCover>
           <CardContent>
-            <Typography textColor="#fff" mt={{ xs: 11, sm: 10 }} sx={{fontSize: '0.7rem'}}>
+            <Typography textColor="#fff" mt={{ xs: 11, sm: 10 }} sx={{ fontSize: '0.7rem' }}>
               {place.placeName}
             </Typography>
           </CardContent>

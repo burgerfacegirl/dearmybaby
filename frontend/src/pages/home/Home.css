@@ -57,6 +57,12 @@
   background-color: rgb(59, 45, 142);
 }
 
+.plus-plan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .plus-plan:hover {
   cursor: pointer;
 }
@@ -109,6 +115,8 @@
 
 .plan-append {
   /* background-color: rgb(255, 243, 152); */
+  display: flex;
+  flex-direction: column;
   background-color: rgb(255, 255, 255);
   border-radius: 15px;
   box-shadow: 10px 10px 10px rgba(203, 203, 203, 0.314);
@@ -228,7 +236,7 @@
   /* text-overflow: ellipsis; */
 }
 
-.reco-info-outline>p {
+.reco-info-outline > p {
   height: 100%;
   display: inline-block;
   overflow: hidden;
@@ -293,7 +301,6 @@
 
   height: 30vh;
   /* margin: 2%; */
-
 }
 
 .detail-img {

@@ -36,6 +36,7 @@ const SelectPlace = (props) => {
       startDate: tripDate[0].startDate,
       endDate: tripDate[0].endDate,
     };
+    navigate('/plan/find-city');
     apiCreatePlan(data).then(() => {
       memberReload();
     });
@@ -129,28 +130,29 @@ const SelectPlace = (props) => {
         </tr>
       </table>
       <button style={{ backgroundColor: 'white', color: 'black', textDecoration: 'none' }}>
-        <button
-          onClick={
-            createPlan
+        {/* <button
+          onClick={() => {
+            createPlan();
             //   alert(
             //   `저장하신 계획 일정: ${trip[0].startDate.toDateString()}, 지역 : ${trip[0].destination}이 맞나요?`
             // )
-          }
+          }}
         >
           일정 저장하기
-        </button>
-        <div></div>
+        </button> */}
         <Link
           to={path.planFindCity}
           onClick={() => {
             // prop 받은 날짜 정보, destination 저장하는 함수
             setTrip([...tripDate, (trip[0].destination = destination)]);
             console.log(trip);
-            // navigate('/plan/find-city');
+            createPlan();
           }}
           state={{ keyword: initLoc.keyword, lat: initLoc.lat, lng: initLoc.lng }}
           style={{ textDecoration: 'none' }}
-        ></Link>
+        >
+          일정 저장하기
+        </Link>
       </button>
     </div>
   );
