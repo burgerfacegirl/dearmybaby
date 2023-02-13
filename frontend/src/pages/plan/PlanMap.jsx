@@ -10,7 +10,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import PlaceBasket from './PlaceBasket';
 
-import { apiGetBookmarkList } from '@/commons/api/bookmark';
+import { apiGetBookmarkList, apiCreateBookmark } from '@/commons/api/bookmark';
 
 const kakao = window.kakao;
 
@@ -71,9 +71,24 @@ export default function PlanMap({ plan }) {
 
   // 북마크 추가 버튼 눌려을때
   const addToBookMark = () => {
-    if (placeBasket && !placeBasket.includes(info)) {
+    if (bookmarkList && !bookmarkList.includes(info)) {
       // placeBasket.push(info);
-      setPlaceBasket(placeBasket.concat(info));
+      // console.log(bookmarkList.concat(info));
+      console.log(bookmarkList);
+      console.log('info', info);
+      const justAddedBookmark = {
+        planId: plan.planId,
+        bookmarkName: info.content,
+        bookmarkAddress: info.addressName,
+        bookmarkLatitude: info.position.lat,
+        bookmarkLongitude: info.position.lng,
+      };
+      try {
+        setBookmarkList(bookmarkList.concat(info.content));
+        apiCreateBookmark(justAddedBookmark);
+      } catch (error) {
+        console.log('error, post bookmark');
+      }
     }
   };
 
@@ -101,7 +116,7 @@ export default function PlanMap({ plan }) {
         </button>
         <button
           onClick={() => {
-            alert(kakaoMapcenter);
+            console.log(bookmarkList);
           }}
         >
           console log
@@ -171,14 +186,6 @@ export default function PlanMap({ plan }) {
                     </div>
                     <div style={{ fontSize: '0.8rem', color: 'rgba(0, 0, 0, 0.7)' }}>{info.categoryGroupName}</div>
                     <div className="body">
-                      <div className="img">
-                        {/* <img
-                          src="//t1.daumcdn.net/thumb/C84x76/?fname=http://t1.daumcdn.net/cfile/2170353A51B82DE005"
-                          width="73"
-                          height="70"
-                          alt="카카오 스페이스닷원"
-                        /> */}
-                      </div>
                       <div className="desc">
                         <div className="ellipsis" style={{ fontSize: '0.9rem' }}>
                           {info.roadAddressName}
@@ -194,10 +201,10 @@ export default function PlanMap({ plan }) {
                           >
                             상세정보
                           </a>
-                          {placeBasket.includes(info) ? (
+                          {bookmarkList.includes(info) ? (
                             <FavoriteIcon
                               style={{ color: 'tomato', fontSize: '1.5rem', position: 'absolute', right: '5%' }}
-                              onClick={addToBookMark}
+                              // onClick={addToBookMark}
                             ></FavoriteIcon>
                           ) : (
                             <FavoriteBorderIcon
@@ -215,16 +222,16 @@ export default function PlanMap({ plan }) {
           </>
         ))}
 
-        <div className="place-basket-div">
+        {/* <div className="place-basket-div">
           <h4>장소바구니</h4>
-          {placeBasket.map((basketplace) => {
+          {bookmarkList.map((basketplace) => {
             return <PlaceBasket key={basketplace.addressName} basketplace={basketplace}></PlaceBasket>;
           })}
-        </div>
+        </div> */}
         <div className="place-basket-div" style={{ left: '0', width: '50%' }}>
           <h4>진짜 장소바구니</h4>
           {bookmarkList != null &&
-            bookmarkList.map((bookmark) => <div key={bookmark.bookmarkId}>{JSON.stringify(bookmark)}</div>)}
+            bookmarkList.map((bookmark) => <div key={bookmark.bookmarkId}>{bookmark.bookmarkName}</div>)}
         </div>
       </Map>
     </div>

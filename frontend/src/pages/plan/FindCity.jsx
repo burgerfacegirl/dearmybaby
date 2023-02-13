@@ -16,6 +16,7 @@ export default function FindCity() {
 
   return (
     <div>
+      {/* <button onClick={() => console.log(plan)}>panic</button> */}
       <PlanMap plan={plan} />
     </div>
   );

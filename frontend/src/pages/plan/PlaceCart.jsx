@@ -219,7 +219,7 @@ const PlaceCart = ({ plan }) => {
           width: '100%',
           height: '100vh',
         }}
-        level={4} // 지도의 확대 레벨
+        level={10} // 지도의 확대 레벨
       >
         {/* button 모음 메뉴 */}
         <div

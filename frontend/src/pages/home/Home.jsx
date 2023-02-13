@@ -83,6 +83,13 @@ export default function Home() {
           <h3 style={{ fontWeight: '100', color: 'white', fontSize: '16px', marginBottom: '15px' }}>
             당신의 아이에게 <br></br>따뜻한 추억을 선물하세요
           </h3>
+          <button
+            onClick={() => {
+              navigate('./kids');
+            }}
+          >
+            아이에 대해 대답해주세요
+          </button>
         </div>
         <div className="family-photo-animation">
           <img

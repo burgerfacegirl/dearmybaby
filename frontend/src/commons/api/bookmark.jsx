@@ -3,13 +3,11 @@ const api = getApiInstance();
 
 // 북마크 저장
 export async function apiCreateBookmark(bookmarkData) {
-  //    const babyData = {
-  //     familyId: 210,
-  //     favoriteSpot: ['바다'],
-  //     favoriteFood: ['밥', '한식'],
-  //     babyName: '연두',
-  //     babyAge: 5,
-  //   };
+  // "planId": 0,
+  // "bookmarkName": "string",
+  // "bookmarkAddress": "string",
+  // "bookmarkLatitude": "string",
+  // "bookmarkLongitude": "string"
 
   if (bookmarkData.planId != null) {
     const response = await api.post(`/bookmark/new`, bookmarkData);
