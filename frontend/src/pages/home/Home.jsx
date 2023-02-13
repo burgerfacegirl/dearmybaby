@@ -50,7 +50,7 @@ export default function Home() {
     if (window.localStorage.getItem('familyId')) {
       setFamilyId(window.localStorage.getItem('familyId'));
       setFamilyName(window.localStorage.getItem('familyName'));
-      apiGetBabyList(familyId).then((res) => {
+      apiGetBabyList(window.localStorage.getItem('familyId')).then((res) => {
         setBabyName(res.data[0].babyName);
       });
     }
@@ -92,6 +92,10 @@ export default function Home() {
           />
         </div>
       </div>
+      {/* {console.log(member.currentPlan)} */}
+      {/* {console.log(member.closestPlan)} */}
+      {/* {console.log(member.memberName)}
+      {console.log(member)} */}
       {member != null && (
         <div className="user-plan">
           {/* 여행 중일때 record 페이지로 보내주는 버튼*/}

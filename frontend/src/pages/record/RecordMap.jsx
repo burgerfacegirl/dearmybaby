@@ -4,7 +4,8 @@ import { Modal, Box } from '@mui/material';
 import './Record.css';
 import RecordUpload from './RecordUpload';
 import RecordMapItem from './RecordMapItem';
-import { apiGetRecordList } from '@/commons/api/record';
+import { apiGetDayRecord } from '@/commons/api/record';
+import { useMember } from '@/commons/MemberContext';
 
 const dummyRecords = [
   {
@@ -41,7 +42,20 @@ const dummyRecords = [
 
 const RecordMap = () => {
   // 현재 위치에 기록 남기기 (업로드) 추가 해야함 => 아이콘 바꿔서 찍고 기록 데이터 저장
+  const member = useMember();
+  if (member != null) {
+    // const currentPlanId = member.currentPlanId.planId;
+  }
+
+  // console.log(currentPlanId);
   const [records, setRecords] = useState(dummyRecords);
+  useEffect(() => {
+    async () => {
+      const response = await apiGetDayRecord(177).then(({ data }) => {
+        setRecords(data[0]);
+      });
+    };
+  }, []);
 
   console.log(records);
   const [modalOpen, setModalOpen] = useState(false);
@@ -98,12 +112,12 @@ const RecordMap = () => {
 
   const points = records.map((record) => ({ lat: record.latitude, lng: record.longitude }));
 
-  const handleRecordReload = () => {
-    apiGetRecordList(6, 13).then(({ data }) => {
-      setRecords(data);
-      console.log(data);
-    });
-  };
+  // const handleRecordReload = () => {
+  //   apiGetRecordList(6, 13).then(({ data }) => {
+  //     setRecords(data);
+  //     console.log(data);
+  //   });
+  // };
 
   return (
     <div>
@@ -190,7 +204,7 @@ const RecordMap = () => {
         >
           {!state.errMsg ? (
             <div>
-              <RecordUpload handleRecordReload={handleRecordReload} recordLocation={state}></RecordUpload>
+              {/* <RecordUpload handleRecordReload={handleRecordReload} recordLocation={state}></RecordUpload> */}
             </div>
           ) : (
             <div>위치를 불러올 수 없어요!</div>
