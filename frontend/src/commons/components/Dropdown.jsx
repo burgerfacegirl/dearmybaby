@@ -20,26 +20,25 @@ function Dropdown(props) {
     window.localStorage.setItem('familyName', familyName);
   };
 
-
   return (
-    <div style={{display: 'inline'}}>
-      {(member && member.familyIdList) 
+    <div style={{ display: 'inline' }}>
+      {member && member.familyIdList
         ? member.familyIdList.map((family) => {
-          return (
-            <button
-              onClick={() => {
-                setLocalStorageFamily(family.familyId, family.familyName);
-                setFamilyId(family.familyId);
-                setFamilyName(family.familyName);
-                apiGetBabyList(family.familyId).then(
-                  (res) => {
+            return (
+              <button
+                onClick={() => {
+                  setLocalStorageFamily(family.familyId, family.familyName);
+                  setFamilyId(family.familyId);
+                  setFamilyName(family.familyName);
+                  apiGetBabyList(family.familyId).then((res) => {
                     setBabyName(res.data[0].babyName);
-                  });}}
-            >
-              {family.familyName}
-            </button>
-          );
-        })
+                  });
+                }}
+              >
+                {family.familyName}
+              </button>
+            );
+          })
         : null}
     </div>
   );

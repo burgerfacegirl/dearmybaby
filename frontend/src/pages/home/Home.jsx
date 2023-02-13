@@ -180,36 +180,39 @@ export default function Home() {
           </div>
         </div>
       )}
-      <div
-        style={{
-          backgroundColor: 'rgba(255, 255, 255, 0.922)',
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
-        <div className="plan-append">
-          <button
-            style={{ height: '40px', width: '130px', margin: '10px', marginRight: '10px', fontSize: '13px' }}
-            className="dday-alarm-button2"
-            onClick={() => {
-              navigate('user/make-group');
-              // setMakeFamily(!makeFamily);
-            }}
-          >
-            가족 그룹 만들기
-          </button>
 
-          <button
-            style={{ height: '40px', width: '130px', margin: '10px', marginLeft: '5px', fontSize: '13px' }}
-            className="dday-alarm-button2"
-            onClick={() => {
-              navigate(`/record`);
-            }}
-          >
-            가족 그룹 들어가기
-          </button>
+      {member && (
+        <div
+          style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.922)',
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <div className="">
+            <button
+              style={{ height: '40px', width: '130px', margin: '10px', marginRight: '10px', fontSize: '13px' }}
+              className="dday-alarm-button2"
+              onClick={() => {
+                navigate('user/make-group');
+                // setMakeFamily(!makeFamily);
+              }}
+            >
+              가족 그룹 만들기
+            </button>
+
+            <button
+              style={{ height: '40px', width: '130px', margin: '10px', marginLeft: '5px', fontSize: '13px' }}
+              className="dday-alarm-button2"
+              onClick={() => {
+                navigate(`/record`);
+              }}
+            >
+              가족 그룹 들어가기
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {familyId ? (
         <div className="recommend">

@@ -1,10 +1,14 @@
 import PropTypes from 'prop-types';
 
 import { useState, useEffect, useRef } from 'react';
+<<<<<<< Updated upstream
 import { Link, useLocation } from 'react-router-dom';
 
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 
+=======
+import { Link, useLocation, useParams } from 'react-router-dom';
+>>>>>>> Stashed changes
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
@@ -14,6 +18,7 @@ import { apiGetBookmarkList } from '@/commons/api/bookmark';
 
 const kakao = window.kakao;
 
+<<<<<<< Updated upstream
 export default function PlanMap({ plan }) {
   const [bookmarkList, setBookmarkList] = useState();
   useEffect(() => {
@@ -27,6 +32,29 @@ export default function PlanMap({ plan }) {
   const [kakaoMapcenter, setKakaoMapCenter] = useState();
   const [markers, setMarkers] = useState([]);
   const [info, setInfo] = useState(null);
+=======
+export default function PlanMap(planId) {
+  console.log(planId);
+  // 첫 검색어 중심 좌표 데이터
+  const location = useLocation();
+  const propWord = location.state?.keyword;
+  const propLat = location.state?.lat;
+  const propLng = location.state?.lng;
+  // console.log('proped from SelectPlace:', propWord)
+  const initKeyword = propWord;
+
+  const keyWordRef = useRef();
+
+  const [info, setInfo] = useState();
+  const [markers, setMarkers] = useState([]);
+  const [map, setMap] = useState();
+
+  // 지역선택 안했을 경우 ..?
+  const [keyWord, setKeyWord] = useState(initKeyword);
+  const [initLat, setInitLat] = useState(propLat); // 최초 위도
+  const [initLng, setInitLng] = useState(propLng); // 최초 경도
+
+>>>>>>> Stashed changes
   const [isOpen, setIsOpen] = useState(false);
   const [placeBasket, setPlaceBasket] = useState([]);
 
@@ -52,6 +80,45 @@ export default function PlanMap({ plan }) {
             placeURL: data[i].place_url,
             categoryCode: data[i].category_group_code,
             roadAddressName: data[i].road_address_name,
+<<<<<<< Updated upstream
+=======
+          });
+          bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        }
+        setMarkers(markers);
+        // 지도 중심 좌표 찾기
+        // setCenter(map.getCenter())
+
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+        // map.setBounds(bounds);
+      }
+    });
+  }, []);
+
+  // 검색할 때 마다 실행
+  useEffect(() => {
+    if (!map) return;
+    const ps = new kakao.maps.services.Places();
+    ps.keywordSearch(keyWord, (data, status, _pagination) => {
+      if (status === kakao.maps.services.Status.OK) {
+        console.log('data', data);
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+        // LatLngBounds 객체에 좌표를 추가합니다
+        const bounds = new kakao.maps.LatLngBounds();
+        let markers = [];
+
+        for (var i = 0; i < data.length; i++) {
+          markers.push({
+            position: {
+              lat: data[i].y,
+              lng: data[i].x,
+            },
+            content: data[i].place_name,
+            adressName: data[i].address_name,
+            placeURL: data[i].place_url,
+            categoryCode: data[i].category_group_code,
+            roadAddressName: data[i].road_address_name,
+>>>>>>> Stashed changes
             categoryGroupName: data[i].category_group_name,
           });
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
