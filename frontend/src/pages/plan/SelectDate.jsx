@@ -9,7 +9,7 @@ import { apiGetMemberFamilyList } from '@/commons/api/member';
 const SelectDate = () => {
   const navigate = useNavigate();
   // const [memberFamily, setmemberFamily] = useState('이 없습니다');
-  const [state, setState] = useState([
+  const [date, setDate] = useState([
     {
       startDate: new Date(),
       endDate: new Date(),
@@ -36,10 +36,7 @@ const SelectDate = () => {
   // };
 
   return (
-    <div
-      className="plan-frame"
-      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-    >
+    <div className="plan-frame" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       {/* <div className="planning-div" style={{ backgroundColor: 'pink' }}>
          <h2>함께 여행할 그룹</h2>
         <button onClick={getGroupData} style={{ marginBottom: '10px' }}>
@@ -48,7 +45,7 @@ const SelectDate = () => {
         {memberFamily}
       </div> */}
 
-
+      {console.log(date)}
       <div
         style={{
           display: 'flex',
@@ -59,29 +56,27 @@ const SelectDate = () => {
         <h3 style={{ margin: '5%' }}>여행 일정 등록</h3>
         <DateRange
           editableDateInputs={true}
-          onChange={(item) => setState([item.selection])}
+          onChange={(item) => setDate([item.selection])}
           moveRangeOnFirstSelection={false}
-          ranges={state}
+          ranges={date}
+          minDate={new Date()}
         />
-        <button
+        {/* <button
           onClick={() => {
-            // navigate('/plan/find-city');
-            setState([...state]);
-            console.log(state);
-            alert('저장 되었습니다.', state)
+            navigate('/plan/find-city');
+            setDate([...date]);
+            console.log(date);
+            alert('저장 되었습니다.', date)
           }}
         >
           날짜 저장하기
-        </button>
-
-        <SelectPlace planDate={state} />
-
-
+        </button> */}
+        <SelectPlace planDate={date} />
       </div>
       {/* <form onSubmit={checkTravelDates}>
         <button>날짜 체크하기</button>
       </form> */}
-    </div >
+    </div>
   );
 };
 export default SelectDate;
