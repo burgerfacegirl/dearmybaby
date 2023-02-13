@@ -309,8 +309,6 @@ const PlaceCart = ({ plan }) => {
                           // setTargetDayIndex(index);
                           addToPath(modalInfo, index);
                           isOpen(false);
-
-                          // isOpen(false)
                         }}
                         style={{ display: 'flex', width: '50px', height: '25px' }}
                       >

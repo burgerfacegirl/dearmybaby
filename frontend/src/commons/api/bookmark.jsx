@@ -26,7 +26,7 @@ export async function apiGetBookmarkList(planId) {
 }
 
 // 북마크 삭제
-export async function apiDeleteBaby(bookmarkId) {
+export async function apiDeleteBookmark(bookmarkId) {
   if (bookmarkId != null) {
     const response = await api.delete(`/bookmark/${bookmarkId}`);
     return response;

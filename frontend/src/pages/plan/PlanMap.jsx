@@ -10,7 +10,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import PlaceBasket from './PlaceBasket';
 
-import { apiGetBookmarkList, apiCreateBookmark } from '@/commons/api/bookmark';
+import { apiGetBookmarkList, apiCreateBookmark, apiDeleteBookmark } from '@/commons/api/bookmark';
 
 const kakao = window.kakao;
 
@@ -71,7 +71,7 @@ export default function PlanMap({ plan }) {
 
   // 북마크 추가 버튼 눌려을때
   const addToBookMark = () => {
-    if (bookmarkList && !bookmarkList.includes(info)) {
+    if (bookmarkList && !bookmarkList.find((e) => e.bookmarkName == info.content)) {
       // placeBasket.push(info);
       // console.log(bookmarkList.concat(info));
       console.log(bookmarkList);
@@ -83,14 +83,20 @@ export default function PlanMap({ plan }) {
         bookmarkLatitude: info.position.lat,
         bookmarkLongitude: info.position.lng,
       };
-      try {
-        setBookmarkList(bookmarkList.concat(info.content));
-        apiCreateBookmark(justAddedBookmark);
-      } catch (error) {
-        console.log('error, post bookmark');
-      }
+
+      // setBookmarkList(bookmarkList.concat(info.content));
+      apiCreateBookmark(justAddedBookmark).then((res) => setBookmarkList(res.data))
     }
   };
+
+
+  const deleteBookmark = () => {
+    if (bookmarkList && bookmarkList.find((e) => e.bookmarkName == info.content)) {
+      console.log(bookmarkList.find((e) => e.bookmarkName == info.content).bookmarkId);
+      const toDeleteBookmark = bookmarkList.find((e) => e.bookmarkName == info.content).bookmarkId
+      apiDeleteBookmark(toDeleteBookmark)
+    }
+  }
 
   // 북마크 삭제 버튼
   // const deleteToBookMark = () => {
@@ -201,10 +207,12 @@ export default function PlanMap({ plan }) {
                           >
                             상세정보
                           </a>
-                          {bookmarkList.includes(info) ? (
+                          {bookmarkList.find((e) => e.bookmarkName == info.content) ? (
+                            // 여기다 하트 색깔 빼는거 + 북마크 리스트에서 빼는거 해야함.
                             <FavoriteIcon
                               style={{ color: 'tomato', fontSize: '1.5rem', position: 'absolute', right: '5%' }}
-                              // onClick={addToBookMark}
+                              onClick={deleteBookmark()}
+                            // console.log('heart', bookmarkList.find((e) => e.bookmarkName == info.content))
                             ></FavoriteIcon>
                           ) : (
                             <FavoriteBorderIcon
