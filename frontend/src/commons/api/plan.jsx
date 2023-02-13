@@ -4,7 +4,6 @@ const api = getApiInstance();
 
 // 여행 계획 생성
 export async function apiCreatePlan(data) {
-  
   if (data.familyId != null) {
     const response = await api.post(`/plan/new`, data);
     return response;

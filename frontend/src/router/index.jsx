@@ -92,7 +92,6 @@ const router = createBrowserRouter([
             path: 'place-detail',
             element: <RecommendPlaceDetail></RecommendPlaceDetail>,
           },
-
         ],
       },
       {
@@ -100,25 +99,34 @@ const router = createBrowserRouter([
         element: <Plan></Plan>,
         children: [
           {
-            index: true,
-            // path: 'select-date',
-            element: <SelectDate></SelectDate>,
+            path: ':planId',
+            children: [
+              {
+                path: 'find-city',
+                element: <FindCity></FindCity>,
+              },
+              {
+                path: 'place-cart',
+                element: <PlaceCart></PlaceCart>,
+              },
+            ],
           },
           {
-            index: 'select-group',
-            element: <SelectGroup></SelectGroup>,
-          },
-          {
-            path: 'find-city',
-            element: <FindCity></FindCity>,
-          },
-          {
-            path: 'place-cart',
-            element: <PlaceCart></PlaceCart>,
-          },
-          {
-            path: 'select-place',
-            element: <SelectPlace></SelectPlace>,
+            path: 'create',
+            children: [
+              {
+                index: true,
+                element: <SelectDate></SelectDate>,
+              },
+              {
+                path: 'select-place',
+                element: <SelectPlace></SelectPlace>,
+              },
+              {
+                index: 'select-group',
+                element: <SelectGroup></SelectGroup>,
+              },
+            ],
           },
         ],
       },

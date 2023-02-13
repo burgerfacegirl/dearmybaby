@@ -152,14 +152,11 @@ export default function Home() {
             <div
               className="plus-plan"
               onClick={() => {
-                navigate('/plan');
+                navigate('/plan/create');
               }}
             >
               <button
                 className="plan-append-text"
-                onClick={() => {
-                  navigate('/plan');
-                }}
                 style={{
                   backgroundColor: 'rgba(229, 229, 229, 1)',
                   color: 'orange',
