@@ -57,3 +57,40 @@ export async function apiDeletePlan(planId) {
   }
   throw new Error('apiDeletePlan : planId must be provided');
 }
+
+//여행 기록에 필요한 day정보 가져오기
+export async function apiGetRecordingDayId(planId) {
+  if (planId != null) {
+    const response = await api.get(`/plan/record/${planId}`);
+    return response;
+  }
+  throw new Error('apiGetRecordingDayId : planId must be provided');
+}
+
+
+// 여행 시작
+export async function apiStartPlan(planId) {
+  if (planId != null) {
+    const response = await api.put(`/plan/start/${planId}`);
+    return response;
+  }
+  throw new Error('apiStartPlan : planId must be provided');
+}
+
+// 다음날로 이동
+export async function apiPlanToNextDay(planId, currentDay) {
+  if (planId != null) {
+    const response = await api.put(`/plan/nextday?planId=${planId}&currentDay=${currentDay}`);
+    return response;
+  }
+  throw new Error('apiPlanToNextDay : planId, currentDay must be provided');
+}
+
+// 여행 끝
+export async function apiEndPlan(planId) {
+  if (planId != null) {
+    const response = await api.put(`/plan/end/${planId}`);
+    return response;
+  }
+  throw new Error('apiEndPlan : planId must be provided');
+}

@@ -6,6 +6,7 @@ import RecordUpload from './RecordUpload';
 import RecordMapItem from './RecordMapItem';
 import { apiGetDayRecord } from '@/commons/api/record';
 import { useMember } from '@/commons/MemberContext';
+import { apiGetRecordingDayId } from '@/commons/api/plan';
 
 const dummyRecords = [
   {
@@ -43,9 +44,18 @@ const dummyRecords = [
 const RecordMap = () => {
   // 현재 위치에 기록 남기기 (업로드) 추가 해야함 => 아이콘 바꿔서 찍고 기록 데이터 저장
   const member = useMember();
-  if (member != null) {
-    // const currentPlanId = member.currentPlanId.planId;
-  }
+
+  console.log(member.currentPlan.planId)
+  useEffect(() => {
+    if (member != null && member.currentPlan != null) {
+      async () => {
+        apiGetRecordingDayId(member.currentPlan.planId).then(({ data }) => {
+          console.log(data);
+        });
+      };
+    }
+  }, []);
+
 
   // console.log(currentPlanId);
   const [records, setRecords] = useState(dummyRecords);
@@ -57,7 +67,6 @@ const RecordMap = () => {
     };
   }, []);
 
-  console.log(records);
   const [modalOpen, setModalOpen] = useState(false);
 
   const [state, setState] = useState({

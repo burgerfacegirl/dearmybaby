@@ -105,10 +105,11 @@ export default function Home() {
       {console.log(member)} */}
       {member != null && (
         <div className="user-plan">
+          {console.log(member.currentPlan)}
           {/* 여행 중일때 record 페이지로 보내주는 버튼*/}
           {member.currentPlan != null ? (
             <div style={{ marginBottom: '3vh' }}>
-              <h4>제주 여행 중</h4>
+              <h4>{member.currentPlan.planDestination} 여행 중</h4>
               <button
                 onClick={() => {
                   navigate(`/record`);
