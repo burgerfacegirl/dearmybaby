@@ -82,21 +82,23 @@ export default function PlanMap({ plan }) {
         bookmarkAddress: info.addressName,
         bookmarkLatitude: info.position.lat,
         bookmarkLongitude: info.position.lng,
+        bookmarkUrl: info.placeURL,
+        bookmarkCategory: info.categoryGroupName,
+        //url, categorycode
       };
 
       // setBookmarkList(bookmarkList.concat(info.content));
-      apiCreateBookmark(justAddedBookmark).then((res) => setBookmarkList(res.data))
+      apiCreateBookmark(justAddedBookmark).then((res) => setBookmarkList(res.data));
     }
   };
-
 
   const deleteBookmark = () => {
     if (bookmarkList && bookmarkList.find((e) => e.bookmarkName == info.content)) {
       console.log(bookmarkList.find((e) => e.bookmarkName == info.content).bookmarkId);
-      const toDeleteBookmark = bookmarkList.find((e) => e.bookmarkName == info.content).bookmarkId
-      apiDeleteBookmark(toDeleteBookmark)
+      const toDeleteBookmark = bookmarkList.find((e) => e.bookmarkName == info.content).bookmarkId;
+      apiDeleteBookmark(toDeleteBookmark).then((res) => setBookmarkList(res.data));
     }
-  }
+  };
 
   // 북마크 삭제 버튼
   // const deleteToBookMark = () => {
@@ -115,14 +117,15 @@ export default function PlanMap({ plan }) {
           placeholder="장소 검색 하세요"
         />
         <button onClick={kakaoSearch}>검색</button>
+        {/* 장소 바구니 보러갈 때 쿼리로 planid를 넘겨 주기  */}
         <button>
-          <Link to="../place-cart" style={{ textDecoration: 'none', color: 'white' }}>
+          <Link to="../place-cart" style={{ textDecoration: 'none', color: 'white' }} state={plan}>
             장소바구니 보러가기
           </Link>
         </button>
         <button
           onClick={() => {
-            console.log(bookmarkList);
+            console.log(plan);
           }}
         >
           console log
@@ -207,12 +210,12 @@ export default function PlanMap({ plan }) {
                           >
                             상세정보
                           </a>
-                          {bookmarkList.find((e) => e.bookmarkName == info.content) ? (
+                          {bookmarkList.find((e) => e.bookmarkName == info.content) != null ? (
                             // 여기다 하트 색깔 빼는거 + 북마크 리스트에서 빼는거 해야함.
                             <FavoriteIcon
                               style={{ color: 'tomato', fontSize: '1.5rem', position: 'absolute', right: '5%' }}
-                              onClick={deleteBookmark()}
-                            // console.log('heart', bookmarkList.find((e) => e.bookmarkName == info.content))
+                              onClick={deleteBookmark}
+                              // console.log('heart', bookmarkList.find((e) => e.bookmarkName == info.content))
                             ></FavoriteIcon>
                           ) : (
                             <FavoriteBorderIcon

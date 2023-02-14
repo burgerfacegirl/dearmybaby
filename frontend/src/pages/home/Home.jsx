@@ -120,8 +120,8 @@ export default function Home() {
             </div>
           ) : null}
           <>
-            <h4 className="plan-append-text">
-              <h2 style={{ display: 'inline' }}>{member.memberName}</h2>님
+            <h4 className="plan-append-text" style={{ display: 'inline' }}>
+              {member.memberName}님
               <ul
                 style={{ display: 'inline', padding: '0', marginLeft: '2%' }}
                 onClick={() => {
