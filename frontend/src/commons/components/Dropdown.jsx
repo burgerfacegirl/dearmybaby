@@ -21,11 +21,18 @@ function Dropdown(props) {
   };
 
   return (
-    <div style={{ display: 'inline' }}>
+    <div>
       {member && member.familyIdList
         ? member.familyIdList.map((family) => {
             return (
-              <button
+              <li
+                style={{
+                  boxShadow: '1px 1px 2px gray',
+                  borderRadius: '5px',
+                  textAlign: 'center',
+                  textDecoration: 'underline',
+                  textDecorationColor: 'white',
+                }}
                 onClick={() => {
                   setLocalStorageFamily(family.familyId, family.familyName);
                   setFamilyId(family.familyId);
@@ -36,7 +43,7 @@ function Dropdown(props) {
                 }}
               >
                 {family.familyName}
-              </button>
+              </li>
             );
           })
         : null}

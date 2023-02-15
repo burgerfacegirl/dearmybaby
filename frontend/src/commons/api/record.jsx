@@ -18,7 +18,6 @@ const api = getApiInstance();
 
 // day별 기록 저장
 export async function apiCreateRecord(record, recordFile) {
-  console.log(record, recordFile);
   if (record != null && recordFile != null) {
     const formData = new FormData();
     formData.append(
@@ -35,7 +34,6 @@ export async function apiCreateRecord(record, recordFile) {
         'Content-Type': 'multipart/form-data',
       },
     });
-    console.log(response);
     return response;
   }
   throw new Error('apiCreateRecord : record, recordFile must be provided');
