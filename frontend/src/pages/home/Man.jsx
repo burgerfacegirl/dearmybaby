@@ -1,7 +1,7 @@
-import DummyPlaceList from './DummyPlaceList';
+import PlaceList from './PlaceList';
 
 const Man = () => {
-  const placeList = [
+  const places = [
     {
       placeName: '리틀프린스뮤지엄',
       imgUrl:
@@ -36,7 +36,7 @@ const Man = () => {
 
   return (
     <div className="placeList">
-      <DummyPlaceList placeList={placeList}></DummyPlaceList>
+      <PlaceList places={places}></PlaceList>
     </div>
   );
 };

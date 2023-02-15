@@ -1,7 +1,7 @@
-import DummyPlaceList from './DummyPlaceList';
+import PlaceList from './PlaceList';
 
 const Weather = () => {
-  const placeList = [
+  const places = [
     {
       placeName: '서울랜드눈썰매장',
       imgUrl: 'https://lh3.googleusercontent.com/p/AF1QipPr757fxbFycG82ZeoJydZVwUKFSsesgCuQoAtQ=s1360-w1360-h1020',
@@ -38,7 +38,7 @@ const Weather = () => {
 
   return (
     <div className="placeList">
-      <DummyPlaceList placeList={placeList}></DummyPlaceList>
+      <PlaceList places={places}></PlaceList>
     </div>
   );
 };
