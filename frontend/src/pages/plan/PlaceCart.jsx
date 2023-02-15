@@ -1,7 +1,5 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/prop-types */
-import { apiCreatePlan, apiGetPlan } from '@/commons/api/plan';
+import { apiGetPlan } from '@/commons/api/plan';
 import { useState, useEffect, Fragment, useReducer } from 'react';
 import { Map as KakaoMap, MapMarker, CustomOverlayMap, Polyline } from 'react-kakao-maps-sdk';
 import { Link, useParams } from 'react-router-dom';
@@ -14,30 +12,77 @@ import { Component } from 'react';
 
 // color pallete
 const colorPallete = ['red', 'blue', 'green', 'yellow', 'yellowgreen', 'pink'];
+// {
+//   "planId": 0,
+//   "planName": "string",
+//   "planDestination": "string",
+//   "startDate": "2023-02-13",
+//   "endDate": "2023-02-13",
+//   "planLatitude": "string",
+//   "planLongitude": "string",
+//   "planPeriod": 0,
+//   "planState": 0,
+//   "familyId": 0,
+//   "currentDay": 0,
+//   "days": [
+//     {
+//       "dayId": 0,
+//       "dayNumber": 0,
+//       "planId": 0,
+//       "bookmarks": [
+//         {
+//           "placeOrder": 0,
+//           "placeName": "string",
+//           "placeLatitude": "string",
+//           "placeLongitude": "string",
+//           "placeAddress": "string",
+//           "dayId": 0
+//         }
+//       ]
+//     }
+//   ]
+// }
 
-export default function PlaceCart() {
-  // url에서 planId를 읽어들여 plan, bookmarkList를 가져온다
-  const { planId } = useParams();
-  const [plan, setPlan] = useState(null);
-  const [days, setDays] = useState([]);
-  const [bookmarkList, setBookmarkList] = useState([]);
+// 입력 받은 여행 기간을 불러와서 배열에 저장
+const dummyDays = [
+  {
+    day: 1,
+    course: [],
+  },
+  {
+    day: 2,
+    course: [],
+  },
+  {
+    day: 3,
+    course: [],
+  },
+];
 
-  useEffect(() => {
-    // 여행 계획 정보 가져오기
-    apiGetPlan(planId).then(({ data }) => {
-      setPlan(data);
-      setDays(Array.from({ length: data.planPeriod }, () => Array(0)));
-    });
-    // api 요청해서 북마크 리스트를 가져오와서 bookmarks state에 저장
-    apiGetBookmarkList(planId).then(({ data }) => setBookmarkList(data));
-  }, [planId]);
+// 여행 날 만큼 버튼 만들어주기
 
-  const [bookmark2dayIndex] = useState(new Map());
+const dummymodalInfo = [];
+
+const PlaceCart = (props) => {
+  // const [bookmarks, setbookmarks] = useState(dummymodalInfo);
+
+  const [days, setDays] = useState([[], [], []]);
+  const [targetDayIndex, setTargetDayIndex] = useState(0);
+  const [place2dayIndex] = useState(new Map());
   // 장소바구니 내용 가져오기 위한 getAPI 호출 파라미터
+  const { planId } = useParams();
   // 장소 바구니에 담긴 장소들
+  const [bookmarks, setbookmarks] = useState(null);
+
+  // 여행 계획 정보 가져오기. 랜더링 될때 한번만 실행됨 setbookmarks(data)
+  useEffect(() => {
+    // api 요청해서 북마크 리스트를 가져오와서 bookmarks state에 저장
+    apiGetBookmarkList(planId).then(({ data }) => setbookmarks(data));
+    renderBookmark();
+  });
 
   const renderBookmark = () => {
-    return bookmarkList.map((bookmark) => (
+    return bookmarks.map((bookmark) => (
       // 북마크된 장소 띄우기.
       <Fragment key={`modalInfo-${bookmark.content}`}>
         {/*
@@ -64,10 +109,21 @@ export default function PlaceCart() {
 
   let currentDay = 0;
   // 날짜를 선택 할때 마다 다른 폴리라인을 만들어야함.
+  function makeHandleDay(dayIndex) {
+    return () => {
+      setTargetDayIndex(dayIndex);
+      console.log('targetDayIndex', targetDayIndex);
+    };
+  }
 
   // 버튼 날짜 만큼 자동 생성
   const makeButton = () => {
-    return days.map((day, index) => <button key={index}>day{index + 1}</button>);
+    // return <button onClick={handleDay1}>day{i}</button>;
+    return days.map((day, index) => (
+      <button key={index} onClick={makeHandleDay(index)}>
+        day{index + 1}
+      </button>
+    ));
   };
 
   // 마커를 클릭 했을 때 실행 되는 함수
@@ -78,74 +134,72 @@ export default function PlaceCart() {
   }
 
   function addToPath(modalPlace, index) {
+    // setTargetDayIndex(i);
     // 장소 바구니 돌면서 이름이 같은 장소 색 바꾸기
-    const prevDayIndex = bookmark2dayIndex.get(modalPlace.bookmarkId);
-    // 만일 이미 특정 날짜에 추가되어 있다면 거기서 삭제해준다
-    if (prevDayIndex != null) {
-      const day = days[prevDayIndex];
-      for (let k = 0; k < day.length; k++) {
-        if (day[k].bookmarkId == modalPlace.bookmarkId) {
-          day.splice(k, 1);
-          break;
+    for (let i = 0; i < bookmarks.length; i++) {
+      if (bookmarks[i].content == modalPlace.content) {
+        // 만일 이미 특정 날짜에 추가되어 있다면 거기서 삭제해준다
+        const prevDayIndex = place2dayIndex.get(modalPlace.content);
+        if (prevDayIndex != null) {
+          const day = days[prevDayIndex];
+          for (let k = 0; k < day.length; k++) {
+            if (day[k].content == modalPlace.content) {
+              day.splice(k);
+              break;
+            }
+          }
         }
+
+        // 장소를 타겟 날짜에 해당하는 색으로 칠한다
+        // bookmarks[i].color = colorPallete[targetDayIndex];
+        bookmarks[i].color = colorPallete[index];
+        console.log('days@@@@@@@@@', days);
+
+        // 장소를 날짜에 추가한다
+        days[index].push(bookmarks[i]);
+        setDays([...days]);
+        place2dayIndex.set(modalPlace.content, targetDayIndex);
+
+        break;
       }
     }
+  }
 
-    // 장소를 날짜에 추가한다
-    days[index].push(modalPlace);
-    setDays([...days]);
-    bookmark2dayIndex.set(modalPlace.bookmarkId, index);
+  // 날짜에 해당하는 장소들 리스트 보여주기
+  function pushPlacePerDay() {
+    // console.log(points);
+    // for (let i = 0; i < bookmarks.length; i++) {
+    //   for (let j = 0; j < dummyDays.length; j++) {
+    //     // dummymodalInfo[i] 장소이름이, dummydays[j]. content안에있는지 확인하기
+    //     console.log(dummyDays[j].course);
+    //     if (
+    //       !dummyDays[j].course.includes(bookmarks[i].content) &&
+    //       bookmarks[i].color === color &&
+    //       colorPallete[j] === color
+    //     ) {
+    //       // console.log('??', bookmarks[i].color);
+    //       // dummydays에 push하기
+    //       dummyDays[j].course.push(bookmarks[i]);
+    //     }
+    //   }
+    // }
+    // console.log(dummyDays);
+    // alert('경로가 저장되었습니다.');
   }
 
   const createNewPlan = () => {
-    console.log(days.length);
-    console.log(plan);
-    // for (let i = 0; i< days.length ; i ++){
-    //   const postData =
-    //   {
-    //     "planId": planId,
-    //     "planName": "string",
-    //     "planDestination": "string",
-    //     "startDate": "2023-02-13",
-    //     "endDate": "2023-02-13",
-    //     "planLatitude": "string",
-    //     "planLongitude": "string",
-    //     "planPeriod": 0,
-    //     "planState": 0,
-    //     "familyId": 0,
-    //     "currentDay": 0,
-    //     "days": [
-    //       {
-    //         "dayId": 0,
-    //         "dayNumber": 0,
-    //         "planId": 0,
-    //         "bookmarks": [
-    //           {
-    //             "placeOrder": 0,
-    //             "placeName": "string",
-    //             "placeLatitude": "string",
-    //             "placeLongitude": "string",
-    //             "placeAddress": "string",
-    //             "dayId": 0
-    //           }
-    //         ]
-    //       }
-    //     ]
-    //   }
-    // }
-    // days.length 만큼 반복해서 apiPOST 요청.
     // data에는
     // apiCreatePlan(data)
   };
 
   return (
     <div>
-      <button onClick={() => console.log(days)}>panic</button>
+      <button onClick={() => console.log(bookmarks)}>panic</button>
       <KakaoMap
         center={{
           // 지도의 중심좌표 장소바구니 목록들중 중심 좌표로 들어오게 하기
-          lat: plan != null ? Number(plan.planLatitude) : 37,
-          lng: plan != null ? Number(plan.planLongitude) : 127,
+          lat: 37.79,
+          lng: 127.43003,
         }}
         style={{
           // 지도의 크기
@@ -160,16 +214,14 @@ export default function PlaceCart() {
           className="daysDiv"
           style={{ position: 'absolute', left: '0vw', top: '8vh', backgroundColor: 'transparent', zIndex: '2' }}
         >
-          <button onClick={() => console.log(bookmark2dayIndex)}>panic button</button>
-          <button onClick={() => alert(bookmarkList.planId)}>으아아</button>
+          <button onClick={() => console.log(place2dayIndex)}>panic button</button>
+          <button onClick={() => alert(bookmarks.planId)}>으아아</button>
           {makeButton()}
         </div>
 
         {/* day별 장소 끼리 선긋는 component */}
         <Polyline
-          path={days.map((day) =>
-            day.map((bookmark) => ({ lat: bookmark.bookmarkLatitude, lng: bookmark.bookmarkLongitude })),
-          )}
+          path={days.map((day) => day.map((place) => place.position))}
           strokeWeight={5} // 선의 두께 입니다
           strokeColor={'#FFAE00'} // 선의 색깔입니다
           strokeOpacity={0.7} // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
@@ -177,101 +229,15 @@ export default function PlaceCart() {
         />
 
         {/* 장소바구니에 담긴 장소들 마커로 찍기 */}
-        {bookmarkList.map((bookmark) => (
-          <CustomOverlayMap
-            key={bookmark.bookmarkId}
-            position={{ lat: bookmark.bookmarkLatitude, lng: bookmark.bookmarkLongitude }}
-          >
-            <div style={{ width: '32px', height: '32px' }}>
-              {' '}
-              {/* Marker */}
-              <FontAwesomeIcon
-                icon={faLocationDot}
-                size="2x"
-                color={colorPallete[bookmark2dayIndex.get(bookmark.bookmarkId) % colorPallete.length]}
-                onClick={() => {
-                  handleMarkerClick(bookmark);
-                }}
-              />
-            </div>
-          </CustomOverlayMap>
-        ))}
-        {open && (
-          <CustomOverlayMap position={{ lat: modalInfo.bookmarkLatitude, lng: modalInfo.bookmarkLongitude }}>
-            <h1>{modalInfo.placeLatitude}</h1>
-            <div
-              className="wrap"
-              style={{
-                backgroundColor: 'white',
-                padding: '5%',
-                borderRadius: '5%',
-                boxShadow: '1px 1px 5px rgba(0, 0, 0, 0.05)',
-                whiteSpace: 'pre-wrap',
-                width: '180px',
-              }}
-            >
-              <button
-                className="close"
-                onClick={() => isOpen(false)}
-                title="닫기"
-                style={{
-                  fontSize: '0.6rem',
-                  fontWeight: '900',
-                  padding: '1% 3%',
-                  position: 'absolute',
-                  top: '3%',
-                  right: '2%',
-                }}
-              >
-                X
-              </button>
-              <div className="modalInfo">
-                <div className="title" style={{ fontWeight: '700', margin: '4% 1%' }}>
-                  {modalInfo.content}
-                </div>
-                <div style={{ fontSize: '0.8rem', color: 'rgba(0, 0, 0, 0.7)' }}>{modalInfo.categoryGroupName}</div>
-                <div className="modal__body">
-                  <div className="ellipsis" style={{ fontSize: '0.9rem' }}>
-                    <a href={modalInfo.placeURL}>Detail</a>
-                  </div>
-                  <div className="modal__button">
-                    {/* 날짜 수 만큼 버튼 만들기  onClick={addToPath(modalInfo)} */}
-                    {days.map((day, index) => (
-                      <button
-                        key={index}
-                        onClick={() => {
-                          // dayButtonFunction(index, modalInfo)
-                          // makeHandleDay(index);
-                          // console.log('color', colorPallete[targetDayIndex]);
-                          // setTargetDayIndex(targetDayIndex);
-                          // index = 몇번째 날 갈 장소인지 나타내는 인덱스
-                          console.log(index, 'index 279');
-                          addToPath(modalInfo, index);
-                          isOpen(false);
-                        }}
-                        style={{ display: 'flex', width: '50px', height: '25px' }}
-                      >
-                        day{index + 1}
-                      </button>
-                    ))}
-                    {/* {modalInfo.categoryGroupName}이 숙박이면 숙소 마커 세우는 함수 */}
-                    <div></div>
-
-                    {/* <div className="jibun ellipsis">{modalInfo.addressName}</div> */}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </CustomOverlayMap>
-        )}
       </KakaoMap>
-
       <div style={{ position: 'absolute', right: '0vw', bottom: '2vh', backgroundColor: 'transparent', zIndex: '2' }}>
+        <button onClick={pushPlacePerDay}>경로 추가</button>
         {/* 이어진 경로가 있는 상태에서 경로 추가 누르면 선 안 없어지고 냅두기, 경로가 추가되지 않은 상태에서 다른날 누르면 이어진선 사라지게하기 */}
-        {/* <Link to={'/'}> */}
-        <button onClick={createNewPlan}>계획 완료하기</button>
-        {/* </Link> */}
+        <Link to={'/'}>
+          <button onClick={createNewPlan}>계획 완료하기</button>
+        </Link>
       </div>
     </div>
   );
-}
+};
+export default PlaceCart;

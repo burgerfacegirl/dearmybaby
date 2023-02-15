@@ -19,7 +19,7 @@ import { useMember, useMemberReload, useMemberAuth } from '@/commons/MemberConte
 import { apiUpdateMemberCurrentPlanId } from '@/commons/api/member';
 import { apiGetBabyList } from '@/commons/api/baby';
 import { apiStartPlan } from '@/commons/api/plan';
-import { apiGetRegion } from '@/commons/api/recommend';
+import { display } from '@mui/system';
 
 // 접속한 유저 그룹의 plans 다 가져와야함
 const dummyUser = {
@@ -45,28 +45,17 @@ export default function Home() {
   const [familyName, setFamilyName] = useState('가족');
   const [babyName, setBabyName] = useState('');
   const [currentDayId, setCurrentDayId] = useState('');
-  const [regionList, setRegionList] = useState([]);
-  // let region = '';
-  // apiGetRegion().then((res) => setRegion(JSON.stringfy(res.data)));
-  let temp = '';
   // 최초에 한번 회원정보를 최신화한다
   useEffect(() => {
     memberReload();
-    apiGetRegion().then(({ data }) => {
-      setRegionList(data);
-      // console.log(typeof temp);
-    });
   }, []);
-
   useEffect(() => {
     if (window.localStorage.getItem('familyId')) {
-      // console.log(familyId);
       setFamilyId(window.localStorage.getItem('familyId'));
       setFamilyName(window.localStorage.getItem('familyName'));
-      // apiGetBabyList(familyId).then((res) => {
-      // console.log(res);
-      // setBabyName(res.data[0].babyName);
-      // });
+      apiGetBabyList(window.localStorage.getItem('familyId')).then((res) => {
+        setBabyName(res.data[0].babyName);
+      });
     }
   }, [familyName]);
   const [view, setView] = useState(false);
@@ -258,29 +247,30 @@ export default function Home() {
         </div>
       )}
 
-      {babyName != '' && (
-        <>
-          <div className="recommend">
-            <h3>{babyName}에게 추천하는 지역별 여행지</h3>
-            {/* <Link to={path.recommend}> */}
-            <Place regionList={regionList} />
-            {/* </Link> */}
-          </div>
-          {/* <div className="recommend">
-            <h3>{babyName}에게 추천하는 지역별 축제</h3>
-            <Link to={path.recommend}>
-              <Place />
-            </Link>
-          </div>
-          <div className="recommend">
-            <h3>{babyName}에게 추천하는 지역별 식당</h3>
-            <Link to={path.recommend}>
-              <Place />
-            </Link>
-          </div> */}
-        </>
-      )}
-
+      {babyName != '' ? (
+        <div className="recommend">
+          <h3>{babyName}에게 추천하는 지역별 여행지</h3>
+          <Link to={path.recommend}>
+            <Place />
+          </Link>
+        </div>
+      ) : null}
+      {babyName != '' ? (
+        <div className="recommend">
+          <h3>{babyName}에게 추천하는 지역별 축제</h3>
+          <Link to={path.recommend}>
+            <Place />
+          </Link>
+        </div>
+      ) : null}
+      {babyName != '' ? (
+        <div className="recommend">
+          <h3>{babyName}에게 추천하는 지역별 식당</h3>
+          <Link to={path.recommend}>
+            <Place />
+          </Link>
+        </div>
+      ) : null}
       <div className="recommend">
         <h3>겨울철 아이와 함께 가볼만한 여행지</h3>
         <Link to={path.recommend}>
