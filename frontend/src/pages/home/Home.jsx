@@ -126,7 +126,7 @@ export default function Home() {
         <div className="user-plan">
           {/* 여행 중일때 record 페이지로 보내주는 버튼*/}
           {member.currentPlan != null ? (
-            <div style={{ marginBottom: '3vh' }}>
+            <div style={{ marginBottom: '2vh' }}>
               <h4>{member.currentPlan.planDestination} 여행 중</h4>
               <button
                 onClick={() => {
