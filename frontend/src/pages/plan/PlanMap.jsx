@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef, Fragment } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -8,7 +7,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import PlaceBasket from './PlaceBasket';
-
+import PropTypes from 'prop-types';
 import { apiGetBookmarkList, apiCreateBookmark, apiDeleteBookmark } from '@/commons/api/bookmark';
 
 const kakao = window.kakao;
