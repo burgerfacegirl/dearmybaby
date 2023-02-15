@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import { useMember } from '@/commons/MemberContext';
-import { apiGetPlanList } from '@/commons/api/plan';
+import { apiGetPlanRecord } from '@/commons/api/plan';
 
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -20,7 +19,7 @@ export default function AlbumList() {
   const [planList, setPlanList] = useState([]);
 
   useEffect(() => {
-    apiGetPlanList(familyId).then(({ data }) => setPlanList(data));
+    apiGetPlanRecord(familyId).then(({ data }) => setPlanList(data));
   }, [familyId]);
 
   return (
@@ -45,7 +44,7 @@ export default function AlbumList() {
             >
               <ListItemButton component={Link} to={`${plan.planId}/view`}>
                 <ListItemAvatar>
-                  <Avatar>{plan.planName}</Avatar>
+                  <Avatar src={plan.regionImgUrl}>{plan.planName}</Avatar>
                 </ListItemAvatar>
                 <ListItemText primary={plan.planName} secondary={plan.startDate} />
               </ListItemButton>
