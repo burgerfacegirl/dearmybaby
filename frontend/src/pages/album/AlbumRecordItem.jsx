@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/media-has-caption */
 import { record } from './props';
 
 export default function AlbumRecordItem({ record }) {
@@ -6,21 +5,15 @@ export default function AlbumRecordItem({ record }) {
     <ul className="record-box">
       <div className="img-padding">
         <li>
-          {record.recordType == 0 ? (
-            <img className="img-padding2" src={record.fileUrl} alt="random" width="75" height="110"></img>
-          ) : (
-            <video src={record.fileUrl} controls width="300" height="200"></video>
-          )}
+          <img className="img-padding2" src={record.recordFile} alt="random" width="75" height="110"></img>
         </li>
       </div>
       <div className="text-padding">
         <li>recordId : {record.recordId}</li>
-        <li>recordName : {record.recordName}</li>
-        <li>recordText : {record.recordText}</li>
-        <li>latitude : {record.latitude}</li>
-        <li>longitude : {record.longitude}</li>
+        <li>dayCount : {record.dayCount}</li>
         <li>recordType : {record.recordType}</li>
-        <li>recordDate : {record.recordDate}</li>
+        <li>latitude : {record.lat}</li>
+        <li>longitude : {record.lng}</li>
       </div>
     </ul>
   );

@@ -67,6 +67,7 @@ export async function apiGetRecordingDayId(planId) {
   throw new Error('apiGetRecordingDayId : planId must be provided');
 }
 
+
 // 여행 시작
 export async function apiStartPlan(planId) {
   if (planId != null) {
@@ -92,12 +93,4 @@ export async function apiEndPlan(planId) {
     return response;
   }
   throw new Error('apiEndPlan : planId must be provided');
-}
-
-export async function apiGetPlanRecord(familyId) {
-  if (familyId != null) {
-    const response = await api.get(`/plan/planrecord/${familyId}`);
-    return response;
-  }
-  throw new Error('apiGetPlanRecord : familyId must be provided');
 }
