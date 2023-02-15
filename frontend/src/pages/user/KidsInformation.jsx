@@ -58,13 +58,14 @@ export default function KidsInformation() {
   // 아이 선호정보 입력하는 함수 + 홈으로 돌아가기
   const postKidFavorInfo = () => {
     console.log('?', babyInfo);
+    console.log('babyid', babyInfo.babyId);
     babyInfo.favoriteFood = foodList;
     babyInfo.favoriteSpot = placeList;
     //
 
     apiUpdateBaby(babyInfo, babyInfo.babyId);
 
-    // navigate('/');
+    navigate('/');
   };
 
   return (
