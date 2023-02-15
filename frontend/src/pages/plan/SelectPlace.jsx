@@ -63,7 +63,7 @@ export default function SelectPlace(props) {
 
   return (
     <div className="plan-cityframe" style={{ padding: '3vh', textAlign: 'center' }}>
-      <h3>여행하실 지역을 선택해주세요</h3>
+      <h2>여행하실 지역을 선택해주세요</h2>
       <table className="city__table">
         <tbody>{regionRows}</tbody>
       </table>
@@ -80,7 +80,7 @@ export default function SelectPlace(props) {
       <button
         onClick={createPlan}
         // state={{ keyword: initLoc.keyword, lat: initLoc.lat, lng: initLoc.lng }}
-        style={{ textDecoration: 'none' }}
+        style={{ marginTop: '10%', textDecoration: 'none', fontSize: '1rem', padding: '4%' }}
       >
         일정 저장하기
       </button>
