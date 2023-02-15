@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 
 import { useState, useEffect, useRef, Fragment } from 'react';
 import { Link, useLocation } from 'react-router-dom';

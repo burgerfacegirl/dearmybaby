@@ -143,7 +143,7 @@ export default function Home() {
             </div>
           ) : null}
           <>
-            <div className="plan-append-text" style={{ display: 'flex' }}>
+            <div className="main-username" style={{ display: 'flex' }}>
               <div style={{ fontWeight: '700', color: 'purple', fontSize: '1.2rem' }}>{member.memberName}님</div>
               <div
                 style={{
@@ -194,9 +194,9 @@ export default function Home() {
           ) : null}
 
           <div className="plan-append">
-            <h3 className="plan-append-text">{babyName}과 여행할 지역을 고르셨나요?</h3>
+            <h3>{babyName}과 여행할 지역을 고르셨나요?</h3>
             <div
-              className="plus-plan"
+              className="plus-plan plus-plan-container"
               onClick={() => {
                 navigate('/plan/create');
               }}
@@ -212,11 +212,11 @@ export default function Home() {
                   background: '#FFFFFF',
                   border: '0.4px solid #EEEEEE',
                   boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.25)',
-                  fontSize: '2rem',
+                  fontSize: '1.5rem',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginRight: '3%',
+                  marginRight: '2%',
                 }}
               >
                 +
