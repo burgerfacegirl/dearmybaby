@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Fragment } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
@@ -19,6 +19,7 @@ export default function PlanMap({ plan }) {
   useEffect(() => {
     if (plan != null) {
       apiGetBookmarkList(plan.planId).then(({ data }) => setBookmarkList(data));
+      setKeyword(plan.planDestination);
     }
   }, [plan]);
 
@@ -144,10 +145,9 @@ export default function PlanMap({ plan }) {
         level={10}
         onCreate={setKakaoMap}
       >
-        {markers.map((marker) => (
-          <>
+        {markers.map((marker, index) => (
+          <Fragment key={index}>
             <MapMarker
-              key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
               position={marker.position}
               onClick={() => {
                 setInfo(marker);
@@ -157,7 +157,6 @@ export default function PlanMap({ plan }) {
 
             {isOpen && (
               <CustomOverlayMap
-                key={`${marker.position.lng}`}
                 position={{
                   lat: info.position.lat,
                   lng: info.position.lng,
@@ -230,7 +229,7 @@ export default function PlanMap({ plan }) {
                 </div>
               </CustomOverlayMap>
             )}
-          </>
+          </Fragment>
         ))}
 
         {/* <div className="place-basket-div">

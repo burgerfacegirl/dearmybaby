@@ -235,7 +235,7 @@ const RecordMap = () => {
             }}
           >
             <Card sx={{ width: 300 }}>
-              <h1 style={{ marginTop: '5%', paddingLeft: '5%' }}>{modalRecord.recordName}</h1>
+              <h1 style={{ marginTop: '3%', paddingLeft: '5%' }}>{modalRecord.recordName}</h1>
               {/* <CardHeader></CardHeader> */}
               <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 {modalRecord.recordType == 0 ? (
