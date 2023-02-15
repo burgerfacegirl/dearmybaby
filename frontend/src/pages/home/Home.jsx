@@ -63,10 +63,12 @@ export default function Home() {
       // console.log(familyId);
       setFamilyId(window.localStorage.getItem('familyId'));
       setFamilyName(window.localStorage.getItem('familyName'));
-      // apiGetBabyList(familyId).then((res) => {
-      // console.log(res);
-      // setBabyName(res.data[0].babyName);
-      // });
+      apiGetBabyList(familyId).then((res) => {
+        console.log('babyList', res);
+        if (res.data[0]) {
+          setBabyName(res.data[0].babyName);
+        }
+      });
     }
   }, [familyName]);
   const [view, setView] = useState(false);
