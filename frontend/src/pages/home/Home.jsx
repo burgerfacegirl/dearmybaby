@@ -178,7 +178,7 @@ export default function Home() {
           ) : null}
 
           <div className="plan-append">
-            <h3>{babyName}과 여행할 지역을 고르셨나요?</h3>
+            <h3>{babyName ? babyName : '아이'}와(과) 여행할 지역을 고르셨나요?</h3>
             <div
               className="plus-plan plus-plan-container"
               onClick={() => {
