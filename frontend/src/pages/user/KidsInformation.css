@@ -6,7 +6,7 @@
   width: 100%;
   /* margin-block: 17vh; */
   text-align: center;
-  color: rgba(252, 163, 17, 1);
+  color: rgb(241, 233, 221);
 }
 
 .noshow {
@@ -78,4 +78,12 @@
 
 .kid-info-question-last {
   margin-bottom: 10%;
+}
+
+.last__fovorpage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 70px;
+  /* color : rgb(175, 140, 231) */
 }
