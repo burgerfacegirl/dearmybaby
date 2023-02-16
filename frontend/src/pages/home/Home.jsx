@@ -90,7 +90,7 @@ export default function Home() {
           <h3 style={{ fontWeight: '100', color: 'white', fontSize: '13px', marginBottom: '15px' }}>
             당신의 아이에게 <br></br>따뜻한 추억을 선물하세요
           </h3>
-          {babyName == null ? (
+          {(member != null & babyName == null) ? (
             <button
               onClick={() => {
                 navigate('./kids');
@@ -118,7 +118,8 @@ export default function Home() {
                 onClick={() => {
                   apiStartPlan(member.currentPlan.planId).then(({ data }) => {
                     // setCurrentDayId(data);
-                    navigate(`record/${data}`);
+                    console.log('여기', data.dayId, data.planId)
+                    navigate(`record/${data.dayId}/${data.planId}`);
                   });
                 }}
               >
@@ -153,12 +154,11 @@ export default function Home() {
           {member.closestPlan != null &&
           today.getFullYear() === new Date(member.closestPlan.startDate).getFullYear() &&
           today.getMonth() === new Date(member.closestPlan.startDate).getMonth() &&
-          today.getDate() === new Date(member.closestPlan.startDate).getDate() &&
+          today.getDate() === ((new Date(member.closestPlan.startDate).getDate()) + 1) &&
           member.currentPlan == null ? (
             <div className="dday-alarm" style={{ marginBottom: '3vh' }}>
               <h4 className="dday-alarm-text">
                 오늘은 {member.closestPlan.planDestination}여행 시작날입니다.<p></p> 기록을 시작해보세요.
-                {console.log('closest', member.closestPlan.planId)}
               </h4>
               <button
                 className="dday-alarm-button"
@@ -167,9 +167,9 @@ export default function Home() {
                   // await memberReload();
                   const response = await apiStartPlan(member.closestPlan.planId);
                   // console.log('dayId', response.data);
-                  setCurrentDayId(response.data);
-                  console.log('여기서는 찍히나?', response.data);
-                  navigate(`/record/${response.data}`);
+                  setCurrentDayId(response.data.dayId);
+                  console.log('여기서는 안 찍히나?', response.data);
+                  navigate(`/record/${response.data.dayId}/${response.data.planId}`);
                 }}
               >
                 여행 시작

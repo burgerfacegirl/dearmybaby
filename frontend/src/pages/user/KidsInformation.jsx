@@ -71,7 +71,7 @@ export default function KidsInformation() {
     console.log('보내기전 최종', babyData);
     apiUpdateBaby(babyData, newBabyId);
 
-    // navigate('/');
+    navigate('/');
   };
 
   return (

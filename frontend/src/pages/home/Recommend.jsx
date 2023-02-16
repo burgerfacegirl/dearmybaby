@@ -115,7 +115,6 @@ const Recommend = () => {
   // api 로  정보 받아오기
   useEffect(() => {
     setFamilyId(window.localStorage.getItem('familyId'));
-    console.log('glgl', familyId);
     if (familyId != null) {
       setFamilyName(window.localStorage.getItem('familyName'));
       console.log('familyID', familyId);
