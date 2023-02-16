@@ -76,18 +76,30 @@ export default function KidsInformation() {
 
   return (
     <>
-      <div className="question">
-        <button style={{ position: 'absolute' }} onClick={() => console.log(babyId)}>
+      <div className="question" style={{ backgroundColor: 'rgb(175, 140, 231)' }}>
+        {/* <button style={{ position: 'absolute' }} onClick={() => console.log(babyId)}>
           Panic Button
-        </button>
+        </button> */}
         {index < questionList.length ? (
-          <div>
-            <div style={{ position: 'absolute' }}>
+          <div style={{ width: '450px', height: '900px' }}>
+            <div
+              style={{
+                position: 'absolute',
+                width: '100vw',
+                // height: '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+                alignContent: 'center',
+              }}
+            >
               <div style={{ marginBlock: '27%', padding: '15%' }}>
                 <h2 style={{ fontSize: '2.4rem' }}>{question.categoryName}</h2>
               </div>
 
-              <div className="answer-div" style={{ display: 'flex', width: '70%', justifyContent: 'space-between' }}>
+              <div
+                className="answer-div"
+                style={{ display: 'flex', width: '70%', justifyContent: 'space-between', alignSelf: 'center' }}
+              >
                 <button className="kidinfo-button" onClick={handleYes}>
                   좋아한다
                 </button>
@@ -111,7 +123,7 @@ export default function KidsInformation() {
           </div>
         ) : (
           // <div>질문이 다 끝났다</div>
-          <div>
+          <div style={{ paddingBlock: '30%', width: '100%' }}>
             <h1>응답 해주셔서 감사합니다.</h1>
             <button
               onClick={() => {

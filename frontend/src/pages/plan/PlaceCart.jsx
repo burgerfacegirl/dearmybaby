@@ -80,41 +80,44 @@ export default function PlaceCart() {
   // days.length 만큼 반복해서 apiPOST 요청.
   // data에는
   // apiCreatePlan(data)
-  const createNewPlan = () => {
-    console.log(plan.days[0].dayId, 'days', days);
+  const createNewPlan = (index) => {
+    // console.log(plan.days[0].dayId, 'days', days);
+    console.log('day path', index);
 
-    for (let i = 0; i < days.length; i++) {
-      let perDay = [];
-      for (let j = 0; j < days[i].length; j++) {
-        // console.log('days[i][j]', days[i][j]);
-        perDay.push({
-          placeOrder: j,
-          placeName: days[i][j].bookmarkName,
-          placeLatitude: days[i][j].bookmarkLatitude,
-          placeLongitude: days[i][j].bookmarkLongitude,
-          placeAddress: days[i][j].bookmarkAdress,
-          dayId: plan.days[i].dayId,
-        });
-        // console.log('days[i]i[j]', days[i][j]);
-        // perDay.push(days[i][j]);
-      }
-      const dailyPlan = {
-        dayId: plan.days[i].dayId,
-        dayNumber: i + 1,
-        planId: planId,
-        places: perDay,
-      };
-      // console.log(dailyPlan);
-      apiCreateDay(dailyPlan).then((res) => console.log(res));
-      // async () => {
-      //   const response = await fetch(apiCreateDay(dailyPlan));
-      //   console.log('response', response);
-      // };
+    let perDay = [];
+    for (let j = 0; j < days[index].length; j++) {
+      // console.log('days[i][j]', days[i][j]);
+      perDay.push({
+        placeOrder: j,
+        placeName: days[index][j].bookmarkName,
+        placeLatitude: days[index][j].bookmarkLatitude,
+        placeLongitude: days[index][j].bookmarkLongitude,
+        placeAddress: days[index][j].bookmarkAdress,
+        dayId: plan.days[index].dayId,
+      });
     }
-    // async () => {
-    //   setDays(response.data);
-    // };
+    // console.log('days[i]i[j]', days[i][j]);
+    // perDay.push(days[i][j]);
+
+    const dailyPlan = {
+      dayId: plan.days[index].dayId,
+      dayNumber: index + 1,
+      planId: planId,
+      places: perDay,
+    };
+    console.log(dailyPlan);
+    apiCreateDay(dailyPlan).then((res) => console.log(res));
+    async () => {
+      const response = await fetch(apiCreateDay(dailyPlan));
+      console.log('response', response);
+    };
+    // }
+    // // async () => {
+    // //   setDays(response.data);
+    // // };
   };
+
+  let dnum;
 
   return (
     <div>
@@ -246,7 +249,16 @@ export default function PlaceCart() {
       </KakaoMap>
 
       <div style={{ position: 'absolute', right: '0vw', bottom: '2vh', backgroundColor: 'transparent', zIndex: '2' }}>
-        {/* 이어진 경로가 있는 상태에서 경로 추가 누르면 선 안 없어지고 냅두기, 경로가 추가되지 않은 상태에서 다른날 누르면 이어진선 사라지게하기 */}
+        {days.map((day, index) => (
+          <button
+            key={index}
+            onClick={() => createNewPlan(index)}
+            style={{ display: 'flex', width: '50px', height: '25px' }}
+          >
+            day{index + 1}
+          </button>
+        ))}
+
         <Link to={'/'}>
           <button onClick={createNewPlan}>계획 완료하기</button>
         </Link>

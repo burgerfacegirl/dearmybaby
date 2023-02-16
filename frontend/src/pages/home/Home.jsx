@@ -90,7 +90,7 @@ export default function Home() {
           <h3 style={{ fontWeight: '100', color: 'white', fontSize: '13px', marginBottom: '15px' }}>
             당신의 아이에게 <br></br>따뜻한 추억을 선물하세요
           </h3>
-          {(member != null & babyName == null) ? (
+          {(member != null) & (babyName == null) ? (
             <button
               onClick={() => {
                 navigate('./kids');
@@ -118,7 +118,7 @@ export default function Home() {
                 onClick={() => {
                   apiStartPlan(member.currentPlan.planId).then(({ data }) => {
                     // setCurrentDayId(data);
-                    console.log('여기', data.dayId, data.planId)
+                    console.log('여기', data.dayId, data.planId);
                     navigate(`record/${data.dayId}/${data.planId}`);
                   });
                 }}
@@ -154,7 +154,7 @@ export default function Home() {
           {member.closestPlan != null &&
           today.getFullYear() === new Date(member.closestPlan.startDate).getFullYear() &&
           today.getMonth() === new Date(member.closestPlan.startDate).getMonth() &&
-          today.getDate() === ((new Date(member.closestPlan.startDate).getDate()) + 1) &&
+          today.getDate() === new Date(member.closestPlan.startDate).getDate() + 1 &&
           member.currentPlan == null ? (
             <div className="dday-alarm" style={{ marginBottom: '3vh' }}>
               <h4 className="dday-alarm-text">
@@ -248,9 +248,9 @@ export default function Home() {
         <>
           <div className="recommend">
             <h3>{babyName}에게 추천하는 지역별 여행지</h3>
-            {/* <Link to={path.recommend}> */}
-            <Place regionList={regionList} />
-            {/* </Link> */}
+            <Link to={path.recommend}>
+              <Place regionList={regionList} />
+            </Link>
           </div>
           {/* <div className="recommend">
             <h3>{babyName}에게 추천하는 지역별 축제</h3>
