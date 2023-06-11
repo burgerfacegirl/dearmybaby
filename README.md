@@ -45,11 +45,11 @@ SSAFY 8기 2학기 공통 프로젝트
 ---
 
 | POSITION | STACK          | VERSION |
-| -------- | -------------- | :-----: |
+| -------- | -------------- |:-------:|
 | Client   | React          | 18.2.0  |
-|          | Vite           |  4.0.0  |
-|          | Axios          |  1.3.2  |
-| Server   | Spring Boot    |  2.7.8  |
+|          | Vite           | 4.0.0   |
+|          | Axios          | 1.3.2   |
+| Server   | Spring Boot    | 2.7.8   |
 |          | OpenJDK        |         |
 |          | QueryDSL       |         |
 | Database | Mysql          |         |
@@ -116,24 +116,6 @@ SSAFY 8기 2학기 공통 프로젝트
 </tr>
 
 <tr>
-
-<td align="center">UI/UX<br/>React<br/>3D Modeling<br/>MyRoom<br/>ItemShop<br/>FEED<br/>Profile<br/>Validation</td>
-
-<td align="center">REST API<br/>Spring Boot<br/>DataBase<br/>GitHub API<br/>WebSocket<br/>RSS Feed<br/>Chrome Extension</td>
-
-<td align="center">UI/UX<br/>React<br/>3D Modeling<br/>Three.js<br/>MyGoals<br/>ItemShop<br/>Chart<br/>Calendar</td>
-
-<td align="center">UI/UX<br/>React<br/>3D Modeling<br/>Three.js<br/>Main<br/>MyRoom<br/>WebSocket<br/>CS Quiz</td>
-
-<td align="center">REST API<br/>Spring Boot<br/>DataBase<br/>Chrome Extension<br/>WebSocket<br/>Member<br/>Record</td>
-
-<td align="center">REST API</br>
-Spring Boot</br>
-DataBase </br>
-Chrome Extension</br>
-WebSocket </br>
-Member</br>
-Record</td>
 
 </tr>
 
